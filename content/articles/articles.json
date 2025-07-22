@@ -1,0 +1,10 @@
+
+{
+    "articles": [
+        {
+            "title": "Cómo estructurar un dashboard efectivo en Grafana",
+            "description": "Principios técnicos y buenas prácticas para un dashboard de verdad útil.",
+            "url": "articles/grafana-dashboards.html"
+        }
+    ]
+}
