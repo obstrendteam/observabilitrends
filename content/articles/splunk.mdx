@@ -1,0 +1,50 @@
+---
+title: Making the Most of Splunk Dashboards and SPL
+author: ObservabiliTrends Team
+date: 2025-07-22
+---
+
+Splunk excels at log aggregation and search, but to get the most value, mastering **SPL (Search Processing Language)** and dashboards is key.
+
+## SPL Quick Tips
+
+- Use `stats` for aggregation:
+```spl
+index=web_logs | stats count by status_code
+```
+
+- Use `timechart` for trends:
+```spl
+index=web_logs | timechart avg(response_time)
+```
+
+- Filter with `where`:
+```spl
+| where response_time > 200
+```
+
+## Dashboards
+
+Splunk dashboards can use tokens, drilldowns, and real-time searches.
+
+For example, to allow dynamic filtering:
+```xml
+<input type="dropdown" token="selected_status">
+  <label>Status Code</label>
+  <choice value="200">200</choice>
+  ...
+</input>
+```
+
+Then use the token in queries.
+
+## Alerts
+
+Set alerts from searches:
+- Run SPL regularly
+- Trigger if condition met
+- Send via email, Slack, etc.
+
+Splunk also integrates with SOAR platforms to auto-remediate certain issues.
+
+For high-scale observability, combining SPL power with visual dashboards is a winning combo.

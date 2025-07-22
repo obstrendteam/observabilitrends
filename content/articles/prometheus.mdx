@@ -1,0 +1,51 @@
+---
+title: Prometheus Metrics and Alerting Best Practices
+author: ObservabiliTrends Team
+date: 2025-07-22
+---
+
+Prometheus is the cornerstone of many observability stacks. Its flexibility and power lie in **custom metrics** and **PromQL**.
+
+## Instrumentation Tips
+
+- Use clearly defined metric names: `http_request_duration_seconds`
+- Label strategically: avoid high cardinality labels like `user_id`
+- Track duration, errors, throughput (RED method)
+
+## PromQL Essentials
+
+PromQL allows aggregations, filtering, and alert expressions.
+
+```promql
+rate(http_requests_total{job="web"}[5m])
+```
+
+This expression shows request rate over 5 minutes.
+
+Other useful examples:
+
+```promql
+avg_over_time(memory_usage_bytes[10m])
+sum(rate(errors_total[1m])) by (service)
+```
+
+## Alerting
+
+Prometheus uses **alerting rules** to detect conditions.
+
+```yaml
+- alert: HighMemory
+  expr: node_memory_Active_bytes > 1e+09
+  for: 5m
+  labels:
+    severity: warning
+```
+
+These rules are pushed to Alertmanager, which handles deduplication, routing, and silencing.
+
+Prometheus thrives when paired with:
+- Grafana for visualization
+- Loki for logs
+- Tempo for traces
+
+It’s lean, fast, and highly customizable.

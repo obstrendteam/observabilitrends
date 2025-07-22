@@ -1,0 +1,40 @@
+---
+title: Deep Dive into Dynatrace Smartscape and Davis AI
+author: ObservabiliTrends Team
+date: 2025-07-22
+---
+
+Dynatrace provides full-stack observability, but two features stand out for modern ops teams: **Smartscape topology** and **Davis AI**.
+
+## Smartscape
+
+Smartscape is a real-time, auto-generated dependency map. It visualizes:
+- Services
+- Processes
+- Hosts
+- Data centers
+
+It updates dynamically and helps pinpoint impact across tiers.
+
+Example use:
+> A spike in a frontend error links to a failing JVM on an internal service → visible instantly via Smartscape.
+
+## Davis AI
+
+Davis is Dynatrace’s AI engine. It automatically detects anomalies, but unlike simple thresholding, it uses context-aware causation.
+
+You can ask Davis:
+```
+Why did our checkout drop in the last 2h?
+```
+
+Davis correlates metrics, logs, traces, and problems to offer root cause — often faster than manual inspection.
+
+## Alert Routing & Custom Events
+
+Define custom alerts via Settings > Anomaly Detection. You can:
+- Set static or dynamic thresholds
+- Link alerts to specific process groups
+- Use metadata for routing (team, region, priority)
+
+Dynatrace remains a powerful tool, especially when Smartscape and Davis are used together for contextual, proactive observability.
