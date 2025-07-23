@@ -14,16 +14,29 @@
     h1, h2 { color: #007acc; }
     h2 { margin-top: 2rem; margin-bottom: 1rem; }
     p { margin-bottom: 1rem; }
+    .back-button {
+      display: inline-block;
+      margin-bottom: 1rem;
+      background: #007acc;
+      color: white;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      border-radius: 4px;
+    }
   </style>
 </head>
 <body>
   <header>
     <h1>ObservabiliTrends</h1>
   </header>
+
   <nav>
     <a href="../index.html">Home</a>
   </nav>
+
   <main>
+    <a href="../index.html" class="back-button">← Back to Articles</a>
+
     <h1>Introduction to OpenTelemetry: The Foundation for Modern Observability</h1>
 
     <h2>What is OpenTelemetry?</h2>
@@ -57,18 +70,4 @@
 
     <h2>Common Use Cases</h2>
     <ul>
-      <li><strong>Performance Monitoring:</strong> Identify bottlenecks in microservices.</li>
-      <li><strong>Error Diagnosis:</strong> Correlate logs and traces to detect failures and understand their context.</li>
-      <li><strong>Usage Analytics:</strong> Measure user behavior and the effectiveness of new features.</li>
-    </ul>
-
-    <h2>Advantages Over Other Solutions</h2>
-    <p>
-      OpenTelemetry unifies previous standards (OpenTracing and OpenCensus), integrating the best of both and fostering an active community with growing ecosystem support.
-    </p>
-  </main>
-  <footer>
-    <p>&copy; 2025 ObservabiliTrends</p>
-  </footer>
-</body>
-</html>
+      <li><strong>Performance Monitoring:</strong> Identify bottlenecks in
