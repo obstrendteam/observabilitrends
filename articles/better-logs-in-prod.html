@@ -1,2 +1,95 @@
 <!DOCTYPE html>
-<html><head><meta charset='utf-8'><title>better-logs-in-prod.html</title><link rel='stylesheet' href='../assets/css/style.css'></head><body><nav><a href='../index.html'>Home</a></nav><main><h1>Better Logs in Production</h1><p>Logging in production environments...</p></main><footer><p>&copy; 2025 ObservabiliTrends</p></footer></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Better Logs in Production</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    header, footer { background: #111; color: white; padding: 1rem; text-align: center; }
+    nav { background: #444; padding: 0.5rem; text-align: center; }
+    nav a { color: white; margin: 0 1rem; text-decoration: none; }
+    main { padding: 1rem; max-width: 800px; margin: auto; }
+    ul { list-style: none; padding: 0; }
+    ol { padding-left: 1.25rem; }
+    li { margin: 0.5rem 0; }
+    h1, h2 { color: #007acc; }
+    h2 { margin-top: 2rem; margin-bottom: 1rem; }
+    p { margin-bottom: 1rem; }
+    .back-button {
+      display: inline-block;
+      margin-bottom: 1rem;
+      background: #007acc;
+      color: white;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ObservabiliTrends</h1>
+  </header>
+
+  <nav>
+    <a href="../index.html">Home</a>
+  </nav>
+
+  <main>
+    <a href="../index.html" class="back-button">← Back to Articles</a>
+
+    <h1>Better Logs in Production</h1>
+
+    <h2>Why Logging Matters</h2>
+    <p>
+      Logging is a fundamental aspect of observability. In production environments, effective logging is critical to diagnose problems, monitor system health, and gain insight into application behavior. However, without proper structure and practices, logs can become noisy, incomplete, or even useless.
+    </p>
+
+    <h2>Common Pitfalls in Production Logging</h2>
+    <ul>
+      <li><strong>Too much noise:</strong> Excessive logs at debug level that overwhelm storage and make analysis difficult.</li>
+      <li><strong>Lack of structure:</strong> Free-text logs that cannot be parsed or indexed properly by log aggregation tools.</li>
+      <li><strong>Missing context:</strong> Logs that don’t include request IDs, user identifiers, or environment metadata.</li>
+      <li><strong>Inconsistent formats:</strong> Varying styles across teams or services make correlation difficult.</li>
+    </ul>
+
+    <h2>Principles of Better Logging</h2>
+    <ol>
+      <li><strong>Use structured logs:</strong> Log in JSON or a format easily consumed by logging systems like ELK, Loki, or Datadog.</li>
+      <li><strong>Include context:</strong> Always include trace IDs, span IDs, request URLs, user sessions, and environment tags.</li>
+      <li><strong>Log at the right level:</strong> Use error/warning for failures, info for key business events, and debug only in dev environments.</li>
+      <li><strong>Avoid sensitive data:</strong> Never log passwords, secrets, or personal data (PII).</li>
+      <li><strong>Be consistent:</strong> Define log schemas and naming conventions across all services.</li>
+    </ol>
+
+    <h2>Log Enrichment Techniques</h2>
+    <p>
+      Enriching logs means appending contextual metadata automatically. You can use log middleware or wrappers to add:
+    </p>
+    <ul>
+      <li>Trace and span IDs from your tracing system (e.g. OpenTelemetry).</li>
+      <li>Application version and deployment information.</li>
+      <li>Container or node identifiers in distributed environments.</li>
+    </ul>
+
+    <h2>Centralized Logging and Querying</h2>
+    <p>
+      Centralized log aggregation is key to managing production logs. Tools like Elasticsearch, Loki, Datadog Logs, or CloudWatch Logs help you:
+    </p>
+    <ul>
+      <li>Search and filter logs in real time.</li>
+      <li>Create alerts based on log patterns or anomalies.</li>
+      <li>Correlate logs with metrics and traces for root cause analysis.</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>
+      Production logs are your first line of defense when things go wrong. Investing in structured, enriched, and centralized logging practices dramatically improves your ability to detect, debug, and prevent incidents. Logs are not just artifacts—they are signals. Make them count.
+    </p>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 ObservabiliTrends</p>
+  </footer>
+</body>
+</html>
