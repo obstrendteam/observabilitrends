@@ -1,137 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Intro to OpenTelemetry | ObservabiliTrends</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="A practical introduction to OpenTelemetry with code examples and architecture diagrams.">
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="article">
-  <meta property="og:title" content="Intro to OpenTelemetry | ObservabiliTrends">
-  <meta property="og:description" content="A practical introduction to OpenTelemetry with code examples and architecture diagrams.">
-  <meta property="og:url" content="https://www.observabilitrends.com/articles/opentelemetry.html">
-  <meta property="og:image" content="https://www.observabilitrends.com/assets/images/opentelemetry-cover.png">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Intro to OpenTelemetry | ObservabiliTrends">
-  <meta name="twitter:description" content="A practical introduction to OpenTelemetry with code examples and architecture diagrams.">
-  <meta name="twitter:image" content="https://www.observabilitrends.com/assets/images/opentelemetry-cover.png">
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      margin: 0;
-      padding: 0;
-      background: #fff;
-      color: #222;
-    }
-    header {
-      background: #007acc;
-      color: #fff;
-      padding: 1rem;
-      text-align: center;
-    }
-    nav {
-      background: #f4f4f4;
-      padding: 0.5rem 1rem;
-      text-align: center;
-    }
-    nav a {
-      color: #007acc;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    main {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-    .back-button {
-      display: inline-block;
-      margin-bottom: 1rem;
-      color: #007acc;
-      text-decoration: none;
-    }
-    .back-button:hover {
-      text-decoration: underline;
-    }
-    .post-meta {
-      font-size: 0.9rem;
-      color: #555;
-      margin-bottom: 1.5rem;
-    }
-    .post-meta span {
-      margin-right: 8px;
-    }
-    .newsletter-box {
-      margin: 2rem auto;
-      padding: 1.5rem;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      background: #fafafa;
-      text-align: center;
-    }
-    .newsletter-box h3 {
-      margin-bottom: 0.5rem;
-    }
-    .newsletter-box input[type="email"] {
-      padding: 0.6rem;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      width: 70%;
-      max-width: 300px;
-      margin-bottom: 0.5rem;
-    }
-    .newsletter-box input[type="submit"] {
-      padding: 0.6rem 1.2rem;
-      border: none;
-      background: #007acc;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .newsletter-box input[type="submit"]:hover {
-      background: #005f99;
-    }
-    footer {
-      background: #f4f4f4;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
-      font-size: 0.9rem;
-      color: #555;
-    }
-  </style>
+  <link rel="stylesheet" href="../assets/css/style.css">
 </head>
-
 <body>
   <header>
     <h1>ObservabiliTrends</h1>
   </header>
-
   <nav>
     <a href="../index.html">Home</a>
   </nav>
-
   <main>
     <a href="../index.html" class="back-button">← Back to Articles</a>
-
-    <article>
-      <!-- Imagen de portada -->
-      <img src="/assets/images/opentelemetry-cover.png" alt="Intro to OpenTelemetry cover image" style="width:100%; border-radius: 12px; margin-bottom: 1rem;">
-      
-      <!-- Metadatos -->
-      <div class="post-meta">
-        <span class="author">By: Daniel Busquets</span> |
-        <span class="date">Published: Sept 21, 2025</span> |
-        <span class="readtime">5 min read</span>
-      </div>
-
-      <h2>What is OpenTelemetry?</h2>
+    <img src="../assets/images/opentelemetry-cover.png" alt="Intro to OpenTelemetry cover image" style="width:100%; border-radius: 12px; margin-bottom: 1rem;">
+    <div class="post-meta">
+      <span class="author">By: Daniel Busquets</span> |
+      <span class="date">Published: Sept 21, 2025</span> |
+      <span class="readtime">5 min read</span>
+    </div>
+    <h2>What is OpenTelemetry?</h2>
       <p>
         OpenTelemetry is an open-source project that provides a unified set of tools, APIs, and SDKs for generating, collecting, and exporting observability data: <strong>traces, metrics, and logs</strong>. Its goal is to help developers and operations teams instrument and monitor distributed applications, simplifying visibility into the internal behavior of complex systems.
       </p>
@@ -171,26 +62,24 @@
       <p>
         OpenTelemetry unifies previous standards (OpenTracing and OpenCensus), integrating the best of both and fostering an active community with growing ecosystem support.
       </p>
-    </article>
-
+    <h2>Newsletter</h2>
     <div class="newsletter-box">
       <h3>📬 Stay updated!</h3>
-      <p>Join <strong>ObservabiliTrends</strong> newsletter for monthly deep dives, tutorials and dashboards.</p>
+      <p>Join <strong>ObservabiliTrends</strong> newsletter.</p>
       <form
         action="https://buttondown.email/api/emails/embed-subscribe/observabilitrends"
         method="post"
         target="popupwindow"
-        onsubmit="window.open('https://buttondown.email/observabilitrends', 'popupwindow')"
-      >
+        onsubmit="window.open('https://buttondown.email/observabilitrends', 'popupwindow')">
         <input type="email" name="email" placeholder="Enter your email" required>
         <br>
         <input type="submit" value="Subscribe">
       </form>
     </div>
   </main>
-
   <footer>
-    <p>&copy; 2025 ObservabiliTrends</p>
+    <p>&copy; <span id="year"></span> ObservabiliTrends</p>
   </footer>
+  <script src="../assets/js/main.js"></script>
 </body>
 </html>
