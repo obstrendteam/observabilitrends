@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Datadog vs Grafana</title>
-  <meta name="description" content="Comparison between Datadog and Grafana for observability needs.">
+  <title>Edge & IoT Observability</title>
+  <meta name="description" content="Extending OpenTelemetry to edge and IoT sensors.">
   <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 <body>
@@ -13,52 +13,40 @@
   <main>
     <a href="../index.html" class="back-button">← Back to Articles</a>
 
-    <h1>Datadog vs Grafana: Which One Should You Choose?</h1>
+    <h1>Edge & IoT Observability: Extending OpenTelemetry to the Sensor Layer</h1>
+
     <div class="post-meta">
       <span class="author">By: Daniel Busquets</span> |
-      <span class="date">Published: Sept 3, 2025</span> |
+      <span class="date">Published: Sept 20, 2025</span> |
       <span class="readtime">5 min read</span>
     </div>
-
-    <h2>Overview</h2>
-    <p>Datadog and Grafana are two of the most popular tools in the observability space. Both offer powerful capabilities, but they differ significantly in architecture, pricing, and flexibility. Choosing between them depends on your use case, budget, and team preferences.</p>
-
-    <h2>Datadog: All-in-One SaaS Monitoring</h2>
-    <p>Datadog is a fully managed SaaS platform that integrates metrics, logs, traces, real user monitoring (RUM), synthetic monitoring, and security in one place. It provides out-of-the-box dashboards, extensive integrations, and AI-powered alerting.</p>
+      
+    <h2>Why Edge Visibility Matters</h2>
+    <p>As edge and IoT devices proliferate, observability must stretch beyond the cloud to the device layer.</p>
+    <h2>Key Challenges</h2>
     <ul>
-      <li><strong>Pros:</strong> Easy to set up, great UX, full observability suite, extensive documentation.</li>
-      <li><strong>Cons:</strong> High and sometimes unpredictable cost, vendor lock-in, limited customization.</li>
+      <li>Resource constraints (CPU, battery)</li>
+      <li>Network latency and intermittent connectivity</li>
+      <li>Data volume and cost</li>
     </ul>
-
-    <h2>Grafana: The Open Source Dashboarding Powerhouse</h2>
-    <p>Grafana is an open source visualization tool that can be used with a variety of backends (Prometheus, Loki, InfluxDB, Elasticsearch, etc.). With Grafana Cloud, it offers hosted services, but its strength lies in its flexibility and extensibility.</p>
-    <ul>
-      <li><strong>Pros:</strong> Highly customizable, open source, no vendor lock-in, strong plugin ecosystem.</li>
-      <li><strong>Cons:</strong> Requires more setup and maintenance, lacks some integrated features out of the box.</li>
-    </ul>
-
-    <h2>Use Cases</h2>
-    <ul>
-      <li><strong>Datadog:</strong> Ideal for teams that want fast time-to-value with minimal setup, especially in fast-scaling cloud-native environments.</li>
-      <li><strong>Grafana:</strong> Preferred by engineering-heavy teams who need full control, cost predictability, and want to build custom observability stacks.</li>
-    </ul>
-
-    <h2>Cost Considerations</h2>
-    <p>Datadog pricing is based on volume and enabled features, which can lead to unexpected costs. Grafana OSS is free; Grafana Cloud offers tiered pricing with a generous free tier. In self-hosted setups, cost is mostly infrastructure-related.</p>
-
-    <h2>Integration and Ecosystem</h2>
-    <p>Both platforms support a wide range of integrations, but with different philosophies. Datadog favors simplicity through native integrations. Grafana enables integration through data sources and plugins, requiring more manual configuration.</p>
-
+    <h2>Best Practices</h2>
+    <ol>
+      <li>Use lightweight OTEL agents with on-device sampling</li>
+      <li>Pre-aggregate locally</li>
+      <li>Export batch telemetry during stable connectivity</li>
+    </ol>
+    <h2>Architecture Overview</h2>
+    <p>OTEL Collector local + data lake or centralized backend + Grafana dashboards.</p>
     <h2>Conclusion</h2>
-    <p>If you’re looking for a plug-and-play enterprise-grade observability platform and are willing to pay for convenience, go with <strong>Datadog</strong>. If you prefer an open, flexible, and cost-effective approach with control over every component, choose <strong>Grafana</strong>.</p>
+    <p>Edge observability is essential for full-stack distributed visibility.</p>
 
     <div class="newsletter-box">
       <h3>📬 Stay updated!</h3>
       <p>Join <strong>ObservabiliTrends</strong> newsletter.</p>
-        <form action="https://buttondown.email/api/emails/embed-subscribe/observabilitrends" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.email/observabilitrends', 'popupwindow')">
-          <input type="email" name="email" placeholder="Enter your email" required><br>
-          <input type="submit" value="Subscribe">
-        </form>
+      <form action="https://buttondown.email/api/emails/embed-subscribe/observabilitrends" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.email/observabilitrends', 'popupwindow')">
+        <input type="email" name="email" placeholder="Enter your email" required><br>
+        <input type="submit" value="Subscribe">
+      </form>
     </div>
 
   </main>
