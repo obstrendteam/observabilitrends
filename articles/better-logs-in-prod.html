@@ -2,18 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Better Logs in Production</title>
-  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <meta name="description" content="Best practices and patterns for logging in production environments.">
+  <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 <body>
-  <header>
-    <h1>ObservabiliTrends</h1>
-  </header>
-
-  <nav>
-    <a href="../index.html">Home</a>
-  </nav>
-
+  <header><h1>ObservabiliTrends</h1></header>
+  <nav><a href="../index.html">Home</a></nav>
   <main>
     <a href="../index.html" class="back-button">← Back to Articles</a>
 
@@ -70,10 +66,18 @@
     <p>
       Production logs are your first line of defense when things go wrong. Investing in structured, enriched, and centralized logging practices dramatically improves your ability to detect, debug, and prevent incidents. Logs are not just artifacts—they are signals. Make them count.
     </p>
-  </main>
 
-  <footer>
-    <p>&copy; 2025 ObservabiliTrends</p>
-  </footer>
+    <div class="newsletter-box">
+      <h3>📬 Stay updated!</h3>
+      <p>Join <strong>ObservabiliTrends</strong> newsletter.</p>
+      <form action="https://buttondown.email/api/emails/embed-subscribe/observabilitrends" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.email/observabilitrends', 'popupwindow')">
+        <input type="email" name="email" placeholder="Enter your email" required><br>
+        <input type="submit" value="Subscribe">
+      </form>
+    </div>
+
+  </main>
+  <footer><p>&copy; <span id="year"></span> ObservabiliTrends</p></footer>
+  <script src="../assets/js/main.js"></script>
 </body>
 </html>
