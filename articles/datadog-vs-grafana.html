@@ -2,18 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Datadog vs Grafana</title>
-  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <meta name="description" content="Comparison between Datadog and Grafana for observability needs.">
+  <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 <body>
-  <header>
-    <h1>ObservabiliTrends</h1>
-  </header>
-
-  <nav>
-    <a href="../index.html">Home</a>
-  </nav>
-
+  <header><h1>ObservabiliTrends</h1></header>
+  <nav><a href="../index.html">Home</a></nav>
   <main>
     <a href="../index.html" class="back-button">← Back to Articles</a>
 
@@ -25,23 +21,17 @@
     </div>
 
     <h2>Overview</h2>
-    <p>
-      Datadog and Grafana are two of the most popular tools in the observability space. Both offer powerful capabilities, but they differ significantly in architecture, pricing, and flexibility. Choosing between them depends on your use case, budget, and team preferences.
-    </p>
+    <p>Datadog and Grafana are two of the most popular tools in the observability space. Both offer powerful capabilities, but they differ significantly in architecture, pricing, and flexibility. Choosing between them depends on your use case, budget, and team preferences.</p>
 
     <h2>Datadog: All-in-One SaaS Monitoring</h2>
-    <p>
-      Datadog is a fully managed SaaS platform that integrates metrics, logs, traces, real user monitoring (RUM), synthetic monitoring, and security in one place. It provides out-of-the-box dashboards, extensive integrations, and AI-powered alerting.
-    </p>
+    <p>Datadog is a fully managed SaaS platform that integrates metrics, logs, traces, real user monitoring (RUM), synthetic monitoring, and security in one place. It provides out-of-the-box dashboards, extensive integrations, and AI-powered alerting.</p>
     <ul>
       <li><strong>Pros:</strong> Easy to set up, great UX, full observability suite, extensive documentation.</li>
       <li><strong>Cons:</strong> High and sometimes unpredictable cost, vendor lock-in, limited customization.</li>
     </ul>
 
     <h2>Grafana: The Open Source Dashboarding Powerhouse</h2>
-    <p>
-      Grafana is an open source visualization tool that can be used with a variety of backends (Prometheus, Loki, InfluxDB, Elasticsearch, etc.). With Grafana Cloud, it offers hosted services, but its strength lies in its flexibility and extensibility.
-    </p>
+    <p>Grafana is an open source visualization tool that can be used with a variety of backends (Prometheus, Loki, InfluxDB, Elasticsearch, etc.). With Grafana Cloud, it offers hosted services, but its strength lies in its flexibility and extensibility.</p>
     <ul>
       <li><strong>Pros:</strong> Highly customizable, open source, no vendor lock-in, strong plugin ecosystem.</li>
       <li><strong>Cons:</strong> Requires more setup and maintenance, lacks some integrated features out of the box.</li>
@@ -54,23 +44,25 @@
     </ul>
 
     <h2>Cost Considerations</h2>
-    <p>
-      Datadog pricing is based on volume and enabled features, which can lead to unexpected costs. Grafana OSS is free; Grafana Cloud offers tiered pricing with a generous free tier. In self-hosted setups, cost is mostly infrastructure-related.
-    </p>
+    <p>Datadog pricing is based on volume and enabled features, which can lead to unexpected costs. Grafana OSS is free; Grafana Cloud offers tiered pricing with a generous free tier. In self-hosted setups, cost is mostly infrastructure-related.</p>
 
     <h2>Integration and Ecosystem</h2>
-    <p>
-      Both platforms support a wide range of integrations, but with different philosophies. Datadog favors simplicity through native integrations. Grafana enables integration through data sources and plugins, requiring more manual configuration.
-    </p>
+    <p>Both platforms support a wide range of integrations, but with different philosophies. Datadog favors simplicity through native integrations. Grafana enables integration through data sources and plugins, requiring more manual configuration.</p>
 
     <h2>Conclusion</h2>
-    <p>
-      If you’re looking for a plug-and-play enterprise-grade observability platform and are willing to pay for convenience, go with <strong>Datadog</strong>. If you prefer an open, flexible, and cost-effective approach with control over every component, choose <strong>Grafana</strong>.
-    </p>
-  </main>
+    <p>If you’re looking for a plug-and-play enterprise-grade observability platform and are willing to pay for convenience, go with <strong>Datadog</strong>. If you prefer an open, flexible, and cost-effective approach with control over every component, choose <strong>Grafana</strong>.</p>
 
-  <footer>
-    <p>&copy; 2025 ObservabiliTrends</p>
-  </footer>
+    <div class="newsletter-box">
+      <h3>📬 Stay updated!</h3>
+      <p>Join <strong>ObservabiliTrends</strong> newsletter.</p>
+        <form action="https://buttondown.email/api/emails/embed-subscribe/observabilitrends" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.email/observabilitrends', 'popupwindow')">
+          <input type="email" name="email" placeholder="Enter your email" required><br>
+          <input type="submit" value="Subscribe">
+        </form>
+    </div>
+
+  </main>
+  <footer><p>&copy; <span id="year"></span> ObservabiliTrends</p></footer>
+  <script src="../assets/js/main.js"></script>
 </body>
 </html>
