@@ -5,24 +5,152 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ObservabiliTrends</title>
   <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #f9fafb;
+      color: #222;
+      line-height: 1.6;
+    }
+    header {
+      background: #1e3a8a;
+      color: #fff;
+      padding: 2rem;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    nav {
+      background: #111827;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem;
+    }
+    nav a {
+      color: #e5e7eb;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    nav a:hover {
+      color: #60a5fa;
+    }
+    main {
+      max-width: 960px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    h2 {
+      margin-bottom: 1rem;
+      color: #1e3a8a;
+    }
+    .articles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .card {
+      background: #fff;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+    }
+    .card a {
+      text-decoration: none;
+      color: #1e3a8a;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    .contact {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: #e0f2fe;
+      border-radius: 0.75rem;
+      text-align: center;
+    }
+    .contact h2 {
+      margin-top: 0;
+      color: #0c4a6e;
+    }
+    .contact p {
+      margin: 0.5rem 0 1rem;
+    }
+    .contact a {
+      display: inline-block;
+      margin: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-email {
+      background: #1e3a8a;
+      color: #fff;
+    }
+    .btn-email:hover {
+      background: #374151;
+    }
+    .btn-linkedin {
+      background: #0a66c2;
+      color: #fff;
+    }
+    .btn-linkedin:hover {
+      background: #004182;
+    }
+    footer {
+      margin-top: 3rem;
+      background: #111827;
+      color: #9ca3af;
+      text-align: center;
+      padding: 1rem;
+    }
+  </style>
 </head>
 <body>
-  <header><h1>ObservabiliTrends</h1></header>
+  <header>
+    <h1>ObservabiliTrends</h1>
+    <p>Insights & Practices for Modern Observability</p>
+  </header>
+
   <nav>
     <a href="index.html">Home</a>
     <a href="contact.html">Contact</a>
   </nav>
+
   <main>
     <h2>Latest Articles</h2>
-    <ul>
-      <li><a href="articles/intro-to-opentelemetry.html">Intro to OpenTelemetry</a></li>
-      <li><a href="articles/better-logs-in-prod.html">Better Logs in Production</a></li>
-      <li><a href="articles/datadog-vs-grafana.html">Datadog vs Grafana</a></li>
-      <li><a href="articles/aiops-observability.html">AIOps in Observability</a></li>
-      <li><a href="articles/edge-iot-observability.html">Edge & IoT Observability</a></li>
-      <li><a href="articles/observability-secops.html">Unified Observability + SecOps</a></li>
-    </ul>
+    <div class="articles">
+      <div class="card"><a href="articles/intro-to-opentelemetry.html">Intro to OpenTelemetry</a></div>
+      <div class="card"><a href="articles/better-logs-in-prod.html">Better Logs in Production</a></div>
+      <div class="card"><a href="articles/datadog-vs-grafana.html">Datadog vs Grafana</a></div>
+      <div class="card"><a href="articles/aiops-observability.html">AIOps in Observability</a></div>
+      <div class="card"><a href="articles/edge-iot-observability.html">Edge & IoT Observability</a></div>
+      <div class="card"><a href="articles/observability-secops.html">Unified Observability + SecOps</a></div>
+    </div>
+
+    <section class="contact">
+      <h2>Get in Touch</h2>
+      <p>Have questions or want to connect? Reach out directly via email or LinkedIn.</p>
+      <a href="mailto:yourname@example.com" class="btn-email">📧 Email Me</a>
+      <a href="https://www.linkedin.com/in/yourprofile" target="_blank" class="btn-linkedin">🔗 Connect on LinkedIn</a>
+    </section>
   </main>
-  <footer><p>&copy; 2025 ObservabiliTrends</p></footer>
+
+  <footer>
+    <p>&copy; 2025 ObservabiliTrends. All rights reserved.</p>
+  </footer>
 </body>
 </html>
