@@ -1,85 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Intro to OpenTelemetry | ObservabiliTrends</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A practical introduction to OpenTelemetry with code examples and architecture diagrams.">
+  <meta name="description" content="Practical introduction to OpenTelemetry: concepts, architecture, hands-on labs (Python + Collector), exporters, best practices and links.">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Intro to OpenTelemetry | ObservabiliTrends">
+  <meta property="og:description" content="Practical introduction to OpenTelemetry: concepts, architecture, hands-on labs (Python + Collector), exporters, best practices and links.">
+  <meta property="og:url" content="https://www.observabilitrends.com/articles/opentelemetry.html">
+  <meta property="og:image" content="https://www.observabilitrends.com/assets/images/opentelemetry-cover.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Intro to OpenTelemetry | ObservabiliTrends">
+  <meta name="twitter:description" content="Practical introduction to OpenTelemetry: concepts, architecture, hands-on labs (Python + Collector), exporters, best practices and links.">
+  <meta name="twitter:image" content="https://www.observabilitrends.com/assets/images/opentelemetry-cover.png">
+
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
   <header>
     <h1>ObservabiliTrends</h1>
   </header>
+
   <nav>
     <a href="../index.html">Home</a>
   </nav>
+
   <main>
     <a href="../index.html" class="back-button">← Back to Articles</a>
-    <img src="../assets/images/opentelemetry-cover.png" alt="Intro to OpenTelemetry cover image" style="width:100%; border-radius: 12px; margin-bottom: 1rem;">
+
+    <img src="../assets/images/opentelemetry-cover.png" alt="Intro to OpenTelemetry cover image" class="cover">
+
     <div class="post-meta">
       <span class="author">By: Daniel Busquets</span> |
       <span class="date">Published: Sept 21, 2025</span> |
-      <span class="readtime">5 min read</span>
+      <span class="readtime">10 min read</span>
     </div>
+
+    <h1>Intro to OpenTelemetry — Practical guide, examples and labs</h1>
+
+    <p><strong>TL;DR:</strong> OpenTelemetry (OTel) is the industry-standard, vendor-neutral observability framework for generating, collecting and exporting traces, metrics and logs. This article covers the architecture, why it matters, practical instrumentation examples (Python & Node), a Collector configuration, exporters, best practices (sampling, cost control, context propagation) and links to labs & repos to get you running end-to-end.</p>
+
     <h2>What is OpenTelemetry?</h2>
-      <p>
-        OpenTelemetry is an open-source project that provides a unified set of tools, APIs, and SDKs for generating, collecting, and exporting observability data: <strong>traces, metrics, and logs</strong>. Its goal is to help developers and operations teams instrument and monitor distributed applications, simplifying visibility into the internal behavior of complex systems.
-      </p>
+    <p>
+      OpenTelemetry is an open, community-driven project (CNCF) that standardizes telemetry: <strong>traces, metrics and logs</strong>. It provides language APIs, SDKs, automatic instrumentation, exporters and a standalone service called the <em>Collector</em> to receive, process and export telemetry to many backends.
+    </p>
 
-      <h2>Why is OpenTelemetry Important?</h2>
-      <p>
-        With the rise of microservices architectures, containers, and cloud environments, observability has become a critical pillar to ensure application performance and reliability. OpenTelemetry enables:
-      </p>
-      <ul>
-        <li><strong>Standardization:</strong> It provides a common format for collecting and exporting observability data, avoiding tool fragmentation.</li>
-        <li><strong>Portability:</strong> It facilitates switching monitoring backends (e.g., from Jaeger to Zipkin or Prometheus) without changing the instrumented code.</li>
-        <li><strong>Scalability:</strong> It allows instrumenting applications at scale without significant performance impact.</li>
-      </ul>
+    <h2>Why OpenTelemetry matters</h2>
+    <ul>
+      <li><strong>Standardization:</strong> OTLP (OpenTelemetry Protocol) unifica el transporte y el formato, evitando lock-in por vendor.</li>
+      <li><strong>Portability:</strong> cambia el backend (Jaeger, Tempo, Datadog, New Relic, Honeycomb...) sin tocar la instrumentación de tu aplicación.</li>
+      <li><strong>Scalability:</strong> Collector con pipelines configurables permite sampling, batching y transformación para reducir overhead y costes.</li>
+    </ul>
 
-      <h2>Key Components of OpenTelemetry</h2>
-      <ol>
-        <li><strong>APIs:</strong> Interfaces developers use to instrument code, generating traces, metrics, and logs.</li>
-        <li><strong>SDKs:</strong> Implementations of the APIs for various programming languages that handle data collection and exporting.</li>
-        <li><strong>Collectors:</strong> Services that receive, process, and export data to backend systems for analysis and visualization.</li>
-      </ol>
+    <h2>Core components</h2>
+    <ol>
+      <li><strong>APIs</strong> — interfaces para crear spans, métricas y correlacionar contexto.</li>
+      <li><strong>SDKs</strong> — implementaciones por lenguaje (Java, Python, Go, .NET, JS) que gestionan context propagation, exporters y processors.</li>
+      <li><strong>Collector</strong> — servicio independiente (binary / container) con pipelines: <code>receivers → processors → exporters</code>.</li>
+      <li><strong>Exporters</strong> — destino de datos: Prometheus, Jaeger, Tempo, Zipkin, OTLP, servicios cloud y vendors.</li>
+    </ol>
 
-      <h2>How OpenTelemetry Works</h2>
-      <ol>
-        <li><strong>Instrumentation:</strong> Code is inserted into the application to capture relevant events, such as API calls, database operations, or errors.</li>
-        <li><strong>Data Generation:</strong> OpenTelemetry creates spans (units of work within a trace), metrics, and logs describing the application's behavior.</li>
-        <li><strong>Exporting:</strong> Data is sent to the Collector, which can transform and export it to multiple systems like Prometheus, Jaeger, Grafana, or cloud services.</li>
-      </ol>
+    <h2>How it works — quick architecture</h2>
+    <p>
+      Instrumentation (auto o manual) → SDK (buffer, batch) → Exporter → Collector (optional) → Backend(s).  
+      La cadena puede verse así:
+    </p>
 
-      <h2>Common Use Cases</h2>
-      <ul>
-        <li><strong>Performance Monitoring:</strong> Identify bottlenecks in microservices.</li>
-        <li><strong>Error Diagnosis:</strong> Correlate logs and traces to detect failures and understand their context.</li>
-        <li><strong>Usage Analytics:</strong> Measure user behavior and the effectiveness of new features.</li>
-      </ul>
+    <pre><code>Application (instrumented)
+  └─> SDK (Batching, Context Propagation)
+       └─> Exporter (OTLP gRPC / HTTP)
+            └─> Collector (receivers → processors → exporters)
+                 └─> Backends (Prometheus / Jaeger / Tempo / Loki / Datadog / Cloud)</code></pre>
 
-      <h2>Advantages Over Other Solutions</h2>
-      <p>
-        OpenTelemetry unifies previous standards (OpenTracing and OpenCensus), integrating the best of both and fostering an active community with growing ecosystem support.
-      </p>
-    <h2>Newsletter</h2>
+    <h2>Hands-on lab: End-to-end with Python + OpenTelemetry Collector + Jaeger/Prometheus</h2>
+    <p>Este laboratorio mínimo te permite generar trazas y métricas desde una aplicación Python y verlas en Jaeger (traces) y Prometheus (metrics).</p>
+
+    <h3>1) Collector (Docker) — config mínima</h3>
+    <p>Crea un archivo <code>collector-config.yaml</code> con esta configuración:</p>
+    <pre><code>receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+
+exporters:
+  jaeger:
+    endpoint: "jaeger:14250"
+    tls:
+      insecure: true
+  prometheus:
+    endpoint: "0.0.0.0:9464"
+
+processors:
+  batch:
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [jaeger]
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [prometheus]</code></pre>
+
+    <p>Arranca el Collector con Docker (suponiendo que tienes Jaeger corriendo o quieres usar el contenedor oficial):</p>
+    <pre><code>docker run --rm -p 4317:4317 -p 4318:4318 -p 9464:9464 \
+  -v $(pwd)/collector-config.yaml:/etc/otel/config.yaml \
+  otel/opentelemetry-collector:latest --config /etc/otel/config.yaml</code></pre>
+
+    <h3>2) Aplicación Python (basic instrument)</h3>
+    <p>Instala dependencias:</p>
+    <pre><code>pip install opentelemetry-api opentelemetry-sdk opentelemetry-instrumentation-flask \
+opentelemetry-exporter-otlp-proto-grpc flask</code></pre>
+
+    <p>Archivo <code>app.py</code>:</p>
+    <pre><code>from flask import Flask
+from opentelemetry import trace
+from opentelemetry.sdk.resources import Resource
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
+from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
+from opentelemetry.instrumentation.flask import FlaskInstrumentor
+
+app = Flask(__name__)
+
+resource = Resource.create({"service.name": "demo-python-service"})
+provider = TracerProvider(resource=resource)
+otlp_exporter = OTLPSpanExporter(endpoint="localhost:4317", insecure=True)
+provider.add_span_processor(BatchSpanProcessor(otlp_exporter))
+trace.set_tracer_provider(provider)
+
+FlaskInstrumentor().instrument_app(app)
+
+@app.route("/")
+def hello():
+    return "Hello from OpenTelemetry demo!"
+
+if __name__ == "__main__":
+    app.run(port=5000)</code></pre>
+
+    <p>Ejecuta <code>python app.py</code> y haz una petición a <code>http://localhost:5000/</code>. Deberías ver spans en Jaeger y métricas en Prometheus (en el endpoint del Collector: <code>http://localhost:9464/metrics</code>).</p>
+
+    <h3>3) Ejemplo rápido en Node.js (autoinstrumentation)</h3>
+    <p>Instala y arranca:</p>
+    <pre><code>npm init -y
+npm install express
+npm install --save-dev @opentelemetry/sdk-node @opentelemetry/auto-instrumentations-node @opentelemetry/exporter-otlp-grpc</code></pre>
+
+    <p>Archivo <code>server.js</code> (ejemplo mínimo con SDK Node):</p>
+    <pre><code>// This is a simplified example; prefer the official quickstart in docs
+const express = require('express');
+const { NodeSDK } = require('@opentelemetry/sdk-node');
+const { OTLPTraceExporter } = require('@opentelemetry/exporter-otlp-grpc');
+const { getNodeAutoInstrumentations } = require('@opentelemetry/auto-instrumentations-node');
+
+const traceExporter = new OTLPTraceExporter({ url: 'http://localhost:4317' });
+
+const sdk = new NodeSDK({
+  traceExporter,
+  instrumentations: [getNodeAutoInstrumentations()]
+});
+
+sdk.start()
+  .then(() => {
+    const app = express();
+    app.get('/', (req, res) => res.send('Hello from Node + OTel'));
+    app.listen(3000, () => console.log('Server listening on 3000'));
+  })
+  .catch(console.error);</code></pre>
+
+    <h2>Exporters and backends — quick map</h2>
+    <ul>
+      <li><strong>Traces:</strong> Jaeger, Zipkin, Tempo, Datadog, Honeycomb</li>
+      <li><strong>Metrics:</strong> Prometheus (native), Prometheus Remote Write, Cloud monitoring (CloudWatch, GCM)</li>
+      <li><strong>Logs:</strong> Loki, Elastic, Splunk, vendor logs</li>
+    </ul>
+
+    <h2>Best practices</h2>
+    <ul>
+      <li><strong>Sampling:</strong> head-based sampling reduces ingestion volume; tail-based sampling gives higher fidelity for alerts but needs more backend compute. Consider hybrid strategies (keep 100% of errors, sample normal traffic).</li>
+      <li><strong>Context propagation:</strong> ensure the <code>traceparent</code> header and baggage are forwarded in HTTP and message queues.</li>
+      <li><strong>Attributes & resource labels:</strong> add <code>service.name</code>, <code>service.version</code>, <code>deployment.environment</code> to all telemetry so dashboards and SLOs are meaningful.</li>
+      <li><strong>Cost control:</strong> filter noisy spans/metrics at the Collector; use batching, compression and exporters that support aggregation.</li>
+      <li><strong>Security:</strong> avoid exporting sensitive PII in spans/logs and secure exporter endpoints (TLS + auth).</li>
+    </ul>
+
+    <h2>Pitfalls & troubleshooting</h2>
+    <ul>
+      <li>If you don’t see spans: check SDK initialization order (provider must be set before instrumentation), verify Collector endpoints/ports and OTLP protocol (grpc vs http).</li>
+      <li>High cardinality metrics: histograms + labels with high cardinality can explode storage/costs — prefer aggregations and stable labels.</li>
+      <li>Version mismatches: OpenTelemetry evolves fast; pin SDK versions in production.</li>
+    </ul>
+
+    <h2>Useful links & further reading</h2>
+    <ul>
+      <li><a href="https://opentelemetry.io/docs/" target="_blank" rel="noopener">OpenTelemetry — official docs</a></li>
+      <li><a href="https://github.com/open-telemetry/opentelemetry-collector" target="_blank" rel="noopener">OpenTelemetry Collector (GitHub)</a></li>
+      <li><a href="https://github.com/open-telemetry/opentelemetry-demo" target="_blank" rel="noopener">OpenTelemetry demo app (end-to-end examples)</a></li>
+      <li><a href="https://grafana.com/oss/tempo/" target="_blank" rel="noopener">Grafana Tempo (tracing backend)</a></li>
+      <li><a href="https://prometheus.io/docs/introduction/overview/" target="_blank" rel="noopener">Prometheus — metrics</a></li>
+      <li><a href="https://grafana.com/docs/grafana/latest/dashboards/" target="_blank" rel="noopener">Grafana dashboards & panels</a></li>
+      <li><a href="https://signoz.io/" target="_blank" rel="noopener">SigNoz — open-source alternative with OTel support</a></li>
+    </ul>
+
+    <h2>Starter repos & dashboards</h2>
+    <ul>
+      <li><a href="https://github.com/open-telemetry/opentelemetry-demo" target="_blank" rel="noopener">opentelemetry-demo</a> — microservices sample with traces/metrics/logs</li>
+      <li><a href="https://github.com/grafana/tempo" target="_blank" rel="noopener">Grafana Tempo repo</a></li>
+      <li>Search Grafana.com Dashboards for OTEL-ready panels (e.g. Prometheus + service metrics templates)</li>
+    </ul>
+
+    <h2>Next steps — practical checklist</h2>
+    <ol>
+      <li>Instrument one service end-to-end (pick Python/Node/Java).</li>
+      <li>Deploy Collector as a sidecar or central service depending on topology.</li>
+      <li>Configure exporters for traces and metrics to backends you have (start with Jaeger + Prometheus locally).</li>
+      <li>Design SLOs and dashboards using the collected metrics and traces.</li>
+      <li>Iterate sampling and filters to control cost and signal quality.</li>
+    </ol>
+
+    <hr>
+
+    <p><em>If you want, puedo convertir este laboratorio en un repo con Docker Compose (Collector + Jaeger + Prometheus + demo app) que puedes clonar y arrancar en tu máquina — dime si lo preparo y te lo entrego listo para usar.</em></p>
+
+    <h2>Further reading & acknowledgements</h2>
+    <p>OpenTelemetry is a fast-moving space; recomiendo seguir el repositorio oficial y la CNCF para novedades, y aprovechar los proyectos de la comunidad (SigNoz, Tempo, opentelemetry-demo) para ejemplos prácticos.</p>
+
+    <!-- Newsletter -->
     <div class="newsletter-box">
       <h3>📬 Stay updated!</h3>
-      <p>Join <strong>ObservabiliTrends</strong> newsletter.</p>
+      <p>Join <strong>ObservabiliTrends</strong> newsletter for monthly deep dives, tutorials and downloadable dashboards.</p>
       <form
         action="https://buttondown.email/api/emails/embed-subscribe/observabilitrends"
         method="post"
         target="popupwindow"
-        onsubmit="window.open('https://buttondown.email/observabilitrends', 'popupwindow')">
+        onsubmit="window.open('https://buttondown.email/observabilitrends', 'popupwindow')"
+      >
         <input type="email" name="email" placeholder="Enter your email" required>
         <br>
         <input type="submit" value="Subscribe">
       </form>
     </div>
+
   </main>
+
   <footer>
     <p>&copy; <span id="year"></span> ObservabiliTrends</p>
   </footer>
+
   <script src="../assets/js/main.js"></script>
 </body>
 </html>
