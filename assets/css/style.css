@@ -1,3 +1,7 @@
+.newsletter-box { margin-top: 2rem; padding: 1.5rem; border: 1px solid #ddd; border-radius: 10px; background: #fafafa; text-align: center; }
+.newsletter-box input[type="email"] { padding: 0.6rem; border: 1px solid #ccc; border-radius: 5px; width: 70%; max-width: 300px; margin-bottom: 0.5rem; }
+.newsletter-box input[type="submit"] { padding: 0.6rem 1.2rem; border: none; background: #007acc; color: white; border-radius: 5px; cursor: pointer; }
+
 /* Reset básico */
 * {
   margin: 0;
