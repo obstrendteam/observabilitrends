@@ -1,54 +1,49 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Better Logs in Production</title>
-  <meta name="description" content="Best practices and patterns for structured, contextual, and centralized logging in production environments.">
-  <link rel="stylesheet" href="../assets/css/style.css" />
-</head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Better Logs in Production</title>
+<meta content="Best practices and patterns for structured, contextual, and centralized logging in production environments." name="description"/>
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<link href="assets/images/Observabilitrends_logo.png" rel="icon" type="image/png"/></head>
 <body>
-  <header><h1>ObservabiliTrends</h1></header>
-  <nav><a href="../index.html">Home</a></nav>
-  <main>
-    <a href="../index.html" class="back-button">← Back to Articles</a>
-    <img src="../assets/images/betterlogs-cover.png" alt="Better Logs in Production cover image" class="cover-image">    
-
-    <h1>Better Logs in Production</h1>
-    <div class="post-meta">
-      <span class="author">By: Daniel Busquets</span> |
+<header><img alt="Observabilitrends Logo" class="logo" src="assets/images/Observabilitrends_logo.png"/><h1>ObservabiliTrends</h1></header>
+<nav><a href="../index.html">Home</a></nav>
+<main>
+<a class="back-button" href="../index.html">← Back to Articles</a>
+<img alt="Better Logs in Production cover image" class="cover-image" src="../assets/images/betterlogs-cover.png"/>
+<h1>Better Logs in Production</h1>
+<div class="post-meta">
+<span class="author">By: Daniel Busquets</span> |
       <span class="date">Published: Sept 20, 2025</span> |
       <span class="readtime">8 min read</span>
-    </div>
-
-    <h2>Why Logging Matters</h2>
-    <p>
+</div>
+<h2>Why Logging Matters</h2>
+<p>
       Logging is a fundamental aspect of <strong>observability</strong>. In production environments, effective logging is critical to diagnose problems, monitor system health, and gain insight into application behavior. 
       However, without proper structure and practices, logs can become noisy, incomplete, or even useless. 
-      When combined with <a href="https://opentelemetry.io/docs/" target="_blank" rel="noopener">OpenTelemetry</a>, structured logging is a powerful ally for root cause analysis.
+      When combined with <a href="https://opentelemetry.io/docs/" rel="noopener" target="_blank">OpenTelemetry</a>, structured logging is a powerful ally for root cause analysis.
     </p>
-
-    <h2>Common Pitfalls in Production Logging</h2>
-    <ul>
-      <li><strong>Too much noise:</strong> Excessive logs at debug level that overwhelm storage and make analysis difficult.</li>
-      <li><strong>Lack of structure:</strong> Free-text logs that cannot be parsed or indexed properly by log aggregation tools.</li>
-      <li><strong>Missing context:</strong> Logs that don’t include request IDs, user identifiers, or environment metadata.</li>
-      <li><strong>Inconsistent formats:</strong> Varying styles across teams or services make correlation difficult.</li>
-    </ul>
-
-    <img src="../assets/images/log-pitfalls-diagram.png" alt="Diagram of common pitfalls in logging" class="inline-diagram">
-
-    <h2>Principles of Better Logging</h2>
-    <ol>
-      <li><strong>Use structured logs:</strong> Log in JSON or a format easily consumed by logging systems like ELK, Loki, or Datadog.</li>
-      <li><strong>Include context:</strong> Always include trace IDs, span IDs, request URLs, user sessions, and environment tags.</li>
-      <li><strong>Log at the right level:</strong> Use <code>error</code>/<code>warning</code> for failures, <code>info</code> for business events, and <code>debug</code> only in dev environments.</li>
-      <li><strong>Avoid sensitive data:</strong> Never log passwords, secrets, or personal data (PII).</li>
-      <li><strong>Be consistent:</strong> Define log schemas and naming conventions across all services.</li>
-    </ol>
-
-    <h2>Code Examples</h2>
-    <h3>Node.js (Winston + OpenTelemetry)</h3>
+<h2>Common Pitfalls in Production Logging</h2>
+<ul>
+<li><strong>Too much noise:</strong> Excessive logs at debug level that overwhelm storage and make analysis difficult.</li>
+<li><strong>Lack of structure:</strong> Free-text logs that cannot be parsed or indexed properly by log aggregation tools.</li>
+<li><strong>Missing context:</strong> Logs that don’t include request IDs, user identifiers, or environment metadata.</li>
+<li><strong>Inconsistent formats:</strong> Varying styles across teams or services make correlation difficult.</li>
+</ul>
+<img alt="Diagram of common pitfalls in logging" class="inline-diagram" src="../assets/images/log-pitfalls-diagram.png"/>
+<h2>Principles of Better Logging</h2>
+<ol>
+<li><strong>Use structured logs:</strong> Log in JSON or a format easily consumed by logging systems like ELK, Loki, or Datadog.</li>
+<li><strong>Include context:</strong> Always include trace IDs, span IDs, request URLs, user sessions, and environment tags.</li>
+<li><strong>Log at the right level:</strong> Use <code>error</code>/<code>warning</code> for failures, <code>info</code> for business events, and <code>debug</code> only in dev environments.</li>
+<li><strong>Avoid sensitive data:</strong> Never log passwords, secrets, or personal data (PII).</li>
+<li><strong>Be consistent:</strong> Define log schemas and naming conventions across all services.</li>
+</ol>
+<h2>Code Examples</h2>
+<h3>Node.js (Winston + OpenTelemetry)</h3>
 <pre><code class="language-js">
 const { createLogger, transports, format } = require('winston');
 const logger = createLogger({
@@ -67,8 +62,7 @@ logger.info('Order created', {
   userId: 'user42'
 });
 </code></pre>
-
-    <h3>Python (structlog)</h3>
+<h3>Python (structlog)</h3>
 <pre><code class="language-python">
 import structlog
 
@@ -77,61 +71,54 @@ log = structlog.get_logger()
 log.info("user_login", user_id="u123", trace_id="abc-xyz")
 log.error("payment_failed", error="timeout", order_id="987")
 </code></pre>
-
-    <p>
-      For more examples, see the <a href="https://opentelemetry.io/docs/concepts/signals/logs/" target="_blank" rel="noopener">OpenTelemetry Logging Documentation</a>.
+<p>
+      For more examples, see the <a href="https://opentelemetry.io/docs/concepts/signals/logs/" rel="noopener" target="_blank">OpenTelemetry Logging Documentation</a>.
     </p>
-
-    <h2>Log Enrichment Techniques</h2>
-    <p>
+<h2>Log Enrichment Techniques</h2>
+<p>
       Enriching logs means appending contextual metadata automatically. You can use log middleware or wrappers to add:
     </p>
-    <ul>
-      <li>Trace and span IDs from your tracing system (e.g., OpenTelemetry).</li>
-      <li>Application version and deployment information.</li>
-      <li>Container or node identifiers in distributed environments.</li>
-    </ul>
-
-    <img src="../assets/images/log-enrichment-flow.png" alt="Diagram showing log enrichment flow with middleware" class="inline-diagram">
-
-    <h2>Centralized Logging and Querying</h2>
-    <p>
+<ul>
+<li>Trace and span IDs from your tracing system (e.g., OpenTelemetry).</li>
+<li>Application version and deployment information.</li>
+<li>Container or node identifiers in distributed environments.</li>
+</ul>
+<img alt="Diagram showing log enrichment flow with middleware" class="inline-diagram" src="../assets/images/log-enrichment-flow.png"/>
+<h2>Centralized Logging and Querying</h2>
+<p>
       Centralized log aggregation is key to managing production logs. Tools like 
-      <a href="https://www.elastic.co/what-is/elk-stack" target="_blank" rel="noopener">Elasticsearch</a>, 
-      <a href="https://grafana.com/oss/loki/" target="_blank" rel="noopener">Loki</a>, 
-      <a href="https://www.datadoghq.com/product/log-management/" target="_blank" rel="noopener">Datadog Logs</a>, or 
-      <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html" target="_blank" rel="noopener">CloudWatch Logs</a> help you:
+      <a href="https://www.elastic.co/what-is/elk-stack" rel="noopener" target="_blank">Elasticsearch</a>, 
+      <a href="https://grafana.com/oss/loki/" rel="noopener" target="_blank">Loki</a>, 
+      <a href="https://www.datadoghq.com/product/log-management/" rel="noopener" target="_blank">Datadog Logs</a>, or 
+      <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html" rel="noopener" target="_blank">CloudWatch Logs</a> help you:
     </p>
-    <ul>
-      <li>Search and filter logs in real time.</li>
-      <li>Create alerts based on log patterns or anomalies.</li>
-      <li>Correlate logs with metrics and traces for root cause analysis.</li>
-    </ul>
-
-    <h2>Hands-on Labs and Tools</h2>
-    <ul>
-      <li><a href="https://killercoda.com/openshift/scenario/logging" target="_blank" rel="noopener">KillerCoda Labs: Logging with OpenShift</a></li>
-      <li><a href="https://grafana.com/tutorials/grafana-loki-logging/" target="_blank" rel="noopener">Grafana Loki Tutorial</a></li>
-      <li><a href="https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-tutorial" target="_blank" rel="noopener">Azure Log Analytics Hands-on</a></li>
-    </ul>
-
-    <h2>Conclusion</h2>
-    <p>
+<ul>
+<li>Search and filter logs in real time.</li>
+<li>Create alerts based on log patterns or anomalies.</li>
+<li>Correlate logs with metrics and traces for root cause analysis.</li>
+</ul>
+<h2>Hands-on Labs and Tools</h2>
+<ul>
+<li><a href="https://killercoda.com/openshift/scenario/logging" rel="noopener" target="_blank">KillerCoda Labs: Logging with OpenShift</a></li>
+<li><a href="https://grafana.com/tutorials/grafana-loki-logging/" rel="noopener" target="_blank">Grafana Loki Tutorial</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-tutorial" rel="noopener" target="_blank">Azure Log Analytics Hands-on</a></li>
+</ul>
+<h2>Conclusion</h2>
+<p>
       Production logs are your first line of defense when things go wrong. Investing in structured, enriched, and centralized logging practices dramatically improves your ability to detect, debug, and prevent incidents. 
-      <br><br>
+      <br/><br/>
       Logs are not just artifacts—they are <strong>signals</strong>. Make them count.
     </p>
-
-    <div class="newsletter-box">
-      <h3>📬 Stay updated!</h3>
-      <p>Join <strong>ObservabiliTrends</strong> newsletter.</p>
-      <form action="https://buttondown.email/api/emails/embed-subscribe/observabilitrends" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.email/observabilitrends', 'popupwindow')">
-        <input type="email" name="email" placeholder="Enter your email" required><br>
-        <input type="submit" value="Subscribe">
-      </form>
-    </div>
-  </main>
-  <footer><p>&copy; <span id="year"></span> ObservabiliTrends</p></footer>
-  <script src="../assets/js/main.js"></script>
+<div class="newsletter-box">
+<h3>📬 Stay updated!</h3>
+<p>Join <strong>ObservabiliTrends</strong> newsletter.</p>
+<form action="https://buttondown.email/api/emails/embed-subscribe/observabilitrends" method="post" onsubmit="window.open('https://buttondown.email/observabilitrends', 'popupwindow')" target="popupwindow">
+<input name="email" placeholder="Enter your email" required="" type="email"/><br/>
+<input type="submit" value="Subscribe"/>
+</form>
+</div>
+</main>
+<footer><p>© <span id="year"></span> ObservabiliTrends</p></footer>
+<script src="../assets/js/main.js"></script>
 </body>
 </html>
