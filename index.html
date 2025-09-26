@@ -1,52 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Observabilitrends</title>
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ObservabiliTrends | Trends and Best Practices in Observability</title>
+  <meta name="description" content="ObservabiliTrends brings articles, tools, and insights about observability, monitoring, logs, metrics, traces, and AIOps.">
+  <link rel="stylesheet" href="assets/css/style.css" />
+  
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/images/90fd47a9-82a5-452e-9543-687e89f08e36.png"/>
-
+  <link rel="icon" type="image/png" href="assets/images/Observabilitrends_logo.png">
+  
   <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
-
-  <!-- Main Styles -->
-  <link rel="stylesheet" href="assets/css/style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
-    <img src="assets/images/Observabilitrends_logo.png" alt="Observabilitrends Logo" class="site-logo"/>
+    <a href="index.html" aria-label="Go to homepage">
+      <img src="assets/images/Observabilitrends_logo.png" alt="ObservabiliTrends logo" class="site-logo">
+    </a>
   </header>
 
   <nav>
-    <a href="index.html">Home</a>
-    <a href="contact.html">Contact</a>
+    <a href="index.html" class="active" aria-label="Home page">Home</a>
+    <a href="contact.html" aria-label="Contact page">Contact</a>
   </nav>
 
   <main>
     <h2>Latest Articles</h2>
     <div class="articles">
-      <div class="card"><a href="articles/intro-to-opentelemetry.html">Intro to OpenTelemetry</a></div>
-      <div class="card"><a href="articles/better-logs-in-prod.html">Better Logs in Production</a></div>
-      <div class="card"><a href="articles/datadog-vs-grafana.html">Datadog vs Grafana</a></div>
-      <div class="card"><a href="articles/aiops-observability.html">AIOps in Observability</a></div>
-      <div class="card"><a href="articles/edge-iot-observability.html">Edge & IoT Observability</a></div>
-      <div class="card"><a href="articles/observability-secops.html">Unified Observability + SecOps</a></div>
+      <div class="card">
+        <a href="articles/intro-to-opentelemetry.html">Intro to OpenTelemetry</a>
+        <p class="excerpt">Learn the basics of OpenTelemetry and how it standardizes metrics, traces, and logs for modern observability.</p>
+      </div>
+      <div class="card">
+        <a href="articles/better-logs-in-prod.html">Better Logs in Production</a>
+        <p class="excerpt">Best practices to structure, enrich, and centralize logs for real-world production systems.</p>
+      </div>
+      <div class="card">
+        <a href="articles/datadog-vs-grafana.html">Datadog vs Grafana</a>
+        <p class="excerpt">Compare two leading observability platforms: pricing, features, integrations, and use cases.</p>
+      </div>
+      <div class="card">
+        <a href="articles/aiops-observability.html">AIOps in Observability</a>
+        <p class="excerpt">How AI and machine learning are shaping modern observability practices and incident response.</p>
+      </div>
+      <div class="card">
+        <a href="articles/edge-iot-observability.html">Edge & IoT Observability</a>
+        <p class="excerpt">Challenges and solutions for monitoring IoT devices and edge computing infrastructures.</p>
+      </div>
+      <div class="card">
+        <a href="articles/observability-secops.html">Unified Observability + SecOps</a>
+        <p class="excerpt">Breaking silos: combining observability with security operations for proactive defense.</p>
+      </div>
     </div>
 
     <section class="contact">
       <h2>Get in Touch</h2>
       <p>Have questions or want to connect? Reach out directly via email or LinkedIn.</p>
-      <a class="btn-email" href="mailto:info@observabilitrends.com">📧 Email</a>
-      <a class="btn-linkedin" href="https://www.linkedin.com/company/observabilitrends" target="_blank">🔗 LinkedIn</a>
+      <a class="btn-email" href="mailto:info@observabilitrends.com" aria-label="Send us an email">📧 Email Me</a>
+      <a class="btn-linkedin" href="https://www.linkedin.com/company/observabilitrends" target="_blank" rel="noopener noreferrer" aria-label="Connect on LinkedIn">🔗 Connect on LinkedIn</a>
     </section>
   </main>
 
   <footer>
-    <p>© 2025 Observabilitrends. All rights reserved.</p>
+    <p>© <span id="year"></span> ObservabiliTrends. All rights reserved.</p>
+    <p>
+      <a href="privacy.html">Privacy Policy</a> | 
+      <a href="terms.html">Terms of Service</a> | 
+      <a href="https://www.linkedin.com/company/observabilitrends" target="_blank" rel="noopener">LinkedIn</a>
+    </p>
   </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+  <!-- Optional: lightweight analytics (example with Plausible) -->
+  <!-- <script async defer data-domain="observabilitrends.com" src="https://plausible.io/js/script.js"></script> -->
 </body>
 </html>
