@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Advancing Dashboarding in Grafana — Integrating Multiple Data Sources & Business Dashboards | Observabilitrends</title>
+  <meta name="description" content="Patterns and practical recipes to build executive and engineering dashboards in Grafana by correlating multiple data sources, using plugins (Business Charts) and delivering dashboards-as-code.">
+  <link rel="icon" type="image/png" href="../assets/images/Observabilitrends_logo.png" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <!-- Attribution / important references (load-bearing) -->
+  <!-- Sources used (examples & guidance):
+       - Grafana: mixing datasources & best practices. -->
+</head>
+<body>
+  <header>
+    <a href="../index.html" aria-label="Home">
+      <img src="../assets/images/Observabilitrends_logo.png" alt="Observabilitrends Logo" class="site-logo">
+    </a>
+  </header>
+
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+
+  <main class="container">
+    <article>
+      <h1>Advancing Dashboarding in Grafana</h1>
+      <p class="post-meta">
+        By Observabilitrends — <span class="date">Updated: Sept 23, 2025</span> • <span class="readtime">12 min read</span>
+      </p>
+
+      <p>
+        We design dashboards that speak to both engineering teams and business leadership. In this article we share practical patterns and recipes to:
+      </p>
+      <ul>
+        <li>Integrate and correlate data from multiple sources (APIs, Splunk indexes, Datadog, Dynatrace, InfluxDB, etc.) in the same Grafana dashboard or even the same panel.</li>
+        <li>Use advanced plugins such as the <strong>Business Charts</strong> suite to create tailored visualizations and business-friendly representations.</li>
+        <li>Deliver reusable, safe dashboard artifacts (JSON templates, dashboards-as-code) and governance around metrics for cross-functional consumption.</li>
+      </ul>
+
+      <hr>
+
+      <h2>Why correlate multiple sources in the same dashboard?</h2>
+      <p>
+        Systems rarely live in a single observability tool. Infrastructure metrics may live in Prometheus, business metrics in an analytics DB, APM traces in Datadog/Dynatrace, and logs or security events in Splunk. Combining these signals into a single view lets us quickly answer operational and business questions such as:
+      </p>
+      <ul>
+        <li>Are recent latency spikes in a service correlated with a specific deployment (CI/CD) or a rise in error rates reported in logs?</li>
+        <li>Did an increase in support tickets (CRM) match an outage window detected by monitoring?</li>
+        <li>How is a new feature adoption (business event) impacting infrastructure costs?</li>
+      </ul>
+      <p>
+        Grafana supports mixed data sources and provides transformations to join and reshape queries — this enables correlation across systems without forcing a single backend. :contentReference[oaicite:0]{index=0}
+      </p>
+
+      <h2>Common patterns for multi-source dashboarding</h2>
+
+      <h3>1) Mixed-Panel pattern (multiple queries, single panel)</h3>
+      <p>
+        Use Grafana's <strong>Mixed</strong> datasource to add multiple queries (each query can target a different datasource) to the same panel. This is ideal for aligned time-series charts or tables where each series originates in a different system. Typical uses:
+      </p>
+      <ul>
+        <li>Plot application latency from APM (e.g., Datadog) with infrastructure CPU from Prometheus.</li>
+        <li>Show business KPIs from an analytics DB next to error rates from logs.</li>
+      </ul>
+      <p>
+        Advice: normalize time ranges and sampling resolutions, and use transformations (join, outer join, merge) to align series. Grafana docs and community posts explain how to work with multiple datasources in practice. :contentReference[oaicite:1]{index=1}
+      </p>
+
+      <h3>2) API-aggregation pattern (proxy / mediator)</h3>
+      <p>
+        When complex correlation or custom business logic is required (e.g., enrich APM traces with CRM events), we recommend an API-aggregation layer:
+      </p>
+      <ol>
+        <li>We build a small service that fetches data from multiple vendor APIs (Datadog, Dynatrace, Splunk, custom timeseries DBs).</li>
+        <li>That service merges, normalizes and exposes a single JSON/Prometheus endpoint tailored to the dashboard’s needs.</li>
+        <li>Grafana consumes that endpoint using the JSON API datasource or Prometheus remote write (depending on the format). </li>
+      </ol>
+      <p>
+        This pattern centralizes transformations that may be difficult to express inside Grafana and makes dashboards reproducible and testable.
+      </p>
+
+      <h4>Example: simple Node.js aggregator (pseudo-code)</h4>
+      <pre><code class="language-javascript">
+// This is illustrative. Replace with robust code for auth, retries, caching.
+const express = require('express');
+const fetch = require('node-fetch'); // or axios
+const app = express();
+
+async function fetchDatadog() {
+  // call Datadog API (metrics/queries)
+  return fetch('https://api.datadoghq.com/api/v1/query?from=...&to=...').then(r => r.json());
+}
+async function fetchSplunk() {
+  // call Splunk (or Splunk HTTP Event Collector)
+  return fetch('https://splunk.example/api/search?...').then(r => r.json());
+}
+
+app.get('/api/combined', async (req, res) => {
+  const [dd, sp] = await Promise.all([fetchDatadog(), fetchSplunk()]);
+  // normalize and merge by timestamp
+  const merged = mergeByTimestamp(dd.series, sp.series);
+  res.json({ series: merged });
+});
+
+app.listen(8080);
+      </code></pre>
+
+      <p>
+        Grafana can consume <code>/api/combined</code> with a JSON datasource plugin (for example, the JSON API or SimpleJSON plugin) and visualize the merged series in a panel. Using an aggregator also lets us apply business logic (e.g., map user IDs to feature flags) before presenting it to executives.
+      </p>
+
+      <h3>3) Transformations & joins inside Grafana</h3>
+      <p>
+        If an aggregator is not desirable, Grafana's Transformations let you join query results at the panel level (outer join, merge, labels). This works well for tables or when you have matching keys across datasources. Be mindful of cardinality and performance when joining large tables in the browser. :contentReference[oaicite:2]{index=2}
+      </p>
+
+      <hr>
+
+      <h2>Business-facing visualizations & Business Charts plugin</h2>
+      <p>
+        Technical teams and business stakeholders have different needs: engineers need high-cardinality, fine-grained traces and error windows; leadership wants clear KPIs, trends, and executive summaries. To bridge this gap we:
+      </p>
+      <ul>
+        <li>Design "two-layer" dashboards: a top layer with business KPIs (one-number metrics, trend-sparklines, forecasts) and a second layer with drilldowns for engineering details.</li>
+        <li>Use dedicated business visualization plugins when standard Grafana panels are insufficient.</li>
+      </ul>
+      <p>
+        One widely-used suite is Volkov Labs' <strong>Business Charts</strong> (an Apache ECharts-based panel) and the broader Business Suite (Business Table, Business Input). These plugins enable advanced, code-driven charts and custom rendering for business dashboards. Their documentation and examples are a great resource. :contentReference[oaicite:3]{index=3}
+      </p>
+
+      <h3>Examples of business visuals</h3>
+      <ul>
+        <li>Executive KPI strip: current value, 7/30-day trend, % change, and a traffic-light indicator.</li>
+        <li>Adoption funnel (custom ECharts funnel) combining product analytics and server-side events.</li>
+        <li>Revenue vs. infrastructure cost stacked area chart (two data sources: billing API + cost tags from cloud infra).</li>
+      </ul>
+
+      <p>
+        We recommend exporting Business Charts visualizations as reusable templates (panel JSON) and storing them in your dashboards-as-code repository.
+      </p>
+
+      <figure>
+        <img src="../assets/images/grafana-business-example.png" alt="Business Charts example (placeholder)" class="article-image">
+        <figcaption>Example: Business KPI strip built with Business Charts (replace with your screenshot).</figcaption>
+      </figure>
+
+      <hr>
+
+      <h2>Best practices (engineering + product + leadership)</h2>
+      <ol>
+        <li><strong>Define the question first:</strong> each dashboard must answer 1–3 clear questions for its audience.</li>
+        <li><strong>Two-layer UX:</strong> summary KPIs at the top, drilldowns per system below.</li>
+        <li><strong>Consistent metrics & tags:</strong> enforce naming conventions and resource tags across teams so joins and filters work predictably.</li>
+        <li><strong>Dashboard performance:</strong> minimize heavy client-side joins; prefer pre-aggregated, paged data or server-side aggregation.</li>
+        <li><strong>Versioning & code:</strong> store dashboards as JSON / provisioning files, manage them with Git and CI (dashboards-as-code). See Grafana provisioning and API for automation. :contentReference[oaicite:4]{index=4}</li>
+      </ol>
+
+      <h2>Practical recipe: From vendor APIs to executive panel (step-by-step)</h2>
+      <p>We follow a pragmatic 6-step recipe we use for clients:</p>
+      <ol>
+        <li><strong>Inventory:</strong> list the data sources and confirm available APIs, metrics, and rates (Datadog, Dynatrace, Splunk, InfluxDB, SQL warehouses).</li>
+        <li><strong>Design the KPI:</strong> write a one-sentence question the KPI answers and its mathematical definition (e.g., "95th perc. latency per region over last 24h").</li>
+        <li><strong>Prototype:</strong> build an aggregator or try Mixed queries in a Grafana panel. Prefer a minimal working prototype over perfect modeling.</li>
+        <li><strong>Optimize:</strong> move heavy joins to the aggregator, add caching, ensure auth tokens are secured and rotated.</li>
+        <li><strong>Template & version:</strong> export the panel JSON, add it to dashboards-as-code with variables and provisioning YAML for the target Grafana instance.</li>
+        <li><strong>Operationalize:</strong> monitor dashboard performance (slow queries), add alerts where KPIs cross thresholds, and schedule reviews with stakeholders.</li>
+      </ol>
+
+      <h2>Governance, reproducibility and sharing real value</h2>
+      <p>
+        External references are useful, but we add concrete value by delivering:
+      </p>
+      <ul>
+        <li><strong>Sanitized dashboard templates:</strong> we provide cleaned JSON exports that remove company-sensitive IDs but preserve queries and visual logic.</li>
+        <li><strong>Dashboards-as-code:</strong> Terraform + Grafana provider or provisioning YAML to deploy dashboards reproducibly across environments.</li>
+        <li><strong>Hands-on workshops:</strong> live sessions where we adapt templates to your data and train product/engineering on interpretation.</li>
+        <li><strong>Pre-built aggregators:</strong> example code repositories (our template Node/Go Python aggregator) that demonstrate auth, retries, merging logic and caching.</li>
+      </ul>
+
+      <h2>Plugins & tooling we recommend</h2>
+      <ul>
+        <li><strong>Business Charts / Business Table / Business Suite</strong> (Volkov Labs) — for advanced business visualizations and tables. :contentReference[oaicite:5]{index=5}</li>
+        <li><strong>JSON API or SimpleJSON datasource</strong> — to ingest custom aggregator endpoints.</li>
+        <li><strong>Transformations</strong> (Grafana panel transformations) — for client-side joins and reshaping. :contentReference[oaicite:6]{index=6}</li>
+        <li><strong>Provisioning & dashboards-as-code</strong> — use Grafana provisioning, the HTTP API or Terraform for stable deployments. :contentReference[oaicite:7]{index=7}</li>
+      </ul>
+
+      <h2>Security & compliance considerations</h2>
+      <ul>
+        <li>Ensure API keys and secrets used by aggregators are stored in secure vaults (HashiCorp Vault, AWS Secrets Manager).</li>
+        <li>Redact or obfuscate PII and any sensitive identifiers before exposing data to dashboards used by non-technical audiences.</li>
+        <li>Review SLAs and API rate limits — some vendor APIs charge by volume.</li>
+      </ul>
+
+      <h2>Examples we can share (non-proprietary)</h2>
+      <p>
+        To provide practical value without exposing customer data, we can publish:
+      </p>
+      <ul>
+        <li>Sanitized Grafana dashboard JSONs for the patterns above (Mixed-Panel, API-aggregator + Business Charts sample).</li>
+        <li>Small example aggregator (MIT / Apache-2.0) that demonstrates fetching metrics from two public sources, joining by timestamp and exposing a JSON endpoint consumable by Grafana.</li>
+        <li>Step-by-step workshop slides and a short video walkthrough showing how to deploy and adapt the templates.</li>
+      </ul>
+
+      <h2>Appendix — quick configuration notes</h2>
+      <h3>1. Mixed datasource in Grafana</h3>
+      <p>
+        In a panel choose the <em>Mixed</em> datasource, then add queries where each query selects its datasource. Use the panel > Transformations to align series or use "Outer join" for tables. :contentReference[oaicite:8]{index=8}
+      </p>
+
+      <h3>2. Business Charts</h3>
+      <p>
+        Install from Grafana plugins catalog or by using the Grafana CLI (if self-hosted). Business Charts exposes a code editor for ECharts options and a visual editor to map data frames to the chart. Documentation and examples are on the plugin site (Volkov Labs). :contentReference[oaicite:9]{index=9}
+      </p>
+
+      <h3>3. Dashboards-as-code</h3>
+      <p>
+        Export your dashboard JSON (Dashboard settings → JSON model) and add provisioning YAML or use Terraform with the Grafana provider to deploy dashboards across environments.
+      </p>
+
+      <hr>
+
+      <h2>How we can help (call-to-action)</h2>
+      <p>
+        At Observabilitrends we help teams move from “lots of graphs” to <em>actionable dashboards</em> that are trusted by both engineers and executives. We offer:
+      </p>
+      <ul>
+        <li>Sanitised dashboard templates you can import into Grafana.</li>
+        <li>Workshops and office-hours to adapt templates to your data.</li>
+        <li>Implementation of aggregation services and dashboards-as-code pipelines.</li>
+      </ul>
+      <p>Contact us at <a href="../contact.html">our contact page</a> or email <a href="mailto:info@observabilitrends.com">info@observabilitrends.com</a> for a free scoping call.</p>
+
+      <hr>
+      <p style="font-size:0.9rem;color:#555">
+        <strong>References:</strong> Grafana docs on datasources & transformations; Grafana best-practices; Volkov Labs Business Charts & Business Suite docs and plugin pages. :contentReference[oaicite:10]{index=10}
+      </p>
+
+    </article>
+  </main>
+
+  <footer>
+    <p>© 2025 Observabilitrends</p>
+    <p><a href="../privacy.html">Privacy Policy</a> | <a href="../terms.html">Terms</a></p>
+  </footer>
+</body>
+</html>
