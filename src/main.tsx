@@ -1,15 +1,7 @@
-const App = () => {
-  return (
-    <div
-      style={{
-        color: "white",
-        padding: "40px",
-        fontSize: "40px",
-      }}
-    >
-      APP FUNCIONA
-    </div>
-  );
-};
+import { createRoot } from "react-dom/client";
+import App from "./App";
+import "./index.css";
 
-export default App;
+createRoot(document.getElementById("root")!).render(
+  <App />
+);
