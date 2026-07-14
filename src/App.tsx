@@ -16,6 +16,9 @@ import Contact from "./pages/Contact.tsx";
 import Community from "./pages/Community.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
+import Resources from "./pages/Resources.tsx";
+import ResourcePage from "./pages/ResourcePage.tsx";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -31,6 +34,8 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 <Route path="/articles" element={<Articles />} />
                 <Route path="/articles/:slug" element={<ArticlePage />} />
+                <Route path="/resources" element={<Resources />} />
+                <Route path="/resources/:slug" element={<ResourcePage />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/services" element={<Services />} />
                 <Route path="/contact" element={<Contact />} />
