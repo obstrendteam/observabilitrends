@@ -27,13 +27,34 @@ export function SiteFooter() {
           <div className="md:col-span-2">
             <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Content</h4>
             <ul className="mt-4 space-y-2 text-sm">
-              <li><Link to="/articles" className="hover:text-primary">Articles</Link></li>
-              <li><Link to="/articles?category=SRE" className="hover:text-primary">SRE</Link></li>
-              <li><Link to="/articles?category=OpenTelemetry" className="hover:text-primary">OpenTelemetry</Link></li>
-              <li><Link to="/articles?category=Platform%20Engineering" className="hover:text-primary">Platform</Link></li>
+            <li>
+                <Link to="/articles" className="hover:text-primary">
+                    Articles
+                </Link>
+            </li>
+            <li>
+                <Link to="/resources" className="hover:text-primary">
+                    Engineering Resources
+                </Link>
+            </li>
+            <li>
+                <Link
+                    to="/articles?category=SRE"
+                    className="hover:text-primary"
+                >
+                    SRE
+                </Link>
+            </li>
+            <li>
+                <Link
+                    to="/articles?category=OpenTelemetry"
+                    className="hover:text-primary"
+                >
+                    OpenTelemetry
+                </Link>
+            </li>
             </ul>
           </div>
-
           <div className="md:col-span-2">
             <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Company</h4>
             <ul className="mt-4 space-y-2 text-sm">
