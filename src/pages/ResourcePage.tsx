@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { PageLayout } from "@/components/site/PageLayout";
-import { getResource } from "@/data/resources";
+//import { getResource } from "@/data/resources";
+import { getResource } from "@/data/engineeringResources";
 import NotFound from "./NotFound";
 
 export default function ResourcePage() {
