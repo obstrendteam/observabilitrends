@@ -24,9 +24,8 @@ export default function Resources() {
         </p>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2">
-<p>{RESOURCES.length}</p>
-
-{RESOURCES.map((resource) => (            <ResourceCard
+          {RESOURCES.map((resource) => (
+            <ResourceCard
               key={resource.id}
               resource={resource}
               featured={resource.featured}
