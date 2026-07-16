@@ -1,6 +1,6 @@
 import { PageLayout } from "@/components/site/PageLayout";
 import { ResourceCard } from "@/components/site/ResourceCard";
-import { RESOURCES } from "@/data/resources";
+import { RESOURCES } from "@/data/engineeringResources";
 
 export default function Resources() {
   return (
