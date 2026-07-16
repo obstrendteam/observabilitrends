@@ -1,28 +1,26 @@
-export interface Resource {
+import { Resource } from "@/types/resource";
 
-    id: string;
+export const RESOURCES: Resource[] = [];
 
-    slug: string;
+export const getFeaturedResources = () =>
+  RESOURCES.filter(r => r.featured);
 
-    title: string;
+export const getResource = (slug: string) =>
+  RESOURCES.find(r => r.slug === slug);
 
-    subtitle: string;
+export const getRelatedResources = (
+  slug: string,
+  n = 3
+) => {
+  const resource = getResource(slug);
 
-    category: string;
+  if (!resource) return [];
 
-    tags: string[];
-
-    version: string;
-
-    updated: string;
-
-    difficulty: "Beginner" | "Intermediate" | "Advanced";
-
-    estimatedTime: number;
-
-    downloadable: boolean;
-
-    featured?: boolean;
-
-    content: string;
-}
+  return RESOURCES
+    .filter(
+      r =>
+        r.slug !== slug &&
+        r.category === resource.category
+    )
+    .slice(0, n);
+};
