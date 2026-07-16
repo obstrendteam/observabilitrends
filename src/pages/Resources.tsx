@@ -1,5 +1,6 @@
-
 import { PageLayout } from "@/components/site/PageLayout";
+import { ResourceCard } from "@/components/site/ResourceCard";
+import { RESOURCES } from "@/data/resources";
 
 export default function Resources() {
   return (
@@ -22,15 +23,14 @@ export default function Resources() {
           help engineering teams make better decisions before writing code.
         </p>
 
-        <div className="mt-12 surface-card p-8">
-          <h2 className="text-xl font-semibold">
-            Resources are being published
-          </h2>
-
-          <p className="mt-3 text-muted-foreground">
-            The first engineering resources are currently being integrated into
-            the new resource library.
-          </p>
+        <div className="mt-12 grid gap-6 md:grid-cols-2">
+          {RESOURCES.map((resource) => (
+            <ResourceCard
+              key={resource.id}
+              resource={resource}
+              featured={resource.featured}
+            />
+          ))}
         </div>
       </section>
     </PageLayout>
