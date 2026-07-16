@@ -1,11 +1,10 @@
-
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Download } from "lucide-react";
-import { Resource } from "@/types/resource";
+import { ArrowUpRight } from "lucide-react";
+import { EngineeringResource } from "@/data/resourceTypes";
 import { ResourceBadge } from "./ResourceBadge";
 
 interface Props {
-  resource: Resource;
+  resource: EngineeringResource;
   featured?: boolean;
 }
 
@@ -20,9 +19,9 @@ export function ResourceCard({ resource, featured = false }: Props) {
       <div className="flex items-center justify-between">
         <ResourceBadge>{resource.category}</ResourceBadge>
 
-        {resource.downloadable && (
-          <Download className="h-4 w-4 text-muted-foreground" />
-        )}
+        <span className="mono text-xs text-muted-foreground">
+          v{resource.version}
+        </span>
       </div>
 
       <h3
@@ -38,9 +37,7 @@ export function ResourceCard({ resource, featured = false }: Props) {
       </p>
 
       <div className="mt-6 pt-4 border-t border-border flex items-center justify-between text-xs text-muted-foreground">
-        <span>
-          {resource.difficulty} · {resource.estimatedTime} min
-        </span>
+        <span>{resource.estimatedTime}</span>
 
         <ArrowUpRight className="h-4 w-4 group-hover:text-primary transition-colors" />
       </div>
