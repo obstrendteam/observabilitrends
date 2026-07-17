@@ -81,12 +81,11 @@ export default function Articles() {
             </p>
 
             <h2 className="mt-3 text-3xl font-semibold tracking-tight">
-              Engineering articles are currently in production
+              Engineering articles are currently in development
             </h2>
 
             <p className="mt-5 max-w-2xl mx-auto leading-8 text-muted-foreground">
-              ObservabiliTrends publishes original engineering content rather than
-              AI-generated filler or repackaged documentation.
+              ObservabiliTrends publishes original engineering content.
             </p>
 
             <p className="mt-4 max-w-2xl mx-auto leading-8 text-muted-foreground">

@@ -169,8 +169,7 @@ export default function Home() {
               We're preparing long-form engineering articles focused on
               OpenTelemetry, Grafana, Prometheus, Kubernetes observability,
               platform engineering and production reliability.
-              Every article is written from real-world experience rather than
-              AI-generated filler.
+              Every article is written from real-world experience.
             </p>
 
           </div>
