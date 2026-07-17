@@ -49,17 +49,17 @@ The objective is simply to expose assumptions before they become technical debt.
 
 Who is going to use this dashboard?
 
-- ☐ Operator
+- Operator
   - Example: Monitors production systems during daily operations.
-- ☐ On-call engineer
+- On-call engineer
   - Example: Uses the dashboard during incident response.
-- ☐ Platform engineer
+- Platform engineer
   - Example: Investigates infrastructure behaviour and platform health.
-- ☐ Engineering manager
+- Engineering manager
   - Example: Tracks service reliability and operational KPIs.
-- ☐ Customer
+- Customer
   - Example: Views service availability or business metrics.
-- ☐ Other
+- Other
   - Specify the intended audience.
 
 ---
@@ -136,12 +136,12 @@ How will the usefulness of this dashboard be evaluated?
 
 Possible metrics:
 
-- ☐ Number of visits
-- ☐ Decisions supported
-- ☐ Operational questions answered
-- ☐ Incident resolution improvements
-- ☐ MTTR reduction
-- ☐ Other KPI
+- Number of visits
+- Decisions supported
+- Operational questions answered
+- Incident resolution improvements
+- MTTR reduction
+- Other KPI
 
 ---
 
@@ -159,8 +159,8 @@ Engineers currently require multiple dashboards to determine whether an increase
 
 Does another dashboard already provide the same information?
 
-- ☐ Yes
-- ☐ No
+- Yes
+- No
 
 If yes:
 
@@ -216,11 +216,11 @@ Examples:
 
 Is historical information required?
 
-- ☐ Last hour
-- ☐ Last day
-- ☐ Last week
-- ☐ Last month
-- ☐ Last year
+- Last hour
+- Last day
+- Last week
+- Last month
+- Last year
 
 ---
 
@@ -256,11 +256,11 @@ Knowing the expected lifetime helps avoid maintaining obsolete dashboards.
 
 Should the dashboard support multiple environments?
 
-- ☐ Development
-- ☐ Testing
-- ☐ Staging
-- ☐ Production
-- ☐ Multiple clusters
+- Development
+- Testing
+- Staging
+- Production
+- Multiple clusters
 
 ---
 
@@ -282,16 +282,16 @@ Examples:
 
 Before implementation begins, verify that:
 
-- ☐ The intended audience is clearly identified.
-- ☐ A single operational objective exists.
-- ☐ Expected actions are defined.
-- ☐ Dashboard ownership is assigned.
-- ☐ Maintenance responsibility is documented.
-- ☐ Success criteria can be measured.
-- ☐ Existing dashboards have been reviewed.
-- ☐ Expected lifetime is understood.
-- ☐ Access permissions are defined.
-- ☐ Documentation location has been recorded.
+- The intended audience is clearly identified.
+- A single operational objective exists.
+- Expected actions are defined.
+- Dashboard ownership is assigned.
+- Maintenance responsibility is documented.
+- Success criteria can be measured.
+- Existing dashboards have been reviewed.
+- Expected lifetime is understood.
+- Access permissions are defined.
+- Documentation location has been recorded.
 
 ---
 

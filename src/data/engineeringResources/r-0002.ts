@@ -58,10 +58,10 @@ DB-042
 
 ### Current status
 
-- ☐ Draft
-- ☐ Testing
-- ☐ Production
-- ☐ Deprecated
+- Draft
+- Testing
+- Production
+- Deprecated
 
 ### Current version
 
@@ -420,15 +420,15 @@ Example:
 
 Before publishing or promoting the dashboard, verify that:
 
-- ☐ Ownership is documented.
-- ☐ Functional objectives remain valid.
-- ☐ Technical implementation is documented.
-- ☐ Data sources are identified.
-- ☐ Dependencies are understood.
-- ☐ Validation has been completed.
-- ☐ The recovery procedure is documented.
-- ☐ Change history has been updated.
-- ☐ Related documentation is available.
+- Ownership is documented.
+- Functional objectives remain valid.
+- Technical implementation is documented.
+- Data sources are identified.
+- Dependencies are understood.
+- Validation has been completed.
+- The recovery procedure is documented.
+- Change history has been updated.
+- Related documentation is available.
 
 ---
 
