@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { analytics } from "@/lib/analytics";
 import { NewsletterPanel } from "@/components/site/Newsletter";
 import { Mail, Briefcase, MessageSquare } from "lucide-react";
+import emailjs from "@emailjs/browser";
 
 const schema = z.object({
   name: z.string().trim().min(1, "Required").max(100),
@@ -23,17 +24,56 @@ export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", company: "", topic: "advisory" as const, message: "" });
 
   async function onSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    const parsed = schema.safeParse(form);
-    if (!parsed.success) { toast.error(parsed.error.issues[0].message); return; }
-    setLoading(true);
-    // TODO: POST to /api/contact (Lovable Cloud edge function, Formspree, Resend, etc.)
-    await new Promise(r => setTimeout(r, 700));
-    analytics.track("contact_submit", { topic: parsed.data.topic });
-    setLoading(false);
-    setForm({ name: "", email: "", company: "", topic: "advisory", message: "" });
-    toast.success("Got it. We'll be in touch within 1–2 business days.");
+  e.preventDefault();
+
+  const parsed = schema.safeParse(form);
+
+  if (!parsed.success) {
+    toast.error(parsed.error.issues[0].message);
+    return;
   }
+
+  setLoading(true);
+
+  try {
+    await emailjs.send(
+      "service_gcr94ao",
+      "template_um5zmjd",
+      {
+        name: parsed.data.name,
+        email: parsed.data.email,
+        company: parsed.data.company || "-",
+        topic: parsed.data.topic,
+        message: parsed.data.message,
+      },
+      "WmzA7mSqd-areENP-"
+    );
+
+    analytics.track("contact_submit", {
+      topic: parsed.data.topic,
+    });
+
+    toast.success(
+      "Message sent successfully. We'll get back to you as soon as possible."
+    );
+
+    setForm({
+      name: "",
+      email: "",
+      company: "",
+      topic: "advisory",
+      message: "",
+    });
+  } catch (error) {
+    console.error(error);
+
+    toast.error(
+      "The message couldn't be sent. Please try again in a few minutes."
+    );
+  } finally {
+    setLoading(false);
+  }
+}
 
   return (
     <PageLayout title="Contact — ObservabiliTrends" description="Get in touch about advisory work, editorial pitches or partnerships." canonical="/contact">
