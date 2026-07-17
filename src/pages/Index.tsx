@@ -23,8 +23,8 @@ export default function Home() {
 
   return (
     <PageLayout
-      title="ObservabiliTrends — Observability, SRE & Platform Engineering"
-      description="Field reports, playbooks and deep analysis on observability, SRE, OpenTelemetry and platform engineering. For senior engineers."
+      title="ObservabiliTrends: Observability, SRE & Platform Engineering"
+      description="Field reports, playbooks and deep analysis on observability, SRE, OpenTelemetry and platform engineering."
       canonical="/"
     >
       {/* HERO */}
