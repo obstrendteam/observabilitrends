@@ -10,8 +10,16 @@ import { ARTICLES, CATEGORIES, getFeatured } from "@/data/articles";
 const LOGOS = ["DATADOG", "GRAFANA", "HONEYCOMB", "NEW RELIC", "ELASTIC", "DYNATRACE", "SPLUNK", "CHRONOSPHERE"];
 
 export default function Home() {
+
+  /*
   const featured = getFeatured();
   const recent = ARTICLES.slice(0, 6);
+  */
+
+  const featured = getFeatured();
+  const recent = ARTICLES.slice(0, 6);
+
+  const hasArticles = ARTICLES.length > 0;
 
   return (
     <PageLayout
@@ -97,22 +105,79 @@ export default function Home() {
       </section>
 
       {/* FEATURED */}
-      <section className="container-prose py-20 md:py-28">
-        <div className="flex items-end justify-between mb-10">
-          <div>
-            <p className="mono text-xs uppercase tracking-wider text-primary">/ featured</p>
-            <h2 className="mt-2 text-3xl md:text-4xl font-semibold tracking-tight">This week's deep dives</h2>
-          </div>
-          <Link to="/articles" className="hidden sm:inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary">
-            All articles <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
 
-        <div className="grid gap-6 lg:grid-cols-2">
-          {featured[0] && <div className="lg:row-span-2"><ArticleCard article={featured[0]} featured /></div>}
-          {featured.slice(1, 3).map(a => <ArticleCard key={a.slug} article={a} />)}
-        </div>
-      </section>
+      {hasArticles ? (
+
+        <section className="container-prose py-20 md:py-28">
+
+          <div className="flex items-end justify-between mb-10">
+
+            <div>
+              <p className="mono text-xs uppercase tracking-wider text-primary">
+                / featured
+              </p>
+
+              <h2 className="mt-2 text-3xl md:text-4xl font-semibold tracking-tight">
+                This week's deep dives
+              </h2>
+            </div>
+
+            <Link
+              to="/articles"
+              className="hidden sm:inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary"
+            >
+              All articles
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-2">
+
+            {featured[0] && (
+              <div className="lg:row-span-2">
+                <ArticleCard article={featured[0]} featured />
+              </div>
+            )}
+
+            {featured.slice(1, 3).map(article => (
+              <ArticleCard
+                key={article.slug}
+                article={article}
+              />
+            ))}
+
+          </div>
+
+        </section>
+
+      ) : (
+
+        <section className="container-prose py-20 md:py-28">
+
+          <div className="surface-card p-12 md:p-16 text-center">
+
+            <p className="mono text-xs uppercase tracking-wider text-primary">
+              / articles
+            </p>
+
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight">
+              Technical articles are coming soon
+            </h2>
+
+            <p className="mt-5 max-w-2xl mx-auto text-muted-foreground leading-relaxed">
+              We're preparing long-form engineering articles focused on
+              OpenTelemetry, Grafana, Prometheus, Kubernetes observability,
+              platform engineering and production reliability.
+              Every article is written from real-world experience rather than
+              AI-generated filler.
+            </p>
+
+          </div>
+
+        </section>
+
+      )}
 
       {/* WHAT WE COVER */}
       <section className="container-prose py-20 md:py-24">
@@ -140,17 +205,39 @@ export default function Home() {
       </section>
 
       {/* RECENT */}
-      <section className="container-prose py-20 md:py-24">
-        <div className="flex items-end justify-between mb-10">
-          <div>
-            <p className="mono text-xs uppercase tracking-wider text-primary">/ recent</p>
-            <h2 className="mt-2 text-3xl md:text-4xl font-semibold tracking-tight">Latest from the dispatch</h2>
+
+      {hasArticles && (
+
+        <section className="container-prose py-20 md:py-24">
+
+          <div className="flex items-end justify-between mb-10">
+
+            <div>
+              <p className="mono text-xs uppercase tracking-wider text-primary">
+                / recent
+              </p>
+
+              <h2 className="mt-2 text-3xl md:text-4xl font-semibold tracking-tight">
+                Latest from the dispatch
+              </h2>
+            </div>
+
           </div>
-        </div>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {recent.map(a => <ArticleCard key={a.slug} article={a} />)}
-        </div>
-      </section>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+            {recent.map(article => (
+              <ArticleCard
+                key={article.slug}
+                article={article}
+              />
+            ))}
+
+          </div>
+
+        </section>
+
+      )}
 
       {/* CONSULTING TRUST STRIP */}
       <section className="container-prose py-20 md:py-24">

@@ -34,7 +34,7 @@ export default function Articles() {
           <p className="mono text-xs uppercase tracking-wider text-primary">/ articles</p>
           <h1 className="mt-2 text-4xl md:text-5xl font-semibold tracking-tighter">The archive</h1>
           <p className="mt-3 text-muted-foreground max-w-2xl">
-            Every article we've published. Searchable, filterable, and written for engineers who own the pager.
+            Every article we've published. Searchable, filterable and written for engineers.
           </p>
 
           <div className="mt-8 relative max-w-xl">
