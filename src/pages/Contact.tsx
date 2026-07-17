@@ -36,14 +36,14 @@ export default function Contact() {
   }
 
   return (
-    <PageLayout title="Contact — ObservabiliTrends" description="Get in touch about advisory work, editorial pitches, or partnerships." canonical="/contact">
+    <PageLayout title="Contact — ObservabiliTrends" description="Get in touch about advisory work, editorial pitches or partnerships." canonical="/contact">
       <section className="container-prose pt-20 pb-10">
         <p className="mono text-xs uppercase tracking-wider text-primary">/ contact</p>
         <h1 className="mt-2 text-5xl md:text-6xl font-semibold tracking-tighter max-w-3xl leading-[1.05]">
           Let's start a conversation.
         </h1>
         <p className="mt-6 text-lg text-muted-foreground max-w-2xl leading-relaxed">
-          Whether you want to work with us, pitch a story, or just say hello — we read every message.
+          Whether you want to work with us, pitch a story or just say hello, we read every message.
         </p>
       </section>
 

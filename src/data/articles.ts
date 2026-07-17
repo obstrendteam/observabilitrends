@@ -31,6 +31,9 @@ export interface Article {
   content: string; // markdown-like, simple paragraphs and ## headings
 }
 
+export const ARTICLES: Article[] = [];
+
+/*
 export const ARTICLES: Article[] = [
   {
     slug: "opentelemetry-collector-production-patterns",
@@ -249,6 +252,7 @@ Per-region independent, federated read, fully replicated. Each has a failure mod
 The answer is almost always federated read, with regional autonomy for alerting.`,
   },
 ];
+*/
 
 export const getFeatured = () => ARTICLES.filter(a => a.featured);
 export const getArticle = (slug: string) => ARTICLES.find(a => a.slug === slug);

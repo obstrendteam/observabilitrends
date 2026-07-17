@@ -60,11 +60,10 @@ export default function Articles() {
             <button
               key={c}
               onClick={() => setActive(c as any)}
-              className={`mono text-xs px-3 py-1.5 rounded-full border transition-colors ${
-                active === c
-                  ? "bg-foreground text-background border-foreground"
-                  : "border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"
-              }`}
+              className={`mono text-xs px-3 py-1.5 rounded-full border transition-colors ${active === c
+                ? "bg-foreground text-background border-foreground"
+                : "border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"
+                }`}
             >
               {c}
             </button>
@@ -74,9 +73,29 @@ export default function Articles() {
 
       <section className="container-prose pb-24">
         {filtered.length === 0 ? (
-          <div className="surface-card p-12 text-center text-muted-foreground">
-            No articles match. Try a different filter.
+
+          <div className="surface-card p-12 md:p-16 text-center">
+
+            <p className="mono text-xs uppercase tracking-wider text-primary">
+              / coming soon
+            </p>
+
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight">
+              Engineering articles are currently in production
+            </h2>
+
+            <p className="mt-5 max-w-2xl mx-auto leading-8 text-muted-foreground">
+              ObservabiliTrends publishes original engineering content rather than
+              AI-generated filler or repackaged documentation.
+            </p>
+
+            <p className="mt-4 max-w-2xl mx-auto leading-8 text-muted-foreground">
+              The first in-depth articles are currently being researched,
+              peer-reviewed and prepared for publication.
+            </p>
+
           </div>
+
         ) : (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {filtered.map(a => <ArticleCard key={a.slug} article={a} />)}
