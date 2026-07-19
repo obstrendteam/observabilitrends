@@ -9,6 +9,9 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import NotFound from "./NotFound";
 
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
 export default function ArticlePage() {
   const { slug = "" } = useParams();
   const article = getArticle(slug);
@@ -118,14 +121,13 @@ export default function ArticlePage() {
           {/* Content */}
           <div className="lg:col-span-9 order-1 lg:order-2">
             <div className="prose prose-lg max-w-none dark:prose-invert">
-              {article.content.split("\n").filter(Boolean).map((line, i) => {
-                if (line.startsWith("## ")) {
-                  const text = line.replace("## ", "");
-                  const id = text.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-                  return <h2 key={i} id={id}>{text}</h2>;
-                }
-                return <p key={i}>{line}</p>;
-              })}
+
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+
+                {article.content}
+
+              </ReactMarkdown>
+
             </div>
 
             {/* Tags + share */}
