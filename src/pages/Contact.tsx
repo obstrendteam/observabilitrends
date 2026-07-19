@@ -37,8 +37,8 @@ export default function Contact() {
 
   try {
     await emailjs.send(
-      "service_gcr94ao",
-      "template_um5zmjd",
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
       {
         name: parsed.data.name,
         email: parsed.data.email,
@@ -46,7 +46,7 @@ export default function Contact() {
         topic: parsed.data.topic,
         message: parsed.data.message,
       },
-      "WmzA7mSqd-areENP-"
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
     );
 
     analytics.track("contact_submit", {
