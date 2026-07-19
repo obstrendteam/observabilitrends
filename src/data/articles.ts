@@ -1,6 +1,7 @@
 import dashboardArticle from "@/data/articles/why-dashboards-fail-before-they-are-even-built.md?raw";
 
 export type Category =
+    "Dashboards"
   | "OpenTelemetry"
   | "Prometheus"
   | "Grafana"
@@ -48,13 +49,13 @@ export interface Article {
 
 export const ARTICLES: Article[] = [
   {
-    slug: "why-dashboards-fail-before-they-are-even-built",
+    slug: "why-dashboards-often-fail-before-they-are-even-built",
     title: "Why dashboards often fail before they are even built",
 
     excerpt:
       "Many dashboard problems originate long before the first visualization is created. Learn how purpose, audience and ownership determine whether a dashboard becomes a valuable operational tool or simply another collection of charts.",
 
-    category: "Grafana",
+    category: "Dashboards",
 
     tags: [
       "dashboard",
