@@ -1,7 +1,6 @@
-import articleContent from "@/data/articles/why-dashboards-fail-before-they-are-even-built.md?raw";
+import dashboardArticle from "@/data/articles/why-dashboards-fail-before-they-are-even-built.md?raw";
 
 export type Category =
-  | "Dashboards"
   | "OpenTelemetry"
   | "Prometheus"
   | "Grafana"
@@ -16,7 +15,6 @@ export type Category =
   | "Cloud Monitoring";
 
 export const CATEGORIES: Category[] = [
-  "Dashboards",
   "OpenTelemetry",
   "Prometheus",
   "Grafana",
@@ -51,49 +49,53 @@ export interface Article {
 export const ARTICLES: Article[] = [
   {
     slug: "why-dashboards-fail-before-they-are-even-built",
-
     title: "Why dashboards often fail before they are even built",
 
     excerpt:
-      "Dashboards are among the most common artifacts in modern observability platforms, yet many gradually lose their original purpose. This article explores the decisions that determine whether a dashboard becomes a useful operational tool or simply another collection of charts.",
+      "Many dashboard problems originate long before the first visualization is created. Learn how purpose, audience and ownership determine whether a dashboard becomes a valuable operational tool or simply another collection of charts.",
 
-    category: "Dashboards",
+    category: "Grafana",
 
     tags: [
-      "dashboards",
+      "dashboard",
+      "grafana",
       "observability",
       "monitoring",
-      "grafana",
-      "sre",
       "design",
+      "sre"
     ],
 
     author: {
-      name: "ObservabiliTrends Editorial Team",
+      name: "ObservabiliTrends",
       role: "Editorial Team",
       initials: "OT",
     },
 
-    date: "2026-07-19",
+    date: "2026-07-20",
 
     readingTime: 20,
 
     featured: true,
 
-    content: articleContent,
+    content: dashboardArticle,
   },
 ];
 
-export const getFeatured = () =>
-  ARTICLES.filter(article => article.featured);
+export function getFeatured() {
+  return ARTICLES.filter(article => article.featured);
+}
 
-export const getArticle = (slug: string) =>
-  ARTICLES.find(article => article.slug === slug);
+export function getArticle(slug: string) {
+  return ARTICLES.find(article => article.slug === slug);
+}
 
-export const getRelated = (
-  slug: string,
-  limit = 3
-) =>
-  ARTICLES
-    .filter(article => article.slug !== slug)
+export function getRelated(slug: string, limit = 3) {
+  const current = getArticle(slug);
+
+  if (!current) return [];
+
+  return ARTICLES
+    .filter(a => a.slug !== slug)
+    .filter(a => a.category === current.category)
     .slice(0, limit);
+}
