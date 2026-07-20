@@ -14,10 +14,11 @@ export default function About() {
         <p className="mt-6 text-lg text-muted-foreground max-w-2xl leading-relaxed">
           ObservabiliTrends is an independent media platform covering observability, SRE, distributed systems and platform engineering.
         </p>
-        <p>
+        <p className="mt-6 text-lg text-muted-foreground max-w-2xl leading-relaxed">
           Founded by Daniel Busquets.
-
-          Connect on <Link to={"www.linkedin.com/in/dbusquets"}>LinkedIn</Link>
+          </p>
+        <p className="mt-6 text-lg text-muted-foreground max-w-2xl leading-relaxed">
+          Connect on <a href="https://www.linkedin.com/in/dbusquets" target='_blank' aria-label='LinkedIn'>LinkedIn</a>
         </p>
       </section>
 
