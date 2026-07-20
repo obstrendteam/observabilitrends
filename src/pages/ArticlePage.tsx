@@ -136,22 +136,9 @@ export default function ArticlePage() {
           <div className="lg:col-span-9 order-1 lg:order-2">
             <div className="prose prose-lg max-w-none dark:prose-invert">
 
-              <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
-                components={{
-                  h2: ({ children }) => {
-                    const text = String(children);
-
-                    return (
-                      <h2 id={slugify(text)}>
-                        {children}
-                      </h2>
-                    );
-                  },
-                }}
-              >
-                {article.content}
-              </ReactMarkdown>
+<ReactMarkdown>
+  {article.content}
+</ReactMarkdown>
 
             </div>
 
