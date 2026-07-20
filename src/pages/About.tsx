@@ -8,7 +8,7 @@ export default function About() {
     <PageLayout title="About - ObservabiliTrends" description="Why ObservabiliTrends exists, who's behind it and how we think about observability and reliability." canonical="/about">
       <section className="container-prose pt-20 pb-12">
         <p className="mono text-xs uppercase tracking-wider text-primary">/ about</p>
-        <h1 className="mt-2 text-5xl md:text-6xl font-semibold tracking-tighter max-w-3xl leading-[1.05]">
+        <h1 className="mt-8 max-w-6xl md:text-6xl font-semibold tracking-tighter max-w-3xl leading-[1.05]">
           The observability independent place.
         </h1>
         <p className="mt-6 text-lg text-muted-foreground max-w-2xl leading-relaxed">
