@@ -1,5 +1,3 @@
-
-
 # Why dashboards often fail before they are even built
 
 ## Abstract
@@ -105,3 +103,32 @@ From experience across large monitoring environments, it is common to encounter 
 > Consider a dashboard originally created to supervise a single customer-facing application. During its first months, it displayed request rate, latency, error rate and infrastructure health. As new requirements emerged, additional panels were incorporated to visualise deployment history, cloud costs, JVM internals, database utilisation, synthetic monitoring results and business conversion metrics. None of the original panels was removed.
 >
 > After several years, the dashboard still contained valuable information, but answering the original operational questions required navigating through dozens of unrelated charts. The dashboard had evolved without losing information, yet it had also lost much of its original focus.
+
+### Different audiences require different dashboards
+
+Even when a dashboard has a clearly defined purpose, it may still become ineffective if it attempts to satisfy the needs of every possible audience.
+
+Different roles ask different questions about the same system. An engineer responsible for responding to production incidents typically needs immediate access to technical indicators such as latency, error rates, infrastructure health and recent deployments. A service owner may instead focus on service availability, customer impact and long-term reliability trends. Executives are generally interested in broader operational indicators, business continuity and strategic objectives rather than the behaviour of individual components.
+
+Although all these perspectives describe the same environment, they rarely require the same level of detail.
+
+Attempting to combine every viewpoint into a single dashboard usually produces a compromise that serves none of them particularly well. Technical users must filter through business metrics that are irrelevant during incident response, while non-technical stakeholders are presented with implementation details that provide little value for strategic decision making.
+
+Stephen Few repeatedly argues that dashboards should be designed around specific objectives rather than around the available data. Once the intended audience changes, the objectives often change as well, making a different dashboard a more effective solution than simply adding more panels to an existing one.
+
+Rather than asking whether another stakeholder could also use a dashboard, a more useful question is whether the dashboard still enables its primary audience to answer the questions it was originally created to support.
+
+Table placeholder
+
+| Audience | Typical questions | Information usually required |
+| --- | --- | --- |
+| On-call engineer | Is the service currently healthy? | Error rate, latency, saturation, recent deployments |
+| Platform engineer | Is the infrastructure operating correctly? | Resource utilisation, cluster health, platform services |
+| Service owner | Is the service meeting operational objectives? | Availability, incidents, long-term trends |
+| Executive | Is the business being affected? | Service continuity, high-level KPIs, major incidents |
+
+Figure placeholder
+
+Focused operational dashboard versus overloaded multi-purpose dashboard.
+
+At this point another question naturally emerges. If dashboards should begin with clearly defined objectives and audiences, which questions should be answered before creating one?
