@@ -5,7 +5,7 @@ import { RESOURCES } from "@/data/engineeringResources";
 export default function Resources() {
   return (
     <PageLayout
-      title="Engineering Resources — ObservabiliTrends"
+      title="Engineering Resources - ObservabiliTrends"
       description="Frameworks, templates and practical engineering resources for observability, SRE and platform teams."
       canonical="/resources"
     >

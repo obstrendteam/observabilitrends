@@ -19,7 +19,7 @@ export default function ResourcePage() {
 
   return (
   <PageLayout
-    title={`${resource.title} — ObservabiliTrends`}
+    title={`${resource.title} - ObservabiliTrends`}
     description={resource.description}
     canonical={`/resources/${resource.slug}`}
   >

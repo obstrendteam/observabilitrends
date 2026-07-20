@@ -62,7 +62,7 @@ Editorial principles
           </p>
 
           <h2 className="mt-3 text-3xl font-semibold tracking-tight">
-            Built by an engineer, not by a marketing team.
+            Built by an engineer.
           </h2>
 
           <div className="mt-6 space-y-5 text-muted-foreground leading-relaxed max-w-3xl">
@@ -77,8 +77,8 @@ Editorial principles
             </p>
 
             <p>
-              The objective has always been simple: create the kind of technical
-              publication that many engineers wish existed — deeply researched,
+              The objective is simple: create the kind of technical
+              publication that many engineers wish existed: deeply researched,
               vendor-neutral and based on real operational experience rather than
               marketing narratives.
             </p>

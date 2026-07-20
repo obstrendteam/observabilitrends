@@ -36,7 +36,7 @@ const ENGAGEMENTS = [
 
 export default function Services() {
   return (
-    <PageLayout title="Services — ObservabiliTrends Advisory" description="Independent advisory for platform and SRE teams. Architectural reviews, monitoring assessments, SLO design, and cost optimization." canonical="/services">
+    <PageLayout title="Services - ObservabiliTrends Advisory" description="Independent advisory for platform and SRE teams. Architectural reviews, monitoring assessments, SLO design, and cost optimization." canonical="/services">
       <section className="container-prose pt-20 pb-10">
         <p className="mono text-xs uppercase tracking-wider text-primary">/ advisory</p>
         <h1 className="mt-2 text-5xl md:text-6xl font-semibold tracking-tighter max-w-3xl leading-[1.05]">

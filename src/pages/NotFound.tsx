@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export default function NotFound() {
   return (
-    <PageLayout title="404 — ObservabiliTrends">
+    <PageLayout title="404 - ObservabiliTrends">
       <section className="container-prose py-32 text-center">
         <p className="mono text-xs uppercase tracking-wider text-primary">/ 404</p>
         <h1 className="mt-4 text-6xl md:text-8xl font-semibold tracking-tighter">Signal lost.</h1>

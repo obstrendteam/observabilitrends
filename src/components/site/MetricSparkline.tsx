@@ -1,4 +1,4 @@
-/** Decorative "metrics" sparkline — pure CSS/SVG, no data fetching. */
+/** Decorative "metrics" sparkline - pure CSS/SVG, no data fetching. */
 export function MetricSparkline({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 400 80" className={className} fill="none" aria-hidden="true">

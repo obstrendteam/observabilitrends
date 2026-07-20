@@ -47,7 +47,7 @@ export default function Home() {
 
             <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed animate-float-up">
               Field reports, postmortem patterns, and architecture deep-dives on
-              <span className="text-foreground"> OpenTelemetry, Prometheus, SRE</span> and platform engineering — written by engineers who run production.
+              <span className="text-foreground"> OpenTelemetry, Prometheus, SRE</span> and platform engineering - written by engineers who run production.
             </p>
 
             <div className="mt-9 flex flex-wrap items-center gap-3 animate-float-up">
@@ -185,7 +185,7 @@ export default function Home() {
             <p className="mono text-xs uppercase tracking-wider text-primary">/ coverage</p>
             <h2 className="mt-2 text-3xl md:text-4xl font-semibold tracking-tight">Twelve domains. One discipline.</h2>
             <p className="mt-4 text-muted-foreground leading-relaxed">
-              We write across the entire observability and reliability stack — from collector internals to org-wide SLO programs.
+              We write across the entire observability and reliability stack - from collector internals to org-wide SLO programs.
             </p>
           </div>
           <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -289,7 +289,7 @@ export default function Home() {
             <BookOpen className="h-6 w-6 text-primary" />
             <h3 className="mt-4 text-xl font-semibold">Playbooks coming soon.</h3>
             <p className="mt-2 text-sm text-muted-foreground">
-              Battle-tested runbooks, dashboards and SLO templates — packaged and ready to deploy. Premium subscribers get early access.
+              Battle-tested runbooks, dashboards and SLO templates - packaged and ready to deploy. Premium subscribers get early access.
             </p>
             <Link to="/contact" className="mt-4 inline-flex items-center gap-1 text-sm text-primary">
               Get notified <ArrowRight className="h-4 w-4" />

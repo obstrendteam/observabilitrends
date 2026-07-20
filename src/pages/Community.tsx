@@ -4,7 +4,7 @@ import { Users, MessageSquare, Sparkles, Lock } from "lucide-react";
 
 export default function Community() {
   return (
-    <PageLayout title="Community — ObservabiliTrends" description="A practitioner community for SREs, platform engineers and observability architects. Coming soon." canonical="/community">
+    <PageLayout title="Community - ObservabiliTrends" description="A practitioner community for SREs, platform engineers and observability architects. Coming soon." canonical="/community">
       <section className="container-prose pt-20 pb-12">
         <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs">
           <Lock className="h-3 w-3 text-primary" />
@@ -38,7 +38,7 @@ export default function Community() {
         <ul className="mt-6 space-y-4 text-muted-foreground">
           <li className="flex gap-4"><span className="mono text-primary shrink-0">Q3 2026</span> Forum integration with topic-based channels and threaded discussions.</li>
           <li className="flex gap-4"><span className="mono text-primary shrink-0">Q4 2026</span> Public profiles with reputation, contributions, and verified employer.</li>
-          <li className="flex gap-4"><span className="mono text-primary shrink-0">Q1 2027</span> Job board curated by community members — no agency reposts.</li>
+          <li className="flex gap-4"><span className="mono text-primary shrink-0">Q1 2027</span> Job board curated by community members - no agency reposts.</li>
           <li className="flex gap-4"><span className="mono text-primary shrink-0">later</span> Mobile companion app, AMAs, and member-led workshops.</li>
         </ul>
       </section>

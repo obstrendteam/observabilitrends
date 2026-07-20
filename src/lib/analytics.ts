@@ -1,5 +1,5 @@
 /**
- * Analytics adapter — placeholders for GA, Plausible, PostHog.
+ * Analytics adapter - placeholders for GA, Plausible, PostHog.
  * Wire real keys via env or runtime config when integrations are ready.
  */
 export const analytics = {

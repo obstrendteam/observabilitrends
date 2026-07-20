@@ -28,7 +28,7 @@ export default function Articles() {
   }, [query, active]);
 
   return (
-    <PageLayout title="Articles — ObservabiliTrends" description="Field reports, playbooks and deep dives on observability, SRE, OpenTelemetry, Prometheus and platform engineering." canonical="/articles">
+    <PageLayout title="Articles - ObservabiliTrends" description="Field reports, playbooks and deep dives on observability, SRE, OpenTelemetry, Prometheus and platform engineering." canonical="/articles">
       <section className="border-b border-border bg-surface">
         <div className="container-prose py-16 md:py-20">
           <p className="mono text-xs uppercase tracking-wider text-primary">/ articles</p>

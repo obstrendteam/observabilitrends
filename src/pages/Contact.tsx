@@ -76,7 +76,7 @@ export default function Contact() {
 }
 
   return (
-    <PageLayout title="Contact — ObservabiliTrends" description="Get in touch about advisory work, editorial pitches or partnerships." canonical="/contact">
+    <PageLayout title="Contact - ObservabiliTrends" description="Get in touch about advisory work, editorial pitches or partnerships." canonical="/contact">
       <section className="container-prose pt-20 pb-10">
         <p className="mono text-xs uppercase tracking-wider text-primary">/ contact</p>
         <h1 className="mt-2 text-5xl md:text-6xl font-semibold tracking-tighter max-w-3xl leading-[1.05]">
@@ -91,7 +91,7 @@ export default function Contact() {
         <div className="lg:col-span-4 space-y-4">
           {[
             { Icon: Briefcase, title: "Advisory & consulting", body: "Architectural reviews, SLO programs, cost optimization." },
-            { Icon: MessageSquare, title: "Editorial pitches", body: "Postmortems, deep-dives, contrarian takes — pitch us." },
+            { Icon: MessageSquare, title: "Editorial pitches", body: "Postmortems, deep-dives, contrarian takes - pitch us." },
             { Icon: Mail, title: "Press & partnerships", body: "We're selective. We're also responsive." },
           ].map(({ Icon, title, body }) => (
             <div key={title} className="surface-card p-5">
