@@ -132,3 +132,297 @@ Figure placeholder
 Focused operational dashboard versus overloaded multi-purpose dashboard.
 
 At this point another question naturally emerges. If dashboards should begin with clearly defined objectives and audiences, which questions should be answered before creating one?
+
+---
+
+# Questions worth answering before creating a dashboard
+
+Once the purpose of a dashboard has been clearly defined, the next step is deciding what deserves to appear on it. Surprisingly, this phase is often shorter than selecting colours, arranging panels or choosing chart types, despite having a far greater influence on the usefulness of the final result.
+
+Many dashboard design problems can be traced back to a small number of questions that were never explicitly discussed. Defining these questions early does not guarantee a successful dashboard, but it considerably reduces the probability of building one that gradually becomes difficult to maintain or simply fails to answer the operational questions it was created to support.
+
+Stephen Few repeatedly argues that dashboards should be designed around objectives rather than available data. In practice, this means understanding not only what information exists, but why someone needs to see it in the first place.
+
+## Who is going to use it?
+
+The intended audience is one of the strongest factors influencing dashboard design.
+
+Although dashboards often display the same underlying telemetry, different users interpret that information from different perspectives and for different purposes. A platform engineer investigating infrastructure saturation does not require the same level of abstraction as an executive reviewing service availability. Likewise, an engineer responding to an incident needs immediate access to operational signals rather than long-term business indicators.
+
+Attempting to satisfy every audience with a single dashboard usually results in unnecessary complexity. Important operational signals become diluted among information that is relevant only occasionally, while high-level indicators coexist with low-level implementation details that many users neither need nor understand.
+
+Separating dashboards according to their primary audience generally produces simpler interfaces, shorter investigation times and more focused operational conversations.
+
+| Audience | Typical questions |
+|----------|-------------------|
+| On-call engineer | Is something failing right now? Where should the investigation begin? |
+| Platform engineer | Is the platform operating within expected capacity and reliability limits? |
+| Service owner | Is the service meeting its operational objectives? |
+| Management | Are availability, reliability and customer impact evolving as expected? |
+
+This separation does not imply duplicating information unnecessarily. Instead, it recognises that the same underlying telemetry can support different decisions depending on who is consuming it.
+
+## Which decisions should it support?
+
+A useful dashboard exists to support decisions rather than simply display information.
+
+This distinction may appear subtle, yet it fundamentally changes the design process. Instead of asking *"Which metrics should we visualise?"*, it becomes more productive to ask *"Which decisions should become easier after consulting this dashboard?"*
+
+For example, an operational dashboard might support decisions such as:
+
+- Should this alert be escalated?
+- Is the problem affecting the entire service or only one component?
+- Did the latest deployment introduce measurable changes?
+- Is additional capacity required?
+- Should traffic be redirected or a rollback initiated?
+
+When dashboards are designed around concrete operational decisions, selecting the appropriate metrics becomes considerably easier. Measurements that do not contribute to any meaningful decision naturally become candidates for removal or relocation.
+
+This principle also helps avoid a common design trap: adding information simply because it is available. Modern observability platforms can expose thousands of metrics, but availability alone is rarely sufficient justification for placing them on a dashboard.
+
+## Which information is essential?
+
+Once objectives and audience have been established, every panel should justify its presence.
+
+One practical approach is to classify information into three groups.
+
+**Essential information**
+
+Metrics that are required to understand the current operational state and support the primary objective of the dashboard.
+
+Examples include service availability, request latency, error rate, throughput or infrastructure health depending on the dashboard's purpose.
+
+**Useful supporting information**
+
+Data that helps provide additional context during investigations but is not required during every consultation.
+
+Deployment history, recent configuration changes or links to related documentation often fall into this category.
+
+**Information that probably belongs elsewhere**
+
+Measurements that may be valuable for specialised analysis but rarely contribute to the dashboard's primary objective.
+
+Examples include highly detailed JVM internals, low-level infrastructure counters, exhaustive business KPIs or debugging metrics that are only relevant during specific investigations.
+
+Making these distinctions encourages intentional design instead of incremental accumulation.
+
+## How will usefulness be measured?
+
+Dashboards themselves can and should be evaluated.
+
+Many organisations regularly measure the health of applications and infrastructure while rarely assessing whether the dashboards used to monitor those systems continue to provide value.
+
+One possible indicator is actual usage. Several commercial observability platforms, including Dynatrace, expose dashboard usage statistics that show how frequently dashboards are opened or consulted. Although usage alone cannot determine quality, dashboards that receive little or no traffic over extended periods may deserve review.
+
+Other qualitative indicators may include:
+
+- Whether incident response begins from the dashboard.
+- Whether operational meetings consistently rely on it.
+- Whether engineers actively maintain it.
+- Whether obsolete panels are periodically removed.
+- Whether users request improvements instead of creating alternative dashboards.
+
+These indicators should not be interpreted in isolation. A rarely consulted dashboard supporting disaster recovery procedures may still be extremely valuable. Conversely, a frequently opened dashboard may persist simply because no better alternative exists.
+
+The objective is not to maximise page views but to ensure that dashboards continue fulfilling the purpose for which they were originally designed.
+
+> **Future resource**
+>
+> The accompanying **Dashboard Readiness Assessment** provides a practical checklist that can be completed before implementing a new dashboard. It summarises the questions discussed in this section and can be incorporated into design reviews or dashboard approval processes.
+
+**Figure placeholder**
+
+Decision flow before creating a dashboard:
+Objective → Audience → Decisions → Essential information → Dashboard implementation.
+
+**References**
+
+- Stephen Few. *Information Dashboard Design*. Analytics Press, 2006.
+- Grafana Labs. *Dashboard design best practices*.
+- Google. *Site Reliability Engineering*.
+
+---
+
+# Dashboards are products that require maintenance
+
+Designing an effective dashboard is only the beginning of its lifecycle.
+
+Unlike static reports, operational dashboards evolve together with the systems they represent. Services change, architectures become more complex, ownership shifts between teams and operational priorities evolve over time. A dashboard that accurately reflected a system two years ago may gradually become misleading if it is never reviewed.
+
+While this reality is well understood for software systems, infrastructure or APIs, dashboards are frequently treated as finished deliverables once they have been published. In practice, they behave much more like software products than static documents.
+
+Recognising this distinction changes how dashboards should be designed, maintained and governed throughout their lifetime.
+
+## Dashboards have a lifecycle
+
+Every operational dashboard follows a lifecycle, whether teams acknowledge it explicitly or not.
+
+A simplified lifecycle can be described as:
+
+1. A specific operational need is identified.
+2. The dashboard is designed and implemented.
+3. It becomes part of daily operational workflows.
+4. The monitored system evolves.
+5. The dashboard is reviewed, updated or eventually retired.
+
+The important observation is that publishing a dashboard is not the final step. It merely marks the beginning of its operational life.
+
+Many organisations dedicate considerable effort to creating dashboards while allocating almost no time to reviewing them afterwards. As a result, obsolete panels accumulate, terminology becomes inconsistent and visualisations continue displaying information that is no longer relevant.
+
+Regular reviews allow teams to remove unnecessary panels, simplify layouts and ensure that dashboards continue supporting their original objectives.
+
+Just as software benefits from periodic refactoring, dashboards benefit from periodic simplification.
+
+## Every dashboard should have documentation
+
+Documentation is often associated with services, APIs or infrastructure components, yet dashboards themselves frequently become critical operational assets.
+
+During an incident, engineers may rely on a dashboard before consulting architecture diagrams, deployment pipelines or source code. Despite this importance, many dashboards exist without any accompanying documentation.
+
+Even lightweight documentation can significantly improve long-term maintainability.
+
+At a minimum, every dashboard should describe:
+
+| Item | Purpose |
+|------|---------|
+| Objective | Which operational problem does this dashboard address? |
+| Intended audience | Who is expected to use it? |
+| Data sources | Which systems provide the displayed information? |
+| Important dependencies | Which services, exporters or integrations are required? |
+| Dashboard owner | Who is responsible for reviewing and maintaining it? |
+| Last review date | When was the dashboard last validated? |
+
+This information rarely changes the dashboard itself, but it dramatically reduces ambiguity when new engineers join a team or ownership changes.
+
+Documentation also provides context for future modifications. Understanding *why* a panel exists is often more valuable than understanding *how* it was configured.
+
+> **Future resource**
+>
+> The accompanying **Dashboard Technical Specification** provides a reusable template for documenting dashboards consistently across teams.
+
+## Monitoring as Code
+
+As dashboards become operationally important, many organisations have started treating them as version-controlled assets rather than objects created manually through a graphical interface.
+
+This approach is commonly known as *Monitoring as Code*.
+
+Instead of editing dashboards directly in production, dashboard definitions are stored alongside application or infrastructure code, allowing changes to benefit from the same engineering practices already applied elsewhere.
+
+Typical advantages include:
+
+- Version history.
+- Peer review.
+- Rollback capabilities.
+- Promotion across development, staging and production environments.
+- Consistent deployments.
+- Auditable change history.
+
+Different observability platforms implement this concept differently, but the underlying principle remains the same: dashboards should evolve through controlled engineering processes rather than ad hoc modifications.
+
+Monitoring as Code deserves a dedicated discussion beyond the scope of this article, yet introducing the concept here helps explain why mature observability teams increasingly manage dashboards as software artifacts rather than configuration stored inside a platform.
+
+## Change management matters
+
+Not every requested change necessarily improves a dashboard.
+
+Operational dashboards naturally attract new requirements as systems evolve. Additional metrics become available, teams request more visibility and new stakeholders identify information they would like to include.
+
+Without a defined review process, dashboards tend to grow continuously while rarely becoming simpler.
+
+Before introducing any modification, it is useful to ask several questions.
+
+- Which operational question does this new panel answer?
+- Who requested the change?
+- Does the information already exist elsewhere?
+- Will another panel become redundant?
+- Should documentation also be updated?
+
+These questions encourage intentional evolution instead of incremental accumulation.
+
+In mature engineering organisations, removing obsolete information is often as valuable as introducing new visualisations. Simplicity is rarely achieved by adding more panels; it is usually achieved by preserving only those that continue supporting operational decisions.
+
+## Dashboards should also be retired
+
+One aspect that receives relatively little attention is retirement.
+
+Applications are decommissioned, services are consolidated and monitoring strategies evolve. Dashboards associated with those systems should evolve accordingly.
+
+Keeping obsolete dashboards available indefinitely increases maintenance costs and makes it more difficult for engineers to identify which dashboards remain authoritative.
+
+Retirement should therefore be considered a normal stage of the dashboard lifecycle rather than an exceptional event.
+
+Removing a dashboard whose purpose no longer exists is often evidence of healthy operational governance rather than lost work.
+
+**Figure placeholder**
+
+Dashboard lifecycle:
+
+Operational need → Design → Implementation → Daily use → Review → Update → Retirement
+
+**References**
+
+- Google. *Site Reliability Engineering*.
+- Grafana Labs. *Provisioning Grafana*.
+- Git Documentation.
+
+---
+
+# Key takeaways
+
+The value of a dashboard is determined long before the first panel is created.
+
+Although visual design and tooling influence the final result, the decisions that have the greatest long-term impact concern objectives, audience and ownership. A dashboard built without a clearly defined purpose will rarely become more useful simply by adding additional metrics or improving its appearance.
+
+The main ideas discussed throughout this article can be summarised as follows.
+
+- Dashboards exist to support operational decisions, not to display as much information as possible.
+- Clearly defining the intended audience helps determine which information deserves a place on a dashboard.
+- Every dashboard should answer one or more specific operational questions.
+- Scope naturally expands over time unless dashboards are reviewed regularly.
+- Documentation reduces ambiguity and improves long-term maintainability.
+- Monitoring as Code introduces engineering practices such as version control, peer review and controlled deployments into dashboard management.
+- Dashboards have a lifecycle that includes creation, maintenance, periodic review and eventual retirement.
+- The long-term success of a dashboard can often be assessed through actual operational usage rather than visual appearance alone.
+
+Designing fewer dashboards with a clear purpose will usually provide greater operational value than maintaining many dashboards whose objectives are no longer understood.
+
+---
+
+# Further reading
+
+Readers interested in exploring dashboard design and operational visualisation in greater depth may find the following references particularly useful.
+
+- Stephen Few - *Information Dashboard Design: Displaying Data for At-a-Glance Monitoring*.
+- Edward R. Tufte - *The Visual Display of Quantitative Information*.
+- Google - *Site Reliability Engineering*.
+- Google - *The Site Reliability Workbook*.
+- Grafana Labs - *Dashboard design best practices*.
+
+For practical implementation guidance accompanying this article, see the following engineering resources published by ObservabiliTrends.
+
+- Dashboard Readiness Assessment
+- Dashboard Technical Specification
+
+---
+
+# Bibliography
+
+Few, S. (2006). *Information Dashboard Design: Displaying Data for At-a-Glance Monitoring*. Analytics Press.
+
+Few, S. (2009). *Now You See It: Simple Visualization Techniques for Quantitative Analysis*. Analytics Press.
+
+Google. (2016). *Site Reliability Engineering: How Google Runs Production Systems*. O'Reilly Media.
+
+Google. (2018). *The Site Reliability Workbook*. O'Reilly Media.
+
+Grafana Labs. *Dashboard Design Best Practices*. Available at: https://grafana.com/docs/grafana/latest/dashboards/build-dashboards/best-practices/
+
+Grafana Labs. *Provisioning Grafana*. Available at: https://grafana.com/docs/grafana/latest/administration/provisioning/
+
+Git Project. *Git Documentation*. Available at: https://git-scm.com/doc
+
+Tufte, E. R. (1983). *The Visual Display of Quantitative Information*. Graphics Press.
+
+Uneecops Technologies. *Generations of Dashboards*. Available at: https://www.uneecops.com/blog/generations-of-dashboards/
+
+Watt, D. *Dashboard Design - Dashboard*. The Data School. Available at: https://www.thedataschool.co.uk/a/dan-watt/dashboard-design-dashboard/
