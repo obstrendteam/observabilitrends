@@ -100,6 +100,8 @@ From experience across large monitoring environments, it is common to encounter 
 >
 > After several years, the dashboard still contained valuable information, but answering the original operational questions required navigating through dozens of unrelated charts. The dashboard had evolved without losing information, yet it had also lost much of its original focus.
 
+![Figure 2. Focused operational dashboard versus overloaded multi-purpose dashboard.](/images/articles/dashboard-good-vs-bad.webp)
+
 ### Different audiences require different dashboards
 
 Even when a dashboard has a clearly defined purpose, it may still become ineffective if it attempts to satisfy the needs of every possible audience.
@@ -120,8 +122,6 @@ Rather than asking whether another stakeholder could also use a dashboard, a mor
 | Platform engineer | Is the infrastructure operating correctly? | Resource utilisation, cluster health, platform services |
 | Service owner | Is the service meeting operational objectives? | Availability, incidents, long-term trends |
 | Executive | Is the business being affected? | Service continuity, high-level KPIs, major incidents |
-
-![Figure 2. Focused operational dashboard versus overloaded multi-purpose dashboard.](/images/articles/dashboard-good-vs-bad.webp)
 
 At this point another question naturally emerges. If dashboards should begin with clearly defined objectives and audiences, which questions should be answered before creating one?
 
