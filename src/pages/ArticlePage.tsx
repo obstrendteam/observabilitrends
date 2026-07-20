@@ -86,14 +86,14 @@ export default function ArticlePage() {
           <ArrowLeft className="h-4 w-4" /> All articles
         </Link>
 
-        <div className="mt-8 max-w-3xl">
+        <div className="mt-8 max-w-6xl">
           <span className="mono text-xs uppercase tracking-wider px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20">
             {article.category}
           </span>
-          <h1 className="mt-5 text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tighter leading-[1.05]">
+          <h1 className="mt-5 max-w-none text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tighter leading-[1.05] text-balance">
             {article.title}
           </h1>
-          <p className="mt-5 text-lg text-muted-foreground leading-relaxed">{article.excerpt}</p>
+          <p className="mt-5 max-w-4xl text-lg text-muted-foreground leading-relaxed">{article.excerpt}</p>
 
           <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground border-y border-border py-4">
             <div className="flex items-center gap-2">
