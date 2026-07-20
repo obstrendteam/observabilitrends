@@ -9,7 +9,7 @@ export default function About() {
       <section className="container-prose pt-20 pb-12">
         <p className="mono text-xs uppercase tracking-wider text-primary">/ about</p>
         <h1 className="mt-2 text-5xl md:text-6xl font-semibold tracking-tighter max-w-3xl leading-[1.05]">
-          The observability press for people who run production.
+          The observability independent place.
         </h1>
         <p className="mt-6 text-lg text-muted-foreground max-w-2xl leading-relaxed">
           ObservabiliTrends is an independent media platform covering observability, SRE, distributed systems and platform engineering.
