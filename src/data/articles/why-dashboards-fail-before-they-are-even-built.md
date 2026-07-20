@@ -346,11 +346,7 @@ Retirement should therefore be considered a normal stage of the dashboard lifecy
 
 Removing a dashboard whose purpose no longer exists is often evidence of healthy operational governance rather than lost work.
 
-**Figure placeholder**
-
-Dashboard lifecycle:
-
-Operational need → Design → Implementation → Daily use → Review → Update → Retirement
+![Figure 3. Dashboard lifecycle.](/images/articles/dashboard-decision-lifecycle.webp)
 
 **References**
 
