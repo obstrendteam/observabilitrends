@@ -162,3 +162,24 @@
   from { stroke-dashoffset: 1000; }
   to { stroke-dashoffset: 0; }
 }
+
+.prose img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.prose table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.prose pre {
+  overflow-x: auto;
+}
+
+.prose {
+  overflow-wrap: anywhere;
+}
