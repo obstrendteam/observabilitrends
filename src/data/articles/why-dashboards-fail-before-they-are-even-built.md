@@ -116,8 +116,6 @@ Stephen Few repeatedly argues that dashboards should be designed around specific
 
 Rather than asking whether another stakeholder could also use a dashboard, a more useful question is whether the dashboard still enables its primary audience to answer the questions it was originally created to support.
 
-Table placeholder
-
 | Audience | Typical questions | Information usually required |
 | --- | --- | --- |
 | On-call engineer | Is the service currently healthy? | Error rate, latency, saturation, recent deployments |
@@ -228,10 +226,7 @@ The objective is not to maximise page views but to ensure that dashboards contin
 >
 > The accompanying **Dashboard Readiness Assessment** provides a practical checklist that can be completed before implementing a new dashboard. It summarises the questions discussed in this section and can be incorporated into design reviews or dashboard approval processes.
 
-**Figure placeholder**
-
-Decision flow before creating a dashboard:
-Objective → Audience → Decisions → Essential information → Dashboard implementation.
+![Figure 2. Decision flow before creating a dashboard.](/images/articles/dashboard-decision-flow.webp)
 
 **References**
 
