@@ -18,8 +18,6 @@ Although modern observability platforms are vastly more sophisticated than the d
 
 ![Figure 1. Evolution of dashboards from executive reporting to modern observability platforms.](/images/articles/dashboard-evolution.webp)
 
-*Figure 1. Evolution of dashboards from executive reporting to modern observability platforms. Illustration inspired by the historical evolution presented by UNEECOPS in "Generations of Dashboards".*
-
 The concept gradually expanded beyond transportation. During the second half of the twentieth century, business intelligence systems adopted dashboards as a way of consolidating key performance indicators into a single operational view. Later, monitoring platforms incorporated the same principles to help engineers supervise increasingly complex computing environments.
 
 Despite decades of evolution, defining a dashboard is not entirely straightforward. Different disciplines describe dashboards from slightly different perspectives depending on whether they focus on business intelligence, human-computer interaction or operational monitoring. Nevertheless, nearly all definitions converge on the same fundamental idea: a dashboard exists to help someone understand the current state of a system and support decision-making.
@@ -123,9 +121,7 @@ Rather than asking whether another stakeholder could also use a dashboard, a mor
 | Service owner | Is the service meeting operational objectives? | Availability, incidents, long-term trends |
 | Executive | Is the business being affected? | Service continuity, high-level KPIs, major incidents |
 
-Figure placeholder
-
-Focused operational dashboard versus overloaded multi-purpose dashboard.
+![Figure 2. Focused operational dashboard versus overloaded multi-purpose dashboard.](/images/articles/dashboard-good-vs-bad.webp)
 
 At this point another question naturally emerges. If dashboards should begin with clearly defined objectives and audiences, which questions should be answered before creating one?
 
@@ -226,7 +222,7 @@ The objective is not to maximise page views but to ensure that dashboards contin
 >
 > The accompanying **Dashboard Readiness Assessment** provides a practical checklist that can be completed before implementing a new dashboard. It summarises the questions discussed in this section and can be incorporated into design reviews or dashboard approval processes.
 
-![Figure 2. Decision flow before creating a dashboard.](/images/articles/dashboard-decision-flow.webp)
+![Figure 3. Decision flow before creating a dashboard.](/images/articles/dashboard-decision-flow.webp)
 
 **References**
 
@@ -258,7 +254,7 @@ A simplified lifecycle can be described as:
 4. The monitored system evolves.
 5. The dashboard is reviewed, updated or eventually retired.
 
-![Figure 3. Dashboard lifecycle.](/images/articles/dashboard-lifecycle.webp)
+![Figure 4. Dashboard lifecycle.](/images/articles/dashboard-lifecycle.webp)
 
 The important observation is that publishing a dashboard is not the final step. It merely marks the beginning of its operational life.
 
