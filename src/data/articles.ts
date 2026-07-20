@@ -16,6 +16,7 @@ export type Category =
   | "Cloud Monitoring";
 
 export const CATEGORIES: Category[] = [
+  "Dashboards",
   "OpenTelemetry",
   "Prometheus",
   "Grafana",
