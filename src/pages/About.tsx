@@ -7,19 +7,23 @@ export default function About() {
   return (
     <PageLayout title="About - ObservabiliTrends" description="Why ObservabiliTrends exists, who's behind it and how we think about observability and reliability." canonical="/about">
       <section className="container-prose pt-20 pb-12">
-        <p className="mono text-xs uppercase tracking-wider text-primary">/ about</p>
-        <h1 className="mt-8 max-w-6xl md:text-6xl font-semibold tracking-tighter max-w-3xl leading-[1.05]">
-          The observability independent place.
+
+        <p className="mono text-xs uppercase tracking-wider text-primary">
+          / about
+        </p>
+
+        <h1 className="mt-8 text-5xl md:text-6xl font-semibold tracking-tighter leading-[1.05] max-w-5xl">
+          Independent engineering research for modern observability.
         </h1>
-        <p className="mt-6 text-lg text-muted-foreground max-w-2xl leading-relaxed">
-          ObservabiliTrends is an independent media platform covering observability, SRE, distributed systems and platform engineering.
+
+        <p className="mt-8 text-xl text-muted-foreground max-w-3xl leading-relaxed">
+          ObservabiliTrends is an independent editorial platform dedicated to
+          observability, reliability engineering and platform architecture.
+          We publish long-form technical research, engineering resources and
+          practical guidance designed for professionals operating production
+          systems at scale.
         </p>
-        <p className="mt-6 text-lg text-muted-foreground max-w-2xl leading-relaxed">
-          Founded by Daniel Busquets.
-          </p>
-        <p className="mt-6 text-lg text-muted-foreground max-w-2xl leading-relaxed">
-          Connect on <a href="https://www.linkedin.com/in/dbusquets" target='_blank' aria-label='LinkedIn'>LinkedIn</a>
-        </p>
+
       </section>
 
       <section className="container-prose py-12 grid md:grid-cols-3 gap-6">
@@ -37,24 +41,72 @@ export default function About() {
       </section>
 
       <section className="container-prose py-16 max-w-3xl">
-        <h2 className="text-3xl font-semibold tracking-tight">What we believe</h2>
+        <h2 className="text-3xl font-semibold tracking-tight">
+Editorial principles
+</h2>
         <div className="mt-6 space-y-5 text-muted-foreground leading-relaxed">
-          <p>The observability ecosystem evolves quickly, and separating practical engineering knowledge from marketing messages is not always easy. ObservabiliTrends was created to offer technically grounded content written from the perspective of engineers who build, operate and maintain production systems.</p>
+          <p>Observability has become one of the fastest-moving areas of modern software engineering. New tools, commercial platforms and architectural patterns appear constantly, making it increasingly difficult to distinguish engineering practice from product messaging.</p>
 
-          <p>Our goal is to publish practical, vendor-neutral articles based on research, hands-on experience and industry best practices. When we discuss a technology or recommend an approach, we aim to explain both its strengths and its limitations, helping readers make informed decisions rather than promoting a particular product.</p>
+          <p>ObservabiliTrends exists to provide carefully researched, vendor-neutral content that prioritises technical accuracy over marketing narratives. Every article is written with the goal of helping engineers make better operational decisions.</p>
 
-          <p>Our advisory work and editorial content complement each other. Practical experience helps shape the topics we write about, while the research behind every article continually challenges and improves the way we approach observability in real-world environments.</p>
+          <p>We believe good engineering comes from understanding principles before products. Technology changes rapidly; sound design decisions tend to last much longer.</p>
         </div>
       </section>
 
-      <section className="container-prose pb-24">
-        <div className="surface-card p-8 md:p-12 flex flex-col md:flex-row gap-6 items-start md:items-center justify-between">
-          <div>
-            <h3 className="text-2xl font-semibold tracking-tight">Have a story tip or want to contribute?</h3>
-            <p className="mt-2 text-muted-foreground">We work with practicing engineers. Pitch us a postmortem, an architecture deep-dive or a contrarian take.</p>
+      <section className="container-prose py-16">
+
+        <div className="surface-card p-8 md:p-10">
+
+          <p className="mono text-xs uppercase tracking-wider text-primary">
+            / founder
+          </p>
+
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight">
+            Built by an engineer, not by a marketing team.
+          </h2>
+
+          <div className="mt-6 space-y-5 text-muted-foreground leading-relaxed max-w-3xl">
+
+            <p>
+              ObservabiliTrends was founded by
+              <span className="text-foreground font-medium">
+                {" "}Daniel Busquets
+              </span>,
+              an observability engineer focused on monitoring strategy,
+              dashboard design, platform engineering and operational excellence.
+            </p>
+
+            <p>
+              The objective has always been simple: create the kind of technical
+              publication that many engineers wish existed — deeply researched,
+              vendor-neutral and based on real operational experience rather than
+              marketing narratives.
+            </p>
+
           </div>
-          <Button asChild size="lg"><Link to="/contact">Get in touch <ArrowRight className="ml-1.5 h-4 w-4" /></Link></Button>
+
+          <div className="mt-8 flex flex-wrap gap-4">
+
+            <a
+              href="https://www.linkedin.com/in/dbusquets"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center rounded-md border border-primary/30 bg-primary/5 px-5 py-3 text-sm font-medium hover:border-primary hover:bg-primary/10 transition"
+            >
+              Connect on LinkedIn
+            </a>
+
+            <Link
+              to="/contact"
+              className="inline-flex items-center rounded-md border border-border px-5 py-3 text-sm hover:border-primary transition"
+            >
+              Contact
+            </Link>
+
+          </div>
+
         </div>
+
       </section>
     </PageLayout>
   );
