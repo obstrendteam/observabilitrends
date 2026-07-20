@@ -12,6 +12,13 @@ import NotFound from "./NotFound";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
+function slugify(text: string) {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
 export default function ArticlePage() {
   const { slug = "" } = useParams();
   const article = getArticle(slug);
@@ -30,11 +37,18 @@ export default function ArticlePage() {
 
   const sections = useMemo(() => {
     if (!article) return [];
-    return article.content.split("\n").filter(l => l.startsWith("## ")).map(l => {
-      const text = l.replace("## ", "").trim();
-      const id = text.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-      return { id, text };
-    });
+
+    return article.content
+      .split("\n")
+      .filter(line => line.startsWith("## "))
+      .map(line => {
+        const text = line.replace("## ", "").trim();
+
+        return {
+          text,
+          id: slugify(text),
+        };
+      });
   }, [article]);
 
   if (!article) return <NotFound />;
@@ -122,10 +136,21 @@ export default function ArticlePage() {
           <div className="lg:col-span-9 order-1 lg:order-2">
             <div className="prose prose-lg max-w-none dark:prose-invert">
 
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  h2: ({ children }) => {
+                    const text = String(children);
 
+                    return (
+                      <h2 id={slugify(text)}>
+                        {children}
+                      </h2>
+                    );
+                  },
+                }}
+              >
                 {article.content}
-
               </ReactMarkdown>
 
             </div>
