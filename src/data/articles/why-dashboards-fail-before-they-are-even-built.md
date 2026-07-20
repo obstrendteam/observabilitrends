@@ -16,11 +16,9 @@ The word *dashboard* originally referred to the instrument panel of a vehicle. D
 
 Although modern observability platforms are vastly more sophisticated than the dashboard of an automobile, the underlying principle remains remarkably similar. Operators cannot directly inspect every component of a distributed system, every request flowing through a service mesh or every event generated across thousands of infrastructure nodes. Instead, dashboards expose a carefully selected subset of information that allows engineers to understand the current state of a system and decide whether further investigation is required.
 
-> **Figure 1.** Evolution of dashboards from executive reporting to modern observability platforms.
->
-> *Image placeholder.*
->
-> Source inspiration: UNEECOPS - *Generations of Dashboards*.
+![Figure 1. Evolution of dashboards from executive reporting to modern observability platforms.](/images/articles/dashboard-evolution.webp)
+
+*Figure 1. Evolution of dashboards from executive reporting to modern observability platforms. Illustration inspired by the historical evolution presented by UNEECOPS in "Generations of Dashboards".*
 
 The concept gradually expanded beyond transportation. During the second half of the twentieth century, business intelligence systems adopted dashboards as a way of consolidating key performance indicators into a single operational view. Later, monitoring platforms incorporated the same principles to help engineers supervise increasingly complex computing environments.
 
