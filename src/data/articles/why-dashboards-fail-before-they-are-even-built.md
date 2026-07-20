@@ -258,6 +258,8 @@ A simplified lifecycle can be described as:
 4. The monitored system evolves.
 5. The dashboard is reviewed, updated or eventually retired.
 
+![Figure 3. Dashboard lifecycle.](/images/articles/dashboard-lifecycle.webp)
+
 The important observation is that publishing a dashboard is not the final step. It merely marks the beginning of its operational life.
 
 Many organisations dedicate considerable effort to creating dashboards while allocating almost no time to reviewing them afterwards. As a result, obsolete panels accumulate, terminology becomes inconsistent and visualisations continue displaying information that is no longer relevant.
@@ -345,8 +347,6 @@ Keeping obsolete dashboards available indefinitely increases maintenance costs a
 Retirement should therefore be considered a normal stage of the dashboard lifecycle rather than an exceptional event.
 
 Removing a dashboard whose purpose no longer exists is often evidence of healthy operational governance rather than lost work.
-
-![Figure 3. Dashboard lifecycle.](/images/articles/dashboard-lifecycle.webp)
 
 **References**
 
