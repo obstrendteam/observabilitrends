@@ -2,7 +2,7 @@
 
 ## Abstract
 
-Dashboards are among the most common artifacts in modern observability platforms, yet many gradually lose the purpose that originally justified their creation. While discussions often focus on visualization techniques or tooling, many of the factors that determine whether a dashboard becomes valuable are decided long before the first panel is added.
+Dashboards are among the most common artifacts in modern observability platforms, yet many gradually lose the purpose that originally justified their creation. While discussions often focus on visualization techniques or tooling, many of the factors that determine whether a dashboard becomes valuable are decided before the first panel is added.
 
 This article explores the decisions that shape an effective dashboard before implementation begins. Starting from the historical evolution of dashboards and their role in decision support, it examines how objectives, audience and long-term ownership influence their usefulness. Rather than concentrating on any specific technology, it proposes a practical framework for designing dashboards that remain relevant as systems, organisations and operational requirements evolve.
 
@@ -24,7 +24,7 @@ Despite decades of evolution, defining a dashboard is not entirely straightforwa
 
 One of the most widely cited definitions was proposed by Stephen Few in *Information Dashboard Design*:
 
-> *"A visual display of the most important information needed to achieve one or more objectives, consolidated and arranged on a single screen so the information can be monitored at a glance."*
+> *A visual display of the most important information needed to achieve one or more objectives, consolidated and arranged on a single screen so the information can be monitored at a glance.*
 
 Few's definition remains remarkably applicable to modern observability platforms. Technologies have evolved from static reporting systems to highly interactive monitoring environments, but the objective has not fundamentally changed. A dashboard should reduce the effort required to understand a situation rather than increase it.
 
@@ -58,7 +58,7 @@ It is tempting to think that dashboard quality depends primarily on the choice o
 
 Many dashboard initiatives begin with a request that sounds deceptively simple:
 
-> "We need a dashboard."
+> We need a dashboard.
 
 While the request itself is common, the underlying problem is often left undefined.
 
@@ -94,7 +94,7 @@ None of these categories is inherently inappropriate. The challenge arises when 
 
 From experience across large monitoring environments, it is common to encounter dashboards containing dozens of panels while only a small subset receives regular attention during day-to-day operations. Rather than improving situational awareness, excessive scope can increase the cognitive effort required to locate genuinely useful information.
 
-> **Example**
+> **Example:**
 >
 > Consider a dashboard originally created to supervise a single customer-facing application. During its first months, it displayed request rate, latency, error rate and infrastructure health. As new requirements emerged, additional panels were incorporated to visualise deployment history, cloud costs, JVM internals, database utilisation, synthetic monitoring results and business conversion metrics. None of the original panels was removed.
 >
@@ -112,7 +112,7 @@ Although all these perspectives describe the same environment, they rarely requi
 
 Attempting to combine every viewpoint into a single dashboard usually produces a compromise that serves none of them particularly well. Technical users must filter through business metrics that are irrelevant during incident response, while non-technical stakeholders are presented with implementation details that provide little value for strategic decision making.
 
-Stephen Few repeatedly argues that dashboards should be designed around specific objectives rather than around the available data. Once the intended audience changes, the objectives often change as well, making a different dashboard a more effective solution than simply adding more panels to an existing one.
+Stephen Few maintains that dashboards should be designed around specific objectives rather than around the available data. Once the intended audience changes, the objectives often change as well, making a different dashboard a more effective solution than simply adding more panels to an existing one.
 
 Rather than asking whether another stakeholder could also use a dashboard, a more useful question is whether the dashboard still enables its primary audience to answer the questions it was originally created to support.
 
@@ -133,7 +133,7 @@ Once the purpose of a dashboard has been clearly defined, the next step is decid
 
 Many dashboard design problems can be traced back to a small number of questions that were never explicitly discussed. Defining these questions early does not guarantee a successful dashboard, but it considerably reduces the probability of building one that gradually becomes difficult to maintain or simply fails to answer the operational questions it was created to support.
 
-Stephen Few repeatedly argues that dashboards should be designed around objectives rather than available data. In practice, this means understanding not only what information exists, but why someone needs to see it in the first place.
+Stephen Few states that dashboards should be designed around objectives rather than available data. In practice, this means understanding not only what information exists, but why someone needs to see it in the first place.
 
 ## Who is going to use it?
 
@@ -218,9 +218,9 @@ These indicators should not be interpreted in isolation. A rarely consulted dash
 
 The objective is not to maximise page views but to ensure that dashboards continue fulfilling the purpose for which they were originally designed.
 
-> **Future resource**
+> **Continue reading**
 >
-> The accompanying **Dashboard Readiness Assessment** provides a practical checklist that can be completed before implementing a new dashboard. It summarises the questions discussed in this section and can be incorporated into design reviews or dashboard approval processes.
+> If you're planning a new dashboard, the **[Dashboard Readiness Assessment](/resources/dashboard-readiness-assessment)** provides a structured framework for evaluating objectives, stakeholders, ownership and information requirements before implementation begins. It complements this article and can be used as part of technical design reviews.
 
 ![Figure 3. Decision flow before creating a dashboard.](/images/articles/dashboard-decision-flow.webp)
 
@@ -236,7 +236,7 @@ The objective is not to maximise page views but to ensure that dashboards contin
 
 Designing an effective dashboard is only the beginning of its lifecycle.
 
-Unlike static reports, operational dashboards evolve together with the systems they represent. Services change, architectures become more complex, ownership shifts between teams and operational priorities evolve over time. A dashboard that accurately reflected a system two years ago may gradually become misleading if it is never reviewed.
+Services change, architectures become more complex, ownership shifts between teams and operational priorities evolve over time. A dashboard that accurately reflected a system two years ago may gradually become misleading if it is never reviewed.
 
 While this reality is well understood for software systems, infrastructure or APIs, dashboards are frequently treated as finished deliverables once they have been published. In practice, they behave much more like software products than static documents.
 
@@ -244,9 +244,7 @@ Recognising this distinction changes how dashboards should be designed, maintain
 
 ## Dashboards have a lifecycle
 
-Every operational dashboard follows a lifecycle, whether teams acknowledge it explicitly or not.
-
-A simplified lifecycle can be described as:
+Every dashboard follows a lifecycle that can be described as:
 
 1. A specific operational need is identified.
 2. The dashboard is designed and implemented.
@@ -256,7 +254,7 @@ A simplified lifecycle can be described as:
 
 ![Figure 4. Dashboard lifecycle.](/images/articles/dashboard-lifecycle.webp)
 
-The important observation is that publishing a dashboard is not the final step. It merely marks the beginning of its operational life.
+The important observation is that publishing a dashboard only marks the beginning of its operational life.
 
 Many organisations dedicate considerable effort to creating dashboards while allocating almost no time to reviewing them afterwards. As a result, obsolete panels accumulate, terminology becomes inconsistent and visualisations continue displaying information that is no longer relevant.
 
@@ -266,11 +264,9 @@ Just as software benefits from periodic refactoring, dashboards benefit from per
 
 ## Every dashboard should have documentation
 
-Documentation is often associated with services, APIs or infrastructure components, yet dashboards themselves frequently become critical operational assets.
+Documentation is often associated with applications, APIs or infrastructure components and diagrams, yet dashboards themselves frequently become critical operational assets.
 
 During an incident, engineers may rely on a dashboard before consulting architecture diagrams, deployment pipelines or source code. Despite this importance, many dashboards exist without any accompanying documentation.
-
-Even lightweight documentation can significantly improve long-term maintainability.
 
 At a minimum, every dashboard should describe:
 
@@ -287,9 +283,9 @@ This information rarely changes the dashboard itself, but it dramatically reduce
 
 Documentation also provides context for future modifications. Understanding *why* a panel exists is often more valuable than understanding *how* it was configured.
 
-> **Future resource**
+> **Continue reading**
 >
-> The accompanying **Dashboard Technical Specification** provides a reusable template for documenting dashboards consistently across teams.
+> Once the objectives and information requirements have been defined, the **[Dashboard Technical Specification](/resources/dashboard-technical-specification)** provides a reusable documentation template for translating those decisions into a consistent technical design. It can be used to standardise dashboard implementations across engineering teams and simplify long-term maintenance.
 
 ## Monitoring as Code
 
@@ -308,7 +304,17 @@ Typical advantages include:
 - Consistent deployments.
 - Auditable change history.
 
-Different observability platforms implement this concept differently, but the underlying principle remains the same: dashboards should evolve through controlled engineering processes rather than ad hoc modifications.
+Different observability platforms implement this concept differently, but the underlying engineering principle remains the same: dashboards should evolve through controlled development processes rather than ad hoc modifications.
+
+Today, Monitoring as Code is typically implemented through one of three complementary approaches.
+
+| Approach | Typical examples | Primary focus |
+|-----------|------------------|---------------|
+| Vendor-native configuration frameworks | Dynatrace Monaco, Grafana Provisioning | Platform-specific dashboard and observability configuration |
+| Infrastructure as Code | Terraform Providers | Declarative management of observability resources alongside infrastructure |
+| GitOps workflows | GitHub Actions, GitLab CI/CD, Azure DevOps, ArgoCD | Version control, peer review and automated deployment pipelines |
+
+Each approach addresses a different aspect of dashboard management, and mature engineering organisations frequently combine them. Vendor-native frameworks expose the full capabilities of a particular observability platform, Infrastructure as Code integrates dashboards into broader infrastructure provisioning, while GitOps workflows introduce controlled review and deployment processes.
 
 Monitoring as Code deserves a dedicated discussion beyond the scope of this article, yet introducing the concept here helps explain why mature observability teams increasingly manage dashboards as software artifacts rather than configuration stored inside a platform.
 
@@ -348,6 +354,7 @@ Removing a dashboard whose purpose no longer exists is often evidence of healthy
 
 - Google. *Site Reliability Engineering*.
 - Grafana Labs. *Provisioning Grafana*.
+- Dynatrace. *Configuration as Code (Monaco and Terraform)*.
 - Git Documentation.
 
 ---
@@ -373,20 +380,34 @@ Designing fewer dashboards with a clear purpose will usually provide greater ope
 
 ---
 
+## Dashboard Design Series
+
+This article is part of the **Dashboard Design Series**, an editorial collection exploring dashboard engineering from strategic planning through long-term operational management.
+
+Current publications in the series:
+
+1. **Why Dashboards Often Fail Before They Are Even Built**
+2. *(coming soon)* Dashboard Design Principles
+3. *(coming soon)* Designing Dashboards for Incident Response
+4. *(coming soon)* Dashboard Anti-Patterns
+5. *(coming soon)* Dashboard Governance and Lifecycle Management
+
+---
+
 # Further reading
 
 Readers interested in exploring dashboard design and operational visualisation in greater depth may find the following references particularly useful.
 
-- Stephen Few - *Information Dashboard Design: Displaying Data for At-a-Glance Monitoring*.
-- Edward R. Tufte - *The Visual Display of Quantitative Information*.
-- Google - *Site Reliability Engineering*.
-- Google - *The Site Reliability Workbook*.
-- Grafana Labs - *Dashboard design best practices*.
+- Stephen Few — *Information Dashboard Design: Displaying Data for At-a-Glance Monitoring*
+- Edward R. Tufte — *The Visual Display of Quantitative Information*
+- Google — *Site Reliability Engineering*
+- Google — *The Site Reliability Workbook*
+- Grafana Labs — *Dashboard design best practices*
 
-For practical implementation guidance accompanying this article, see the following engineering resources published by ObservabiliTrends.
+For practical implementation guidance accompanying this article, the following engineering resources are available on ObservabiliTrends.
 
-- Dashboard Readiness Assessment
-- Dashboard Technical Specification
+- **[Dashboard Readiness Assessment](/resources/dashboard-readiness-assessment)**
+- **[Dashboard Technical Specification](/resources/dashboard-technical-specification)**
 
 ---
 
