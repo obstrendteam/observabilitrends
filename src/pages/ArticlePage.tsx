@@ -228,16 +228,45 @@ export default function ArticlePage() {
             </div>
 
             {/* Author */}
-            <div className="mt-10 surface-card p-6 flex items-start gap-4">
-              <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-secondary text-foreground font-semibold">
-                {article.author.initials}
-              </span>
-              <div className="flex-1">
-                <div className="font-semibold">{article.author.name}</div>
-                <div className="text-sm text-muted-foreground">{article.author.role} - contributor at ObservabiliTrends</div>
-                <p className="mt-2 text-sm text-muted-foreground">Writes about reliability, observability and the operational reality of running production systems at scale.</p>
-              </div>
-            </div>
+<div className="mt-10 surface-card p-6 flex items-start gap-4">
+
+  <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-secondary text-foreground font-semibold">
+    {article.author.initials}
+  </span>
+
+  <div className="flex-1">
+
+    <div className="font-semibold">
+      {article.author.name}
+    </div>
+
+    <div className="text-sm text-muted-foreground">
+      {article.author.role}
+      {article.author.company && (
+        <> · {article.author.company}</>
+      )}
+    </div>
+
+    {article.author.bio && (
+      <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+        {article.author.bio}
+      </p>
+    )}
+
+    {article.author.linkedin && (
+      <a
+        href={article.author.linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-4 inline-flex text-sm font-medium text-primary hover:underline"
+      >
+        Connect on LinkedIn →
+      </a>
+    )}
+
+  </div>
+
+</div>
 
             {/* CTA */}
             <div className="mt-10 surface-card p-8 bg-gradient-to-br from-card to-secondary/40">
