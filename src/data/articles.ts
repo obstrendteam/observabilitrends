@@ -72,11 +72,19 @@ export const ARTICLES: Article[] = [
       "sre"
     ],
 
-    author: {
-      name: "ObservabiliTrends",
-      role: "Editorial Team",
-      initials: "OT",
-    },
+author: {
+    name: "Daniel Busquets",
+    initials: "DB",
+
+    role: "Founder & Editor",
+
+    company: "ObservabiliTrends",
+
+    linkedin: "https://linkedin.com/in/dbusquets",
+
+    //bio:
+      //"Observability architect focused on enterprise monitoring, dashboard design and platform engineering."
+},
 
       series: {
   name: "Dashboard Design",
