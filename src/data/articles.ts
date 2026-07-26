@@ -89,7 +89,7 @@ author: {
       series: {
   name: "Dashboard Design",
   part: 1,
-  total: 4,
+  total: 5,
 },
 
     date: "2026-07-20",
