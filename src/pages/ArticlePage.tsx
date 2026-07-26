@@ -228,7 +228,7 @@ export default function ArticlePage() {
               <div className="flex-1">
                 <div className="font-semibold">{article.author.name}</div>
                 <div className="text-sm text-muted-foreground">{article.author.role} - contributor at ObservabiliTrends</div>
-                <p className="mt-2 text-sm text-muted-foreground">Writes about reliability, observability tooling, and the operational reality of running production systems at scale.</p>
+                <p className="mt-2 text-sm text-muted-foreground">Writes about reliability, observability and the operational reality of running production systems at scale.</p>
               </div>
             </div>
 
