@@ -59,7 +59,7 @@ export const ARTICLES: Article[] = [
     title: "Why dashboards often fail before they are even built",
 
     excerpt:
-      "Many dashboard problems originate long before the first visualization is created. Learn how purpose, audience and ownership determine whether a dashboard becomes a valuable operational tool or simply another collection of charts.",
+      "Many dashboard problems originate before the first visualization is created. Learn how purpose, audience and ownership help ensure a dashboard remains a valuable operational asset throughout its lifecycle.",
 
     category: "Dashboards",
 
