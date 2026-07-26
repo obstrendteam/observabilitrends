@@ -79,7 +79,7 @@ export const ARTICLES: Article[] = [
     },
 
       series: {
-  name: "Dashboard Design Series",
+  name: "Dashboard Design",
   part: 1,
   total: 4,
 },
