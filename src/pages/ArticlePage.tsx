@@ -95,20 +95,65 @@ export default function ArticlePage() {
           </h1>
           <p className="mt-5 max-w-4xl text-lg text-muted-foreground leading-relaxed">{article.excerpt}</p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground border-y border-border py-4">
-            <div className="flex items-center gap-2">
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-foreground font-medium text-xs">
-                {article.author.initials}
-              </span>
-              <div>
-                <div className="text-foreground font-medium">{article.author.name}</div>
-                <div className="text-xs">{article.author.role}</div>
-              </div>
-            </div>
-            <span className="hidden sm:inline text-border">·</span>
-            <span className="inline-flex items-center gap-1.5"><Calendar className="h-3.5 w-3.5" /> {new Date(article.date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
-            <span className="inline-flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" /> {article.readingTime} min read</span>
-          </div>
+<div className="mt-8 border-y border-border py-4">
+
+  {article.series && (
+    <div className="mb-4">
+
+      <p className="mono text-[11px] uppercase tracking-[0.18em] text-primary">
+        Editorial Series
+      </p>
+
+      <div className="mt-1">
+        <p className="font-medium text-foreground">
+          {article.series.name}
+        </p>
+
+        <p className="text-sm text-muted-foreground">
+          Part {article.series.part} of {article.series.total}
+        </p>
+      </div>
+
+    </div>
+  )}
+
+  <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
+
+    <div className="flex items-center gap-2">
+      <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-foreground font-medium text-xs">
+        {article.author.initials}
+      </span>
+
+      <div>
+        <div className="text-foreground font-medium">
+          {article.author.name}
+        </div>
+
+        <div className="text-xs">
+          {article.author.role}
+        </div>
+      </div>
+    </div>
+
+    <span className="hidden sm:inline text-border">·</span>
+
+    <span className="inline-flex items-center gap-1.5">
+      <Calendar className="h-3.5 w-3.5" />
+      {new Date(article.date).toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      })}
+    </span>
+
+    <span className="inline-flex items-center gap-1.5">
+      <Clock className="h-3.5 w-3.5" />
+      {article.readingTime} min read
+    </span>
+
+  </div>
+
+</div>
         </div>
       </article>
 
