@@ -17,7 +17,7 @@ export function SiteFooter() {
               </span>
             </Link>
             <p className="mt-4 text-sm text-muted-foreground max-w-sm">
-              Deep analysis, playbooks and field reports on observability, SRE and platform engineering. For senior engineers who ship.
+              Deep analysis, playbooks and field reports on observability, SRE and platform engineering.
             </p>
             <div className="mt-6 max-w-sm">
               <NewsletterInline />
