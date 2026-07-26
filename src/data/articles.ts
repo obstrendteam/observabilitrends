@@ -42,6 +42,11 @@ export interface Article {
     role: string;
     initials: string;
   };
+    series?: {
+  name: string;
+  part: number;
+  total: number;
+};
   date: string;
   readingTime: number;
   featured?: boolean;
@@ -72,6 +77,12 @@ export const ARTICLES: Article[] = [
       role: "Editorial Team",
       initials: "OT",
     },
+
+      series: {
+  name: "Dashboard Design Series",
+  part: 1,
+  total: 4,
+},
 
     date: "2026-07-20",
 
