@@ -200,9 +200,7 @@ Making these distinctions encourages intentional design instead of incremental a
 
 ## How will usefulness be measured?
 
-Dashboards themselves can and should be evaluated.
-
-Many organisations regularly measure the health of applications and infrastructure while rarely assessing whether the dashboards used to monitor those systems continue to provide value.
+Dashboards themselves should be evaluated to determine whether they continue to provide value or not.
 
 One possible indicator is actual usage. Several commercial observability platforms, including Dynatrace, expose dashboard usage statistics that show how frequently dashboards are opened or consulted. Although usage alone cannot determine quality, dashboards that receive little or no traffic over extended periods may deserve review.
 
@@ -256,7 +254,7 @@ Every dashboard follows a lifecycle that can be described as:
 
 The important observation is that publishing a dashboard only marks the beginning of its operational life.
 
-Many organisations dedicate considerable effort to creating dashboards while allocating almost no time to reviewing them afterwards. As a result, obsolete panels accumulate, terminology becomes inconsistent and visualisations continue displaying information that is no longer relevant.
+If we don't dedicate effort to review dashboards once they have been created, obsolete panels could accumulate, terminology becomes inconsistent and visualisations continue displaying information that is no longer relevant.
 
 Regular reviews allow teams to remove unnecessary panels, simplify layouts and ensure that dashboards continue supporting their original objectives.
 
@@ -264,11 +262,9 @@ Just as software benefits from periodic refactoring, dashboards benefit from per
 
 ## Every dashboard should have documentation
 
-Documentation is often associated with applications, APIs or infrastructure components and diagrams, yet dashboards themselves frequently become critical operational assets.
+Dashboards frequently become critical operational assets that need to be documented to reduce ambiguity, operational dependencies (and risk) or against ownership changes.
 
-During an incident, engineers may rely on a dashboard before consulting architecture diagrams, deployment pipelines or source code. Despite this importance, many dashboards exist without any accompanying documentation.
-
-At a minimum, every dashboard should describe:
+Some ideas on what to document with regards a dashboard could be:
 
 | Item | Purpose |
 |------|---------|
@@ -279,9 +275,7 @@ At a minimum, every dashboard should describe:
 | Dashboard owner | Who is responsible for reviewing and maintaining it? |
 | Last review date | When was the dashboard last validated? |
 
-This information rarely changes the dashboard itself, but it dramatically reduces ambiguity when new engineers join a team or ownership changes.
-
-Documentation also provides context for future modifications. Understanding *why* a panel exists is often more valuable than understanding *how* it was configured.
+Documentation also provides context for future modifications. Understanding *why* a panel exists could be more valuable than understanding *how* it was configured.
 
 > **Continue reading**
 >
@@ -324,7 +318,7 @@ Not every requested change necessarily improves a dashboard.
 
 Operational dashboards naturally attract new requirements as systems evolve. Additional metrics become available, teams request more visibility and new stakeholders identify information they would like to include.
 
-Without a defined review process, dashboards tend to grow continuously while rarely becoming simpler.
+Without a defined review process, dashboards tend to grow continuously in size and in cognitive load. These factors make them harder to be understood.
 
 Before introducing any modification, it is useful to ask several questions.
 
@@ -336,19 +330,15 @@ Before introducing any modification, it is useful to ask several questions.
 
 These questions encourage intentional evolution instead of incremental accumulation.
 
-In mature engineering organisations, removing obsolete information is often as valuable as introducing new visualisations. Simplicity is rarely achieved by adding more panels; it is usually achieved by preserving only those that continue supporting operational decisions.
+Change management should consider removing obsolete information from dashboards in order to achieve simplicity while supporting operational decisions.
 
 ## Dashboards should also be retired
 
-One aspect that receives relatively little attention is retirement.
-
-Applications are decommissioned, services are consolidated and monitoring strategies evolve. Dashboards associated with those systems should evolve accordingly.
+Just as applications are decommissioned, services are consolidated and monitoring strategies evolve. Dashboards associated with those systems should evolve accordingly.
 
 Keeping obsolete dashboards available indefinitely increases maintenance costs and makes it more difficult for engineers to identify which dashboards remain authoritative.
 
-Retirement should therefore be considered a normal stage of the dashboard lifecycle rather than an exceptional event.
-
-Removing a dashboard whose purpose no longer exists is often evidence of healthy operational governance rather than lost work.
+Retirement should therefore be considered a normal stage of the dashboard lifecycle. Removing a dashboard whose purpose no longer exists is an evidence of healthy operational governance.
 
 **References**
 
@@ -361,7 +351,7 @@ Removing a dashboard whose purpose no longer exists is often evidence of healthy
 
 # Key takeaways
 
-The value of a dashboard is determined long before the first panel is created.
+The value of a dashboard is determined before the implementation phase starts.
 
 Although visual design and tooling influence the final result, the decisions that have the greatest long-term impact concern objectives, audience and ownership. A dashboard built without a clearly defined purpose will rarely become more useful simply by adding additional metrics or improving its appearance.
 
@@ -371,12 +361,10 @@ The main ideas discussed throughout this article can be summarised as follows.
 - Clearly defining the intended audience helps determine which information deserves a place on a dashboard.
 - Every dashboard should answer one or more specific operational questions.
 - Scope naturally expands over time unless dashboards are reviewed regularly.
-- Documentation reduces ambiguity and improves long-term maintainability.
+- Documentation reduces ambiguity and improves long-term maintainability, while reducing operational risks.
 - Monitoring as Code introduces engineering practices such as version control, peer review and controlled deployments into dashboard management.
 - Dashboards have a lifecycle that includes creation, maintenance, periodic review and eventual retirement.
-- The long-term success of a dashboard can often be assessed through actual operational usage rather than visual appearance alone.
-
-Designing fewer dashboards with a clear purpose will usually provide greater operational value than maintaining many dashboards whose objectives are no longer understood.
+- The long-term success of a dashboard should be assessed through actual operational usefulness and efectiveness to achieve their defined goals.
 
 ---
 
