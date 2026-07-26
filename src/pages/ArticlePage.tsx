@@ -119,21 +119,28 @@ export default function ArticlePage() {
 
   <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
 
-    <div className="flex items-center gap-2">
-      <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-foreground font-medium text-xs">
-        {article.author.initials}
-      </span>
+    <div className="flex items-center gap-3">
 
-      <div>
-        <div className="text-foreground font-medium">
-          {article.author.name}
-        </div>
+  <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-secondary text-foreground font-semibold text-sm">
+    {article.author.initials}
+  </span>
 
-        <div className="text-xs">
-          {article.author.role}
-        </div>
-      </div>
+  <div>
+
+    <div className="font-semibold text-foreground">
+      {article.author.name}
     </div>
+
+    <div className="text-xs text-muted-foreground">
+      {article.author.role}
+      {article.author.company && (
+        <> · {article.author.company}</>
+      )}
+    </div>
+
+  </div>
+
+</div>
 
     <span className="hidden sm:inline text-border">·</span>
 
