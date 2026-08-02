@@ -16,7 +16,7 @@ export default function Community() {
           Coming soon.
         </h1>
         <p className="mt-6 text-lg text-muted-foreground max-w-2xl leading-relaxed">
-          We're assembling a small, high-signal community for SREs, platform engineers and observability architects. Practitioners only. No vendors in the channels.
+          We're assembling a small community for SREs, platform engineers and observability architects. Practitioners only. No vendors in the channels.
         </p>
       </section>
 
