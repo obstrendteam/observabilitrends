@@ -12,6 +12,9 @@ export default function Community() {
           <span className="mono text-muted-foreground">private beta · invite-only</span>
         </div>
         <p className="mono text-xs uppercase tracking-wider text-primary mt-6">/ community</p>
+        <h1 className="mt-2 text-5xl md:text-6xl font-semibold tracking-tighter max-w-3xl leading-[1.05]">
+          Coming soon.
+        </h1>
         <p className="mt-6 text-lg text-muted-foreground max-w-2xl leading-relaxed">
           We're assembling a small, high-signal community for SREs, platform engineers and observability architects. Practitioners only. No vendors in the channels.
         </p>
