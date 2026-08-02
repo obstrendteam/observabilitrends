@@ -4,6 +4,36 @@ import { Users, MessageSquare, Sparkles, Lock } from "lucide-react";
 
 export default function Community() {
   return (
+
+    <PageLayout title="Community - ObservabiliTrends" description="Coming soon." canonical="/community">
+      <section className="container-prose pt-20 pb-12">
+        <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs">
+          <Lock className="h-3 w-3 text-primary" />
+          <span className="mono text-muted-foreground">private beta · invite-only</span>
+        </div>
+        <p className="mono text-xs uppercase tracking-wider text-primary mt-6">/ community</p>
+        <p className="mt-6 text-lg text-muted-foreground max-w-2xl leading-relaxed">
+          We're assembling a small, high-signal community for SREs, platform engineers and observability architects. Practitioners only. No vendors in the channels.
+        </p>
+      </section>
+
+      <section className="container-prose py-10 grid md:grid-cols-3 gap-6">
+        {[
+          { Icon: Users, title: "Vetted practitioners", body: "Membership requires a brief application. We optimize for signal, not headcount." },
+          { Icon: MessageSquare, title: "Real conversations", body: "Architecture reviews, postmortem swaps, hiring feedback and the occasional rant." },
+          { Icon: Sparkles, title: "Early-access content", body: "First reads of articles, drafts of playbooks and unreleased dashboards." },
+        ].map(({ Icon, title, body }) => (
+          <div key={title} className="surface-card p-6">
+            <Icon className="h-6 w-6 text-primary" />
+            <h3 className="mt-4 font-semibold">{title}</h3>
+            <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{body}</p>
+          </div>
+        ))}
+      </section>
+    </PageLayout>
+  );
+    
+    /*
     <PageLayout title="Community - ObservabiliTrends" description="A practitioner community for SREs, platform engineers and observability architects. Coming soon." canonical="/community">
       <section className="container-prose pt-20 pb-12">
         <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs">
@@ -51,4 +81,5 @@ export default function Community() {
       </section>
     </PageLayout>
   );
+  */
 }
