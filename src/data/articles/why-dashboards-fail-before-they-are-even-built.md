@@ -374,11 +374,11 @@ This article is part of the **Dashboard Design Series**, an editorial collection
 
 Current publications in the series:
 
-1. **Why Dashboards Often Fail Before They Are Even Built**
-2. *(coming soon)* Dashboard Design Principles
-3. *(coming soon)* Designing Dashboards for Incident Response
-4. *(coming soon)* Dashboard Anti-Patterns
-5. *(coming soon)* Dashboard Governance and Lifecycle Management
+- **Why Dashboards Often Fail Before They Are Even Built**
+- Dashboard Design Principles
+- *(coming soon)* Designing Dashboards for Incident Response
+- *(coming soon)* Dashboard Anti-Patterns
+- *(coming soon)* Dashboard Governance and Lifecycle Management
 
 ---
 
