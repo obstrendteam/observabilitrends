@@ -422,8 +422,8 @@ Readers interested in dashboard engineering, human perception and operational vi
 
 The following engineering resources published by ObservabiliTrends complement the concepts introduced throughout this series.
 
-- Dashboard Readiness Assessment
-- Dashboard Technical Specification
+- **[Dashboard Readiness Assessment](/resources/dashboard-readiness-assessment)**
+- **[Dashboard Technical Specification](/resources/dashboard-technical-specification)**
 
 ---
 
