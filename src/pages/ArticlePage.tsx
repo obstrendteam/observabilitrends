@@ -35,21 +35,22 @@ export default function ArticlePage() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const sections = useMemo(() => {
-    if (!article) return [];
+const sections = useMemo(() => {
+  if (!article) return [];
 
-    return article.content
-      .split("\n")
-      .filter(line => line.startsWith("## "))
-      .map(line => {
-        const text = line.replace("## ", "").trim();
+  return article.content
+    .split("\n")
+    .filter(line => /^#{1,2} /.test(line))
+    .map(line => {
+      const text = line.replace(/^#{1,2} /, "").trim();
 
-        return {
-          text,
-          id: slugify(text),
-        };
-      });
-  }, [article]);
+      return {
+        text,
+        id: slugify(text),
+      };
+    })
+    .filter(section => section.text !== article.title);
+}, [article]);
 
   if (!article) return <NotFound />;
   const related = getRelated(article.slug, 3);
@@ -190,17 +191,27 @@ export default function ArticlePage() {
 
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
-                components={{
-                  h2: ({ children }) => {
-                    const text = String(children);
+components={{
+  h1: ({ children }) => {
+    const text = String(children);
 
-                    return (
-                      <h2 id={slugify(text)}>
-                        {children}
-                      </h2>
-                    );
-                  },
-                }}
+    return (
+      <h1 id={slugify(text)}>
+        {children}
+      </h1>
+    );
+  },
+
+  h2: ({ children }) => {
+    const text = String(children);
+
+    return (
+      <h2 id={slugify(text)}>
+        {children}
+      </h2>
+    );
+  },
+}}
               >
                 {article.content}
               </ReactMarkdown>
