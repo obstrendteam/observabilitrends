@@ -1,4 +1,5 @@
 import dashboardArticle from "@/data/articles/why-dashboards-fail-before-they-are-even-built.md?raw";
+import dashboardDesignPrinciplesArticle from "@/data/articles/dashboard-design-principles.md?raw";
 
 export type Category =
     "Dashboards"
@@ -100,6 +101,34 @@ author: {
 
     content: dashboardArticle,
   },
+    {
+  slug: "dashboard-design-principles",
+  title: "Dashboard Design Principles",
+  excerpt:
+    "A practical examination of the principles that make operational dashboards easier to interpret, navigate and maintain as systems evolve.",
+  category: "Dashboards",
+  tags: [
+    "dashboard",
+    "observability",
+    "monitoring",
+    "design",
+    "sre"
+  ],
+  author: {
+    name: "Daniel Busquets",
+    role: "Founder & Editor",
+    initials: "DB",
+  },
+  series: {
+    name: "Dashboard Design Series",
+    part: 2,
+    total: 5,
+  },
+  date: "2026-08-08",
+  readingTime: 15,
+  featured: false,
+  content: dashboardDesignPrinciplesArticle,
+},
 ];
 
 export function getFeatured() {
