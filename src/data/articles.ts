@@ -2,7 +2,7 @@ import dashboardArticle from "@/data/articles/why-dashboards-fail-before-they-ar
 import dashboardDesignPrinciplesArticle from "@/data/articles/dashboard-design-principles.md?raw";
 
 export type Category =
-    "Dashboards"
+  | "Dashboards"
   | "OpenTelemetry"
   | "Prometheus"
   | "Grafana"
@@ -38,16 +38,22 @@ export interface Article {
   excerpt: string;
   category: Category;
   tags: string[];
+
   author: {
     name: string;
     role: string;
     initials: string;
+    company?: string;
+    linkedin?: string;
+    bio?: string;
   };
-    series?: {
-  name: string;
-  part: number;
-  total: number;
-};
+
+  series?: {
+    name: string;
+    part: number;
+    total: number;
+  };
+
   date: string;
   readingTime: number;
   featured?: boolean;
@@ -57,6 +63,7 @@ export interface Article {
 export const ARTICLES: Article[] = [
   {
     slug: "why-dashboards-often-fail-before-they-are-even-built",
+
     title: "Why dashboards often fail before they are even built",
 
     excerpt:
@@ -70,28 +77,22 @@ export const ARTICLES: Article[] = [
       "observability",
       "monitoring",
       "design",
-      "sre"
+      "sre",
     ],
 
-author: {
-    name: "Daniel Busquets",
-    initials: "DB",
+    author: {
+      name: "Daniel Busquets",
+      initials: "DB",
+      role: "Founder & Editor",
+      company: "ObservabiliTrends",
+      linkedin: "https://linkedin.com/in/dbusquets",
+    },
 
-    role: "Founder & Editor",
-
-    company: "ObservabiliTrends",
-
-    linkedin: "https://linkedin.com/in/dbusquets",
-
-    //bio:
-      //"Observability architect focused on enterprise monitoring, dashboard design and platform engineering."
-},
-
-      series: {
-  name: "Dashboard Design",
-  part: 1,
-  total: 5,
-},
+    series: {
+      name: "Dashboard Design Series",
+      part: 1,
+      total: 5,
+    },
 
     date: "2026-07-20",
 
@@ -101,34 +102,47 @@ author: {
 
     content: dashboardArticle,
   },
-    {
-  slug: "dashboard-design-principles",
-  title: "Dashboard Design Principles",
-  excerpt:
-    "A practical examination of the principles that make operational dashboards easier to interpret, navigate and maintain as systems evolve.",
-  category: "Dashboards",
-  tags: [
-    "dashboard",
-    "observability",
-    "monitoring",
-    "design",
-    "sre"
-  ],
-  author: {
-    name: "Daniel Busquets",
-    role: "Founder & Editor",
-    initials: "DB",
+
+  {
+    slug: "dashboard-design-principles",
+
+    title: "Dashboard Design Principles",
+
+    excerpt:
+      "A practical examination of the principles that make operational dashboards easier to interpret, navigate and maintain as systems evolve.",
+
+    category: "Dashboards",
+
+    tags: [
+      "dashboard",
+      "observability",
+      "monitoring",
+      "design",
+      "sre",
+    ],
+
+    author: {
+      name: "Daniel Busquets",
+      initials: "DB",
+      role: "Founder & Editor",
+      company: "ObservabiliTrends",
+      linkedin: "https://linkedin.com/in/dbusquets",
+    },
+
+    series: {
+      name: "Dashboard Design Series",
+      part: 2,
+      total: 5,
+    },
+
+    date: "2026-08-08",
+
+    readingTime: 15,
+
+    featured: false,
+
+    content: dashboardDesignPrinciplesArticle,
   },
-  series: {
-    name: "Dashboard Design Series",
-    part: 2,
-    total: 5,
-  },
-  date: "2026-08-08",
-  readingTime: 15,
-  featured: false,
-  content: dashboardDesignPrinciplesArticle,
-},
 ];
 
 export function getFeatured() {
