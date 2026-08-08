@@ -8,7 +8,7 @@ This article examines the design principles that underpin effective operational 
 
 ---
 
-# Introduction
+## Introduction
 
 The first article in this series argued that many dashboard failures originate before implementation begins. Objectives, audience and ownership shape the long-term usefulness of a dashboard. 
 Once these foundations have been established, a question follows: how should information actually be presented?
@@ -23,7 +23,7 @@ The following sections introduce a set of design principles that remain applicab
 
 ---
 
-# 1. Dashboard design is an engineering discipline
+## 1. Dashboard design is an engineering discipline
 
 Every dashboard is ultimately an interface between a production system and the engineers responsible for operating it. Its purpose is to expose information in a form that allows decisions to be made accurately, consistently and with the minimum possible effort.
 
@@ -47,7 +47,7 @@ Dashboard design combines information architecture, human perception, visual des
 
 The following sections examine the main principles that follow from this approach.
 
-# 2. Information hierarchy
+## 2. Information hierarchy
 
 Operational dashboards rarely fail because they display incorrect information. More frequently, they fail because important information receives the same visual emphasis as everything else.
 
@@ -125,7 +125,7 @@ If every panel appears to belong to the first category, the hierarchy is probabl
 
 Conversely, if only a small number of visualisations occupy the highest level, the dashboard naturally directs attention towards the information that matters most before presenting the details required for deeper analysis.
 
-# 3. Reduce unnecessary cognitive effort
+## 3. Reduce unnecessary cognitive effort
 
 Every dashboard requires its readers to perform a series of mental tasks.
 
@@ -219,7 +219,7 @@ Good dashboard design therefore does not attempt to make systems appear simpler 
 
 It attempts to ensure that engineers spend their effort understanding the system itself rather than understanding the interface used to observe it.
 
-# 4. Consistency improves operational efficiency
+## 4. Consistency improves operational efficiency
 
 Consistency is frequently discussed as a visual design principle. Within operational dashboards, however, its importance extends well beyond appearance.
 
@@ -308,7 +308,7 @@ Establishing common design principles allows independently developed dashboards 
 
 Consistency should therefore be regarded as an engineering investment rather than a visual preference. The effort required to establish common conventions early is usually recovered many times over during the operational lifetime of the dashboards themselves.
 
-# 5. Remove information before adding more
+## 5. Remove information before adding more
 
 Adding a new panel is usually easier than deciding whether an existing one should be removed.
 
@@ -340,7 +340,7 @@ Effective dashboards rarely contain the maximum amount of information available.
 
 They contain the minimum amount of information required to support the decisions they were designed to facilitate.
 
-# 6. Good dashboards are never finished
+## 6. Good dashboards are never finished
 
 Dashboard design does not end when a dashboard is deployed.
 
