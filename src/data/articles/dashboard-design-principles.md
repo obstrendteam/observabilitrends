@@ -10,13 +10,14 @@ This article examines the design principles that underpin effective operational 
 
 # Introduction
 
-The first article in this series argued that many dashboard failures originate before implementation begins. Objectives, audience and ownership shape the long-term usefulness of a dashboard long before any charts are created. Once these foundations have been established, a different question naturally follows: how should information actually be presented?
+The first article in this series argued that many dashboard failures originate before implementation begins. Objectives, audience and ownership shape the long-term usefulness of a dashboard. 
+Once these foundations have been established, a question follows: how should information actually be presented?
 
-Modern dashboard platforms offer hundreds of visualisation options and very few technical limitations. As a result, dashboard quality is rarely constrained by the capabilities of the software itself. More often, it is determined by the principles guiding the design process. Two dashboards may expose exactly the same metrics while providing completely different operational value simply because they organise information differently.
+Modern observability platforms offer hundreds of visualisation options and very few technical limitations. As a result, dashboard quality is rarely constrained by the capabilities of the software itself. More often, it is determined by the principles guiding the design process. Two dashboards may expose exactly the same metrics while providing completely different operational value simply because they organise information differently.
 
-Good dashboard design is frequently misunderstood as an exercise in visual aesthetics. Although readability and appearance are important, the primary objective of an operational dashboard is not to look attractive but to reduce the effort required to understand a system and support timely decisions. Every visual element occupies part of an engineer's limited attention, making design decisions inseparable from operational effectiveness.
+Good dashboard design is frequently misunderstood as an exercise in visual aesthetics. Although readability and appearance are important, the primary objective of an operational dashboard to reduce the cognitive effort required to understand a system and support timely decisions. Every visual element occupies part of an audience's limited attention, making design decisions inseparable from operational effectiveness.
 
-Many of the principles discussed in this article originate outside the observability domain. Research in information visualisation, human-computer interaction and cognitive psychology has long explored how people interpret complex information under time constraints. Modern observability dashboards represent another application of these disciplines, where the quality of the design directly influences how quickly engineers can recognise problems and respond to them.
+Many of the principles discussed in this article originate outside the observability domain. Research in information visualisation, human-computer interaction and cognitive psychology has long explored how people interpret complex information under time constraints. Modern dashboards represent another application of these disciplines, where the quality of the design directly influences how quickly engineers can recognise problems and respond to them.
 
 The following sections introduce a set of design principles that remain applicable regardless of the monitoring platform or technology stack. Together, they provide a practical framework for building dashboards that communicate the right information to the right audience while minimising unnecessary cognitive effort.
 
@@ -24,9 +25,7 @@ The following sections introduce a set of design principles that remain applicab
 
 # 1. Dashboard design is an engineering discipline
 
-Dashboard design is frequently associated with colours, charts and user interfaces. Although visual appearance influences usability, it represents only one component of a considerably broader engineering activity.
-
-Every operational dashboard is ultimately an interface between a production system and the engineers responsible for operating it. Its purpose is to expose information in a form that allows decisions to be made accurately, consistently and with the minimum possible cognitive effort.
+Every dashboard is ultimately an interface between a production system and the engineers responsible for operating it. Its purpose is to expose information in a form that allows decisions to be made accurately, consistently and with the minimum possible effort.
 
 For this reason, dashboard design shares many characteristics with other engineering disciplines. It begins by understanding operational requirements, continues through an iterative design process and evolves as systems, teams and operational practices change over time.
 
@@ -44,19 +43,9 @@ Consequently, good dashboard design is less concerned with producing visually at
 
 ---
 
-Several disciplines contribute to this process.
+Dashboard design combines information architecture, human perception, visual design and operational context. Together, these determine how information should be organised and presented to support engineering decisions.
 
-Information architecture determines how different categories of information are organised and prioritised.
-
-Human perception influences how quickly patterns, anomalies and relationships can be identified.
-
-Visual design affects readability by controlling alignment, spacing, colour and typography.
-
-Finally, operational engineering provides the context that determines which information deserves to be visible during routine monitoring, incident response or post-incident analysis.
-
-Considering these elements together helps explain why effective dashboards cannot be produced simply by arranging metrics on a screen. They require deliberate design decisions supported by an understanding of both the monitored system and the people responsible for operating it.
-
-The remaining sections of this article examine several principles that consistently appear in successful operational dashboards, regardless of the observability platform used to implement them.
+The following sections examine the main principles that follow from this approach.
 
 # 2. Information hierarchy
 
