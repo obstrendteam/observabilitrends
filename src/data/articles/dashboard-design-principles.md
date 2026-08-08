@@ -350,7 +350,7 @@ For this reason, dashboard design should be viewed as an ongoing engineering act
 
 ---
 
-![Figure 6. Dashboard evolution throughout its operational lifecycle.](/images/articles/dashboard-lifecycle-evolution.webp)
+![Figure 6. Dashboard evolution throughout its operational lifecycle.](/images/articles/dashboard-lifecycle.webp)
 
 *Figure 6. Dashboard design continues throughout the operational lifecycle. Periodic reviews ensure that dashboards remain aligned with the systems and engineering practices they support.*
 
