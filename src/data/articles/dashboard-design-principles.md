@@ -8,7 +8,7 @@ This article examines the design principles that underpin effective operational 
 
 ---
 
-## Introduction
+# Introduction
 
 The first article in this series argued that many dashboard failures originate before implementation begins. Objectives, audience and ownership shape the long-term usefulness of a dashboard. 
 Once these foundations have been established, a question follows: how should information actually be presented?
