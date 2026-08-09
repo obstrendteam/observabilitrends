@@ -139,7 +139,7 @@ export const ARTICLES: Article[] = [
 
     readingTime: 15,
 
-    featured: true,
+    featured: false,
 
     content: dashboardDesignPrinciplesArticle,
   },
