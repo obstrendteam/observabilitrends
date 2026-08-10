@@ -284,12 +284,18 @@ The following engineering resources published by ObservabiliTrends complement th
 # Bibliography
 
 Few, S. (2006). *Information Dashboard Design: Displaying Data for At-a-Glance Monitoring*. Analytics Press.
+
 Few, S. (2009). *Now You See It: Simple Visualization Techniques for Quantitative Analysis*. Analytics Press.
+
 Norman, D. A. (2013). *The Design of Everyday Things* (Revised and Expanded Edition). Basic Books.
+
 Tufte, E. R. (1983). *The Visual Display of Quantitative Information*. Graphics Press.
+
 Ware, C. (2020). *Information Visualization: Perception for Design* (4th ed.). Morgan Kaufmann.
+
 Grafana Labs. *Dashboard Design Best Practices*. Available at:
 https://grafana.com/docs/grafana/latest/dashboards/build-dashboards/best-practices/
+
 Nielsen Norman Group. *Information Visualization*. Available at:
 https://www.nngroup.com/topic/data-viz/
 Google. (2016). *Site Reliability Engineering: How Google Runs Production Systems*. O'Reilly Media.
