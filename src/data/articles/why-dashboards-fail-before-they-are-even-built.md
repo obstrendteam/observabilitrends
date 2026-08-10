@@ -2,9 +2,9 @@
 
 ## Abstract
 
-Dashboards are among the most common artifacts in modern observability platforms, yet many gradually lose the purpose that originally justified their creation. While discussions often focus on visualization techniques or tooling, many of the factors that determine whether a dashboard becomes valuable are decided before the first panel is added.
+Dashboards are a common way of presenting operational information in modern observability platforms, but their usefulness depends on decisions made before implementation begins. A dashboard can be technically correct and still fail to serve its goal. Purpose, audience and ownership establish the conditions in which a dashboard can become a useful operational asset, while visualisation and tooling determine how that information is ultimately presented.
 
-This article explores the decisions that shape an effective dashboard before implementation begins. Starting from the historical evolution of dashboards and their role in decision support, it examines how objectives, audience and long-term ownership influence their usefulness. Rather than concentrating on any specific technology, it proposes a practical framework for designing dashboards that remain relevant as systems, organisations and operational requirements evolve.
+This article explores the decisions that shape an effective dashboard before it is built. Starting from the historical evolution of dashboards and their role in decision support, it examines how objectives, audience and long-term ownership influence their usefulness. Rather than concentrating on any specific technology, it proposes a practical framework for designing dashboards that remain relevant as systems, organisations and operational requirements evolve.
 
 ---
 
