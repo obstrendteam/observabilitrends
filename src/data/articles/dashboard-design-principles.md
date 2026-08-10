@@ -2,9 +2,11 @@
 
 ## Abstract
 
-Modern observability platforms provide virtually unlimited flexibility for building dashboards. Panels can be added in seconds, layouts can be rearranged continuously and new metrics are readily available across increasingly complex systems. Yet despite these capabilities, many dashboards remain difficult to interpret during the situations in which they matter most.
-The effectiveness of a dashboard depends less on the visualisation technology than on the design decisions that determine how information is organised, prioritised and presented to its intended audience. These decisions influence how quickly engineers can recognise abnormal behaviour, understand operational context and decide on an appropriate course of action.
-This article examines the design principles that underpin effective operational dashboards. Rather than discussing specific products or visual styles, it explores concepts such as information hierarchy, cognitive load, consistency and signal-to-noise ratio, providing a practical framework for designing dashboards that remain understandable, maintainable and genuinely useful throughout their operational lifetime.
+A dashboard can contain the right information and still be difficult to use. The way that information is organised, prioritised and presented determines how easily the audience can identify relevant signals, understand operational context and decide what to investigate next.
+
+Modern observability platforms provide a wide range of visualisation and layout options, but these capabilities do not determine how effectively a dashboard communicates information. Effective design requires deliberate decisions about information hierarchy, cognitive load, consistency and signal-to-noise ratio.
+
+This article examines the design principles that shape effective operational dashboards. Rather than focusing on specific products or visual styles, it provides a practical framework for organising and presenting information so that dashboards remain understandable, maintainable and useful as operational requirements evolve.
 
 ---
 
@@ -15,7 +17,7 @@ Once these foundations have been established, a question follows: how should inf
 
 Modern observability platforms offer hundreds of visualisation options and very few technical limitations. As a result, dashboard quality is rarely constrained by the capabilities of the software itself. More often, it is determined by the principles guiding the design process. Two dashboards may expose exactly the same metrics while providing completely different operational value simply because they organise information differently.
 
-Good dashboard design is frequently misunderstood as an exercise in visual aesthetics. Although readability and appearance are important, the primary objective of an operational dashboard to reduce the cognitive effort required to understand a system and support timely decisions. Every visual element occupies part of an audience's limited attention, making design decisions inseparable from operational effectiveness.
+Although readability and appearance are important, the primary objective of an operational dashboard to reduce the cognitive effort required to understand a system and support timely decisions. Every visual element occupies part of an audience's limited attention, making design decisions inseparable from operational effectiveness.
 
 Many of the principles discussed in this article originate outside the observability domain. Research in information visualisation, human-computer interaction and cognitive psychology has long explored how people interpret complex information under time constraints. Modern dashboards represent another application of these disciplines, where the quality of the design directly influences how quickly engineers can recognise problems and respond to them.
 
@@ -93,23 +95,13 @@ As a consequence, layout decisions often have a greater impact on usability than
 
 ### Organise dashboards from summary to detail
 
-Operational investigations rarely begin by examining low-level telemetry.
+The information presented on a dashboard should follow the order in which it is expected to become relevant during an investigation. High-level information should establish the current state of the service before the dashboard presents the metrics required to understand the causes behind that state.
 
-Instead, engineers generally start by answering a small number of high-level questions.
+For example, an operational dashboard may first establish whether the service is healthy and whether users are affected. It can then provide additional context to determine whether the condition is widespread or limited to a particular service, component or dependency. More detailed diagnostic information can follow once the relevant area has been identified.
 
-Is the service healthy?
+This creates a hierarchy from summary to detail: service-level indicators provide the initial context, supporting metrics add diagnostic information, and lower-level infrastructure or implementation-specific telemetry provides detail for deeper investigation.
 
-Is user traffic affected?
-
-Is the problem widespread or isolated?
-
-Only after establishing the current state of the system does the investigation progress towards increasingly detailed information.
-
-Information hierarchy should reflect this natural investigative process.
-
-High-level service indicators belong near the top of the dashboard, where they can be assessed immediately. Supporting metrics providing additional context should appear afterwards. Detailed diagnostic information, infrastructure metrics and implementation-specific telemetry naturally occupy lower levels because they become relevant only after the initial assessment has been completed.
-
-This organisation allows engineers to move through an investigation progressively without repeatedly changing dashboards or mentally reorganising unrelated information.
+The hierarchy should also reflect the intended use of the dashboard. Information that is expected to support the initial assessment deserves greater visual prominence than information used only during detailed investigation. This allows the dashboard to provide context progressively, without giving low-level diagnostic data the same visual priority as the signals used to establish system state.
 
 ---
 
@@ -127,262 +119,137 @@ Conversely, if only a small number of visualisations occupy the highest level, t
 
 ## Reduce unnecessary cognitive effort
 
-Every dashboard requires its readers to perform a series of mental tasks.
+Using a dashboard requires the reader to perform several mental tasks. Engineers need to interpret visualisations, compare values, identify deviations from expected behaviour, recognise relationships between metrics and determine whether further investigation is warranted. These activities are inherent to operational monitoring, so dashboard design cannot remove the need for interpretation. Its role is to ensure that the interface does not introduce additional effort that is unrelated to understanding the system.
 
-Engineers scan visualisations, compare values, identify deviations from normal behaviour, recognise relationships between metrics and determine whether additional investigation is necessary. None of these activities can be eliminated, as they represent the purpose of operational monitoring itself.
-
-The dashboard should therefore avoid introducing additional effort unrelated to understanding the system.
-
-A well-designed dashboard allows engineers to concentrate on interpreting operational information. A poorly designed dashboard requires them to first interpret the dashboard.
-
-This distinction is fundamental. Cognitive effort should be invested in analysing production behaviour, not in decoding visual presentation.
-
----
+This distinction is important because a dashboard can make the underlying information harder or easier to interpret without changing the information itself. A well-designed interface allows attention to remain focused on the behaviour of the monitored system, while a poorly organised one requires additional effort to understand the structure, relationships and visual conventions used to present that information. The design objective is therefore not to eliminate cognitive effort, but to direct it towards the operational problem rather than towards decoding the interface.
 
 ### Engineers scan before they read
 
-Unlike reports or documentation, operational dashboards are rarely consumed sequentially.
+Operational dashboards differ from reports and other documents that are normally consumed in a sequential order. Their layout presents multiple pieces of information simultaneously, allowing readers to identify areas that require attention before examining individual metrics in greater detail. This makes the spatial organisation of information an important part of the way a dashboard communicates system state.
 
-Engineers typically begin by scanning the screen to determine whether anything appears unusual before focusing on specific metrics or panels.
+A dashboard should therefore make the information required for an initial assessment easy to locate. Service-level indicators should have sufficient visual prominence, related metrics should have an identifiable relationship and secondary information should not obscure the patterns that the reader needs to recognise first. Once an area requiring attention has been identified, the dashboard can then provide the supporting information needed to understand the condition in greater detail.
 
-This behaviour has important implications for dashboard design.
-
-Information that represents service health should be immediately visible.
-
-Visual patterns should emerge naturally.
-
-Related metrics should appear together.
-
-The reader should not be required to search across multiple areas of the dashboard simply to establish whether the system is behaving normally.
-
-Designs that force extensive visual searching increase the time required to recognise abnormal conditions, particularly during incidents where attention is already divided between multiple operational activities.
-
----
+The resulting hierarchy should allow the reader to move progressively from a broad assessment towards more specific telemetry. This reduces the need to search across unrelated areas of the dashboard simply to establish the current state of the system and creates a clearer relationship between the information displayed and the sequence in which it becomes relevant during an investigation.
 
 ![Figure 3. Visual scanning during dashboard analysis.](/images/articles/dashboard-eye-scanning.webp)
 
-*Figure 3. Engineers rarely inspect dashboards sequentially. A clear visual hierarchy allows the eye to identify important information rapidly before progressing towards increasingly detailed telemetry.*
-
----
+*Figure 3. A clear visual hierarchy allows important information to be identified before the reader moves towards increasingly detailed telemetry.*
 
 ### Every visual element competes for attention
 
-Human attention is limited.
+A dashboard presents charts, colours, annotations, labels and numerical values within the same visual field. Because these elements are processed simultaneously, their relative prominence affects where attention is directed. When several elements receive similar visual emphasis, the reader has to determine which information deserves attention before interpreting what that information means.
 
-Every chart, colour, annotation and numerical value presented on a dashboard competes for that limited resource.
+Visual hierarchy can reduce this additional decision-making by establishing clear priorities. Prominent colours can be reserved for exceptional conditions, while normal operating states use more restrained visual treatment. Larger or more prominent visualisations can represent information that has greater relevance to the dashboard's primary purpose, while supporting metrics remain available without competing with those indicators.
 
-When several elements simultaneously demand attention, readers must continuously decide where to look next. This additional decision-making contributes nothing to understanding the monitored system, yet it increases the effort required to use the dashboard effectively.
-
-For this reason, effective dashboards deliberately minimise unnecessary visual competition.
-
-Prominent colours should be reserved for exceptional situations rather than normal operating conditions.
-
-Large visualisations should communicate information that genuinely deserves greater importance.
-
-Supporting metrics should remain available without dominating the primary operational indicators.
-
-The objective is not to reduce the amount of information available, but to reduce the amount of information competing for immediate attention.
-
----
+The objective is not to reduce the amount of information available to the reader. Detailed telemetry may be essential for diagnosis, particularly when the dashboard is used alongside other operational tools. The objective is to control how much information competes for immediate attention, so that the signals required for the current task remain distinguishable from information that becomes relevant later in the investigation.
 
 ### Simplicity improves recognition
 
-Operational dashboards are frequently used under conditions that differ substantially from normal analytical work.
+Operational dashboards may be used during routine monitoring as well as during incidents, when engineers are often working with several sources of information at the same time. The dashboard therefore benefits from a structure that remains predictable as the amount of information being processed increases. Consistent spacing, logical grouping, clear titles and stable positioning all contribute to this objective by making the relationships between panels easier to recognise.
 
-An engineer responding to an incident may already be processing alerts, coordinating with colleagues, examining logs and communicating through incident management tools. Under these circumstances, even small reductions in cognitive effort can improve the speed with which relevant information is recognised.
-
-Simple layouts contribute directly to this objective.
-
-Consistent spacing allows panels to be distinguished more easily.
-
-Logical grouping reduces unnecessary eye movement.
-
-Clear titles minimise ambiguity.
-
-Stable positioning enables experienced users to develop spatial memory, allowing frequently consulted information to be located almost automatically.
-
-These improvements may appear individually insignificant. Together, however, they produce dashboards that become progressively easier to use as familiarity increases.
-
----
+These characteristics are particularly useful when the same dashboard, or a set of similar dashboards, is consulted repeatedly. Familiar locations and visual conventions reduce the amount of interpretation required to understand the interface itself, allowing the reader to concentrate on the information being presented. Simplicity in this context does not mean removing technical detail; it means avoiding unnecessary complexity in the way that detail is organised.
 
 ### Design should reduce interpretation, not information
 
-Reducing cognitive effort should never be confused with reducing technical depth.
+Reducing cognitive effort should not be confused with reducing technical depth. Production systems can require extensive telemetry, and detailed information may be essential when diagnosing a problem. The design challenge is to make that information accessible without presenting every available metric with the same visual importance.
 
-Complex production systems naturally require complex telemetry.
+A dashboard can therefore contain substantial operational information while remaining understandable when related metrics are grouped logically, unnecessary visual decoration is avoided and visual prominence reflects the relative importance of the information. The underlying system does not become simpler as a result. Instead, the interface provides a clearer path through the information required to understand it.
 
-The objective is not to simplify the underlying engineering reality, but to present that reality in a way that supports efficient interpretation.
-
-A dashboard containing extensive operational information can remain easy to understand when related metrics are grouped logically, unnecessary visual decoration is avoided and attention is directed towards the indicators that matter most.
-
-Good dashboard design therefore does not attempt to make systems appear simpler than they are.
-
-It attempts to ensure that engineers spend their effort understanding the system itself rather than understanding the interface used to observe it.
+Good dashboard design should consequently reduce the effort required to interpret the presentation without reducing the information required to investigate the system. The distinction matters because removing useful telemetry can limit diagnostic capability, while presenting all available telemetry with equal prominence can make the information harder to navigate.
 
 ## Consistency improves operational efficiency
 
-Consistency is frequently discussed as a visual design principle. Within operational dashboards, however, its importance extends well beyond appearance.
+Consistency in dashboard design extends beyond visual appearance. When dashboards serving similar operational purposes use different structures, terminology, units or visual conventions, readers need to adapt to those differences before they can interpret the information being presented. Repeated across a collection of dashboards, these differences can make navigation and comparison less predictable.
 
-Every inconsistency forces readers to stop and interpret the interface before interpreting the monitored system.
+Shared conventions provide a way to reduce this variation. When equivalent information is presented according to consistent rules, familiarity with one dashboard can be applied to others. The reader does not need to relearn the meaning of colours, the location of common indicators or the units used for familiar measurements each time a different service is examined.
 
-Changing colours between dashboards, placing similar information in different locations or using different units to represent equivalent measurements all introduce unnecessary work. Individually these interruptions appear insignificant. Repeated hundreds of times throughout daily operational activities, they become a measurable source of friction.
-
-Consistency reduces that friction by allowing engineers to develop familiarity with the dashboard itself. As familiarity increases, attention shifts naturally from understanding the interface towards understanding system behaviour.
-
----
+Consistency should not be interpreted as a requirement for every dashboard to have the same appearance. Dashboards may serve different audiences and operational purposes and therefore require different layouts. The principle is that dashboards serving comparable purposes should use comparable conventions wherever there is a clear benefit to doing so.
 
 ### Predictability reduces cognitive effort
 
-Operational dashboards are rarely viewed only once.
+Operational dashboards are generally revisited over time rather than consumed as one-time documents. Repeated use allows readers to develop expectations about where information is located and how familiar measurements are represented. A service health indicator may therefore occupy a consistent position across dashboards serving similar purposes, while latency or throughput measurements can use consistent units and visual conventions.
 
-They become part of an engineer's daily workflow and are consulted repeatedly during routine monitoring, incident response and post-incident investigations.
+When these expectations are preserved, readers can recognise familiar information without first determining how each individual dashboard represents it. When conventions change without an operational reason, additional interpretation is required to distinguish a genuine difference in system behaviour from a difference introduced by the interface.
 
-Repeated exposure allows readers to develop expectations.
-
-A service health indicator is expected to appear in a familiar location.
-
-Latency charts are expected to use the same units across services.
-
-Alert colours are expected to carry the same meaning regardless of the dashboard being viewed.
-
-When those expectations are satisfied, information can be recognised almost immediately. When they are violated, engineers must pause to determine whether the difference reflects a genuine operational condition or simply a different design decision.
-
-Good dashboard design deliberately reinforces predictable behaviour rather than constantly introducing new visual patterns.
-
----
+Predictability therefore becomes particularly valuable when engineers move between dashboards during an investigation. A consistent structure does not determine what the underlying system is doing, but it can make the information describing that system easier to locate and compare.
 
 ![Figure 4. Consistent dashboard design across services.](/images/articles/dashboard-consistency-across-services.webp)
 
 *Figure 4. Dashboards following a consistent visual structure allow engineers to transfer familiarity between services. Similar information appears in similar locations, reducing the effort required to locate operational indicators.*
 
----
-
 ### Consistency extends beyond visual appearance
 
-Maintaining consistency involves considerably more than using the same colour palette.
+A consistent dashboard environment requires more than a shared colour palette. Conventions can apply to panel ordering, terminology, measurement units, visualisation choices, time ranges and aggregation intervals, particularly when dashboards represent similar operational concepts. Establishing these conventions gives engineers a predictable framework for interpreting information across services and teams.
 
-Several aspects of dashboard design benefit from standardisation:
+For example, dashboards serving comparable purposes can use a stable ordering for service-level indicators and supporting metrics, while colours can retain the same semantic meaning throughout the platform. Shared naming conventions can reduce ambiguity, and consistent units can make values easier to compare. The appropriate degree of standardisation will depend on the organisation and the purposes of its dashboards, but the underlying principle remains the same: equivalent information should be represented consistently when doing so improves interpretation.
 
-- Panel ordering should remain stable between dashboards serving similar purposes.
-- Colours should preserve the same semantic meaning throughout the platform.
-- Measurement units should be applied consistently.
-- Similar metrics should use comparable visualisations whenever possible.
-- Titles and terminology should follow shared naming conventions.
-- Time ranges and aggregation intervals should remain predictable unless operational requirements dictate otherwise.
-
-These conventions allow engineers to move between dashboards without repeatedly adapting to different presentation styles.
-
-Large organisations frequently formalise these decisions through internal dashboard standards or design systems. Although smaller teams may not require extensive documentation, adopting a consistent approach from the beginning simplifies future maintenance as the number of dashboards increases.
-
----
+These decisions can be documented through internal dashboard standards or design systems. The level of formalisation does not need to be the same for every organisation, but documenting important conventions can make them easier to apply as additional dashboards and contributors are introduced.
 
 ### Familiarity improves operational performance
 
-The benefits of consistency become particularly visible during incidents.
+The value of consistency becomes particularly relevant when dashboards are used as part of incident response. Engineers investigating a production problem may need to move between services, dependencies and supporting infrastructure while simultaneously interpreting alerts, logs and other operational information. A familiar dashboard structure can reduce the amount of interface-specific knowledge required during that process.
 
-Engineers responding to production failures rarely have time to explore unfamiliar interfaces. They rely heavily on experience accumulated through previous investigations.
-
-When dashboards preserve a common structure across services, previous experience remains useful. Readers instinctively know where service-level indicators are located, where supporting infrastructure metrics can be found and where additional diagnostic information is likely to appear.
-
-This familiarity reduces navigation time and allows investigations to progress more naturally.
-
-Although consistency alone cannot prevent operational mistakes, it removes one potential source of unnecessary uncertainty at precisely the moments when engineers can least afford additional cognitive effort.
-
----
+When similar dashboards preserve common conventions, previous experience remains applicable. An engineer who has learned where service-level indicators, supporting metrics and diagnostic information are normally presented can use that knowledge when examining another service with a comparable dashboard. Consistency cannot remove the uncertainty associated with diagnosing a production problem, but it can avoid introducing additional uncertainty through unnecessary differences in presentation.
 
 ### Standardisation supports long-term scalability
 
-Dashboard collections naturally expand as systems evolve.
+Dashboard collections change as systems evolve, new services are introduced and ownership becomes distributed across teams. Without shared conventions, independently developed dashboards can gradually diverge in layout, terminology, visual encoding and information hierarchy. Similar operational information may then require different interpretation depending on which dashboard is being used.
 
-New services are introduced.
+Standardisation provides a common framework without requiring every dashboard to follow an identical design. Dashboards can retain layouts appropriate to their particular purposes while sharing conventions for information that has the same operational meaning. This makes independently developed dashboards easier to interpret as the observability environment grows.
 
-Additional engineering teams appear.
-
-Platform ownership becomes distributed.
-
-Without shared design conventions, each dashboard gradually reflects the preferences of its individual author. Over time, this produces collections of dashboards that expose similar information through entirely different layouts, colours and naming conventions.
-
-Standardisation helps avoid this fragmentation.
-
-Establishing common design principles allows independently developed dashboards to remain coherent as the observability platform grows. Engineers can therefore spend less time learning interfaces and more time understanding the behaviour of the systems those interfaces describe.
-
-Consistency should therefore be regarded as an engineering investment rather than a visual preference. The effort required to establish common conventions early is usually recovered many times over during the operational lifetime of the dashboards themselves.
+For larger environments, these conventions can become part of the engineering practices used to create and maintain dashboards. Documentation, reusable templates and design standards can provide a common baseline for contributors while still allowing individual dashboards to evolve according to their operational requirements.
 
 ## Remove information before adding more
 
-Adding a new panel is usually easier than deciding whether an existing one should be removed.
+Adding a new panel is usually straightforward; deciding whether an existing panel should be removed requires a clearer understanding of the dashboard's purpose. As operational requirements change, additional metrics, charts and annotations may be introduced while information that was useful at an earlier stage remains in place. Complexity can therefore increase incrementally even when each individual addition appears reasonable.
 
-As dashboards evolve, additional metrics, charts and annotations tend to accumulate. Each new operational requirement appears to justify another visualisation, while obsolete information often remains because removing it feels risky.
-
-The result is gradual growth in complexity rather than a sudden decline in quality.
-
-Over time, dashboards become increasingly difficult to scan, important indicators compete with secondary information and engineers require more time to locate the metrics that actually support operational decisions.
-
----
+The effect is not necessarily an immediate decline in dashboard quality. Instead, the accumulation of information can gradually change the balance between primary and supporting indicators. Important information may have to compete with secondary metrics, visual hierarchy can become less distinct and the reader may need more time to identify which elements are relevant to the decision being considered.
 
 ![Figure 5. Dashboard complexity increases over time.](/images/articles/dashboard-complexity-growth.webp)
 
-*Figure 5. Dashboard complexity rarely appears suddenly. It grows incrementally as new panels are added while obsolete information remains.*
+*Figure 5. Dashboard complexity can grow incrementally as new panels are added while existing information remains in place.*
 
----
+Removing information should therefore be treated as part of dashboard design rather than solely as a maintenance activity. Before introducing a new panel, it is useful to consider what operational purpose it serves and whether that purpose is already supported by information elsewhere on the dashboard.
 
-Removing information should therefore be considered part of the design process rather than a maintenance activity.
-
-Before introducing a new panel, it is worth asking a simple question:
+One practical question is:
 
 > **Which operational decision becomes impossible if this information is not displayed?**
 
-If the answer is unclear, the panel probably does not belong on the dashboard.
+The question does not imply that every panel must support a single decision in isolation. Some information may provide context, establish relationships between metrics or support deeper investigation. However, if the role of a panel cannot be clearly related to the purpose of the dashboard, its inclusion should be reconsidered.
 
-Likewise, dashboards should be reviewed periodically to identify visualisations that are rarely consulted, duplicate information already available elsewhere or no longer reflect current operational practices.
+The same principle applies to existing dashboards. Periodic reviews can identify visualisations that are no longer consulted, duplicate information available elsewhere or reflect operational practices that have since changed. Removing such information can restore visual hierarchy and make the remaining content easier to interpret without reducing the information required for the dashboard's current purpose.
 
-Effective dashboards rarely contain the maximum amount of information available.
-
-They contain the minimum amount of information required to support the decisions they were designed to facilitate.
+The goal is therefore not to minimise the number of panels or to produce the smallest possible dashboard. It is to ensure that the information presented has a clear relationship with the operational decisions and investigative tasks the dashboard is intended to support.
 
 ## Good dashboards are never finished
 
-Dashboard design does not end when a dashboard is deployed.
+Dashboard design does not end when a dashboard is deployed. Production systems change, services are modified, architectures evolve and operational priorities shift. As these changes occur, the information that was appropriate when a dashboard was created may no longer represent the questions that its users need to answer.
 
-Production systems evolve continuously. Services change, architectures become more complex, operational priorities shift and engineering teams adopt new ways of working. Dashboards that remain unchanged while their underlying systems evolve gradually become less effective, regardless of how well they were originally designed.
-
-For this reason, dashboard design should be viewed as an ongoing engineering activity rather than a one-time implementation task.
-
----
+For this reason, dashboard design should be treated as an ongoing engineering activity rather than a one-time implementation task. A review does not necessarily indicate that the original design was incorrect; it provides an opportunity to determine whether the dashboard still reflects the system, operational practices and decisions for which it was created.
 
 ![Figure 6. Dashboard evolution throughout its operational lifecycle.](/images/articles/dashboard-lifecycle.webp)
 
-*Figure 6. Dashboard design continues throughout the operational lifecycle. Periodic reviews ensure that dashboards remain aligned with the systems and engineering practices they support.*
+*Figure 6. Dashboard design continues throughout the operational lifecycle. Periodic reviews help maintain alignment between dashboards, the systems they represent and the practices of the teams using them.*
 
----
+Periodic review can identify obsolete metrics, outdated visualisations and information that no longer contributes to the dashboard's intended purpose. The same process can identify new operational requirements that justify additional information or a different organisation of existing metrics. In both cases, the objective is to maintain alignment between the dashboard and the environment in which it is used.
 
-Regular reviews help identify outdated visualisations, obsolete metrics and information that no longer contributes to operational decisions. At the same time, changing business requirements or new operational scenarios may justify introducing additional information or reorganising existing dashboards.
+This continuous refinement also has implications for how dashboards are managed. Documentation provides a record of their intended purpose and conventions, while version control and Monitoring as Code can provide mechanisms for reviewing and controlling changes. These practices were introduced in the first article of this series and become increasingly relevant as dashboards are maintained over longer periods and by multiple contributors.
 
-This continuous refinement should not be interpreted as evidence that the original design was incorrect. Instead, it reflects the reality that dashboards support systems which themselves are constantly changing.
-
-Treating dashboards as living engineering artefacts encourages periodic review, controlled improvements and long-term maintainability. These practices become significantly easier when dashboards are managed through documentation, version control and Monitoring as Code, topics introduced in the previous article and explored further throughout this series.
-
-Ultimately, successful dashboards are not those that remain unchanged for years. They are those that continue to support operational decisions as both systems and organisations evolve.
-
----
+A dashboard should therefore be reviewed when the system it represents, the decisions it supports or the way it is used changes. Treating the dashboard as a maintained engineering artefact makes it possible to evolve its design without losing sight of the operational purpose that justified its creation.
 
 # Key takeaways
 
-Effective dashboard design is primarily concerned with helping engineers interpret operational information efficiently rather than producing visually attractive interfaces.
+Effective dashboard design is concerned with making operational information easier to interpret and use, rather than simply presenting information through visually attractive interfaces. The principles discussed in this article provide a framework for making those design decisions consistently across the lifecycle of a dashboard.
 
-Although dashboards may differ significantly in appearance, the principles governing successful operational visualisation remain remarkably consistent across organisations, industries and observability platforms.
+The main ideas can be summarised as follows.
 
-The main ideas discussed throughout this article can be summarised as follows.
-
-- Dashboard design is an engineering discipline rather than a purely visual activity.
-- Information hierarchy should reflect operational priority, allowing engineers to identify system state before exploring supporting telemetry.
-- Good dashboards minimise unnecessary cognitive effort, enabling engineers to focus on understanding the system rather than interpreting the interface.
-- Consistency improves operational efficiency by making dashboards predictable and easier to navigate under pressure.
-- Every panel should justify its presence by supporting a specific operational decision.
-- Dashboard complexity should be controlled continuously as systems and operational requirements evolve.
-- Dashboard design is an ongoing process that continues throughout the operational lifecycle of the monitored system.
-
----
+- Dashboard design is an engineering discipline that combines operational requirements, information organisation and visual communication.
+- Information hierarchy should reflect operational priority, allowing the initial state of a system to be understood before detailed diagnostic information is presented.
+- Cognitive effort should be directed towards understanding the monitored system rather than interpreting unnecessary complexity in the interface.
+- Consistent conventions make dashboards serving similar purposes easier to navigate and allow familiarity to transfer between services.
+- Every panel should have a clear relationship with the operational purpose or investigative tasks the dashboard is intended to support.
+- Dashboard complexity should be reviewed as new information is introduced and existing information becomes less relevant.
+- Dashboard design continues throughout the operational lifecycle as systems, teams and operational requirements evolve.
 
 # Dashboard Design Series
 
@@ -395,8 +262,6 @@ Current publications in the series:
 - *(coming soon)* Designing Dashboards for Incident Response
 - *(coming soon)* Dashboard Anti-Patterns
 - *(coming soon)* Dashboard Governance and Lifecycle Management
-
----
 
 # Further reading
 
@@ -419,21 +284,13 @@ The following engineering resources published by ObservabiliTrends complement th
 # Bibliography
 
 Few, S. (2006). *Information Dashboard Design: Displaying Data for At-a-Glance Monitoring*. Analytics Press.
-
 Few, S. (2009). *Now You See It: Simple Visualization Techniques for Quantitative Analysis*. Analytics Press.
-
 Norman, D. A. (2013). *The Design of Everyday Things* (Revised and Expanded Edition). Basic Books.
-
 Tufte, E. R. (1983). *The Visual Display of Quantitative Information*. Graphics Press.
-
 Ware, C. (2020). *Information Visualization: Perception for Design* (4th ed.). Morgan Kaufmann.
-
 Grafana Labs. *Dashboard Design Best Practices*. Available at:
 https://grafana.com/docs/grafana/latest/dashboards/build-dashboards/best-practices/
-
 Nielsen Norman Group. *Information Visualization*. Available at:
 https://www.nngroup.com/topic/data-viz/
-
 Google. (2016). *Site Reliability Engineering: How Google Runs Production Systems*. O'Reilly Media.
-
 Google. (2018). *The Site Reliability Workbook*. O'Reilly Media.
