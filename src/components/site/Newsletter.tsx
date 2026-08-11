@@ -65,7 +65,7 @@ export function NewsletterPanel() {
             One signal-rich email. Every Thursday.
           </h3>
           <p className="mt-3 text-muted-foreground">
-            Field reports, postmortem patterns, and the observability tooling we'd actually bet a paycheck on. No fluff, no sponsorships in the body copy.
+            Field reports, postmortem patterns and observability best practices for better reliability.
           </p>
           <ul className="mt-4 text-sm text-muted-foreground space-y-1.5">
             <li>· 4,800+ senior engineers reading</li>
