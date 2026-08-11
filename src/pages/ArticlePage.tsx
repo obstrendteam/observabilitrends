@@ -365,27 +365,6 @@ export default function ArticlePage() {
                 )}
               </div>
             </div>
-
-            {/* CTA */}
-            <div className="mt-10 surface-card p-8 bg-gradient-to-br from-card to-secondary/40">
-              <p className="mono text-xs uppercase tracking-wider text-primary">
-                / keep reading
-              </p>
-
-              <h3 className="mt-2 text-2xl font-semibold tracking-tight">
-                Want more like this in your inbox?
-              </h3>
-
-              <p className="mt-2 text-muted-foreground">
-                One signal-rich email, every Thursday. No fluff.
-              </p>
-
-              <Button asChild className="mt-4">
-                <Link to="/#newsletter">
-                  Subscribe to the dispatch
-                </Link>
-              </Button>
-            </div>
           </div>
         </div>
 
