@@ -37,7 +37,7 @@ const Lab = () => {
             </p>
 
             <img
-              src="/lab/images/Observabilitrends_Lab_diagram.webp"
+              src="/public/images/lab/Observabilitrends_Lab_diagram.webp"
               alt="ObservabiliTrends laboratory architecture"
               className="w-full rounded-lg border border-border"
             />
