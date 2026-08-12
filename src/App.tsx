@@ -19,6 +19,8 @@ import NotFound from "./pages/NotFound.tsx";
 import Resources from "./pages/Resources.tsx";
 import ResourcePage from "./pages/ResourcePage.tsx";
 
+import Lab from "./pages/Lab.tsx";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -40,6 +42,7 @@ const App = () => (
                 <Route path="/services" element={<Services />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/community" element={<Community />} />
+                <Route path="/lab" element={<Lab />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>
