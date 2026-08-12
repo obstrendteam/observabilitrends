@@ -1,6 +1,6 @@
 # ObservabiliTrends Lab
 
-The ObservabiliTrends Lab is a local environment used to validate observability concepts, build dashboard examples, test PromQL queries, and create practical resources for the ObservabiliTrends articles.
+The ObservabiliTrends Lab is a local environment used to validate observability concepts, build dashboard examples, test PromQL queries and create practical resources for the ObservabiliTrends articles.
 
 It combines a containerized demo application with Prometheus-based metrics collection and Grafana visualization.
 
