@@ -1,66 +1,63 @@
 # ObservabiliTrends Lab
 
-The ObservabiliTrends Lab is a local environment used to validate observability concepts, build dashboard examples, test PromQL queries and create practical resources for the ObservabiliTrends articles.
+The ObservabiliTrends Lab is a local environment used to validate observability concepts, develop dashboard examples, test PromQL queries, and produce practical resources for the ObservabiliTrends articles.
 
-It combines a containerized demo application with Prometheus-based metrics collection and Grafana visualization.
-
-![ObservabiliTrends Lab Environment](./images/observabilitrends-lab-architecture.png)
+It combines a containerized demo application with Prometheus-based metrics collection and Grafana visualization. The environment provides a controlled setting for exploring infrastructure, container, and application workload behaviour.
 
 ## Architecture
 
-The environment is built around six main components:
+![ObservabiliTrends Lab architecture](/images/lab/Observabilitrends_Lab_diagram.webp)
 
-- **Docker** — runs the complete lab environment and the application containers.
-- **easyTravel** — a multi-service demo application provided by Dynatrace and used as the application workload.
-- **cAdvisor** — exposes container-level resource metrics.
-- **Node Exporter** — exposes host-level system metrics.
-- **Prometheus** — scrapes and stores the metrics and provides the PromQL query layer.
-- **Grafana** — visualizes the metrics through dashboards and panels.
+The laboratory consists of six main components:
 
-The easyTravel application is composed of several services, including frontends, backend, MongoDB, NGINX and load generators.
+- **Docker** runs the laboratory environment and its containers.
+- **easyTravel** provides a multi-service demo application and the workload used for experiments.
+- **cAdvisor** exposes container-level resource metrics.
+- **Node Exporter** exposes host-level system metrics.
+- **Prometheus** scrapes and stores metrics and provides the PromQL query layer.
+- **Grafana** visualizes the collected metrics through dashboards and panels.
 
-The application is based on the official Dynatrace easyTravel Docker project:
+The easyTravel environment includes multiple application services and supporting components, such as frontends, a backend, MongoDB, NGINX, and load generators. These components provide a workload against which infrastructure and container metrics can be observed.
 
-[Dynatrace/easyTravel-Docker](https://github.com/Dynatrace/easyTravel-Docker)
+The demo application's Docker resources are available in the [Dynatrace easyTravel-Docker repository](https://github.com/Dynatrace/easyTravel-Docker).
 
 ## Metrics available
 
-The lab provides three complementary levels of observability data:
+The metrics available depend on the enabled exporters, the running containers, and the current workload.
 
-| Source | Scope | Examples |
+| Source | Metric domain | Examples |
 |---|---|---|
-| **Node Exporter** | Host | CPU, memory, filesystem, network |
-| **cAdvisor** | Containers | CPU, memory, network, restarts |
-| **easyTravel** | Application workload | Service-level resource consumption and application activity |
+| Node Exporter | Host resources | CPU, memory, filesystem, and network metrics |
+| cAdvisor | Container resources | CPU, memory, network activity, and container-related metrics |
+| Prometheus | Metrics collection and querying | Time-series storage, label-based filtering, aggregation, and PromQL queries |
+| easyTravel | Application workload | Application activity and resource consumption observable through the available infrastructure and container metrics |
 
-Prometheus allows these metrics to be queried individually or correlated across these levels.
+Prometheus provides a common query layer for the metrics exposed by the configured sources. This makes it possible to compare host-level and container-level behaviour over the same time range, provided the relevant metrics and labels are available.
 
-## Questions the lab can answer
+## Questions the lab can help investigate
 
-The environment is intentionally simple, but it is sufficient to investigate practical observability questions such as:
+The environment can be used to investigate questions such as:
 
-- Which services are consuming the most CPU?
-- Which services are consuming the most memory?
-- How does resource consumption evolve over time?
-- Is a resource increase isolated to one container or affecting the whole workload?
-- Which containers are generating the most network traffic?
-- Are containers restarting unexpectedly?
-- How does application load affect infrastructure resource consumption?
-- Can a dashboard distinguish between current state, trends and anomalies?
-- Which metrics are actually useful for answering a specific operational question?
+- Which containers consume the most CPU or memory during a workload?
+- How do host and container resource metrics change over time?
+- Does a resource-consumption pattern belong to an individual container or coincide with broader host activity?
+- How does network activity vary between containers?
+- Do container restarts coincide with changes in resource consumption?
+- How does application workload activity correlate with infrastructure metrics?
+- Which metrics and aggregations provide useful context for a particular dashboard panel?
 
-## What we use the lab for
+These are investigation questions, not predefined conclusions. Their answers depend on the workload, the observation window, the available metrics, and the queries used.
 
-The lab is not intended to reproduce a production environment. It is a controlled environment for **testing and demonstrating observability and dashboard design principles**.
+## How we use the lab
 
-Resources published by ObservabiliTrends may therefore include:
+The laboratory is a controlled environment for technical experiments and examples. It is not intended to represent a production deployment or to provide production-capacity estimates.
 
-- Grafana dashboards
-- Individual panel examples
-- PromQL queries
-- Business-oriented dashboard panels
-- Before/after dashboard examples
-- Screenshots and visual examples
-- Practical experiments supporting concepts discussed in our articles
+It supports the development and validation of:
 
-Where appropriate, these resources are based on observations and experiments performed directly in this lab.
+- Grafana dashboards and individual panels.
+- PromQL queries and metric aggregations.
+- Resource-oriented visualizations.
+- Comparisons of metrics over selected time windows.
+- Reusable dashboard resources and practical examples for articles.
+
+Where an article uses observations from the lab, the environment provides a way to reproduce or inspect the relevant experiment. Results should be interpreted in the context of the configured services, workload, metrics, and time range rather than generalized automatically to other environments.

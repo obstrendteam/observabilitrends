@@ -1,155 +1,124 @@
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { PageLayout } from "@/components/site/PageLayout";
+import labContent from "@/data/lab/lab.md?raw";
 
-const Lab = () => {
+export default function Lab() {
   return (
     <PageLayout
       title="Observability Lab | ObservabiliTrends"
-      description="A practical laboratory used to test observability concepts, dashboards, metrics and engineering resources."
+      description="Explore the ObservabiliTrends Lab: a Docker-based environment for investigating infrastructure and container metrics, testing PromQL queries, and developing practical Grafana resources."
+      canonical="/lab"
     >
-      <article className="container mx-auto max-w-4xl px-4 py-16">
-        <header className="mb-12">
-          <p className="mono mb-3 text-sm text-muted-foreground">
-            OBSERVABILITY LAB
+      <main className="container-prose py-12 md:py-16">
+        <header className="mb-10 max-w-3xl">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+            Observability Lab
           </p>
 
-          <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">
+          <h1 className="mb-5 text-4xl font-bold tracking-tight text-foreground md:text-5xl">
             ObservabiliTrends Lab
           </h1>
 
-          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">
-            A practical laboratory used to test observability concepts,
-            build dashboards and panels, and validate the resources
-            published on ObservabiliTrends.
+          <p className="text-lg leading-relaxed text-muted-foreground">
+            A practical environment for exploring observability, validating
+            PromQL queries, and developing Grafana dashboards using a
+            containerized application workload.
           </p>
         </header>
 
-        <div className="space-y-12">
-          <section>
-            <h2 className="mb-4 text-2xl font-semibold">
-              Laboratory architecture
-            </h2>
-
-            <p className="mb-6 leading-relaxed text-muted-foreground">
-              The laboratory combines a containerized application with
-              Prometheus-based metrics collection and Grafana visualization.
-              It provides a controlled environment for observability
-              experiments, dashboard design and resource creation.
-            </p>
-
-            <img
-              src="/images/lab/Observabilitrends_Lab_diagram.webp"
-              alt="ObservabiliTrends laboratory architecture"
-              className="w-full rounded-lg border border-border"
-            />
-          </section>
-
-          <section>
-            <h2 className="mb-4 text-2xl font-semibold">Components</h2>
-
-            <ul className="space-y-3 leading-relaxed text-muted-foreground">
-              <li>
-                <strong className="text-foreground">Docker</strong> —
-                container runtime hosting the laboratory components.
-              </li>
-
-              <li>
-                <strong className="text-foreground">easyTravel</strong> —
-                Dynatrace's example application used as the application
-                workload.
-              </li>
-
-              <li>
-                <strong className="text-foreground">Prometheus</strong> —
-                metrics collection and time-series storage.
-              </li>
-
-              <li>
-                <strong className="text-foreground">cAdvisor</strong> —
-                container-level resource metrics.
-              </li>
-
-              <li>
-                <strong className="text-foreground">Node Exporter</strong> —
-                host-level system metrics.
-              </li>
-
-              <li>
-                <strong className="text-foreground">Grafana</strong> —
-                dashboards and visualization.
-              </li>
-            </ul>
-
-            <p className="mt-6 leading-relaxed text-muted-foreground">
-              easyTravel is available from the{" "}
-              <a
-                href="https://github.com/Dynatrace/easyTravel-Docker"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-foreground underline underline-offset-4"
-              >
-                Dynatrace easyTravel-Docker repository
-              </a>
-              .
-            </p>
-          </section>
-
-          <section>
-            <h2 className="mb-4 text-2xl font-semibold">
-              What the laboratory can measure
-            </h2>
-
-            <p className="mb-6 leading-relaxed text-muted-foreground">
-              The environment provides telemetry that can be used to explore
-              practical observability questions across the host, containers
-              and application workload.
-            </p>
-
-            <ul className="space-y-3 leading-relaxed text-muted-foreground">
-              <li>
-                <strong className="text-foreground">Host health:</strong>{" "}
-                CPU, memory, filesystem and network activity.
-              </li>
-
-              <li>
-                <strong className="text-foreground">Container health:</strong>{" "}
-                CPU, memory, network, filesystem and container resource
-                consumption.
-              </li>
-
-              <li>
-                <strong className="text-foreground">
-                  Application behaviour:
-                </strong>{" "}
-                request activity, application load and service behaviour
-                exposed through the application and its containers.
-              </li>
-
-              <li>
-                <strong className="text-foreground">
-                  Workload behaviour:
-                </strong>{" "}
-                changes in resource consumption as traffic and simulated user
-                activity change.
-              </li>
-            </ul>
-          </section>
-
-          <section>
-            <h2 className="mb-4 text-2xl font-semibold">
-              What it is used for
-            </h2>
-
-            <p className="leading-relaxed text-muted-foreground">
-              The laboratory is used to create and validate practical
-              examples for ObservabiliTrends, including dashboards,
-              individual panels, Prometheus queries and reusable Grafana
-              resources.
-            </p>
-          </section>
-        </div>
-      </article>
+        <article className="lab-content max-w-4xl">
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              h2: ({ children }) => (
+                <h2 className="mb-4 mt-12 text-2xl font-semibold tracking-tight text-foreground">
+                  {children}
+                </h2>
+              ),
+              h3: ({ children }) => (
+                <h3 className="mb-3 mt-8 text-xl font-semibold text-foreground">
+                  {children}
+                </h3>
+              ),
+              p: ({ children }) => (
+                <p className="mb-5 leading-7 text-muted-foreground">
+                  {children}
+                </p>
+              ),
+              ul: ({ children }) => (
+                <ul className="mb-6 list-disc space-y-2 pl-6 text-muted-foreground">
+                  {children}
+                </ul>
+              ),
+              ol: ({ children }) => (
+                <ol className="mb-6 list-decimal space-y-2 pl-6 text-muted-foreground">
+                  {children}
+                </ol>
+              ),
+              li: ({ children }) => <li className="pl-1">{children}</li>,
+              a: ({ href, children }) => (
+                <a
+                  href={href}
+                  className="font-medium text-primary underline underline-offset-4 hover:opacity-80"
+                  target={href?.startsWith("http") ? "_blank" : undefined}
+                  rel={href?.startsWith("http") ? "noreferrer" : undefined}
+                >
+                  {children}
+                </a>
+              ),
+              img: ({ src, alt }) => (
+                <img
+                  src={src}
+                  alt={alt ?? ""}
+                  loading="lazy"
+                  className="my-8 h-auto w-full rounded-xl border border-border"
+                />
+              ),
+              table: ({ children }) => (
+                <div className="my-8 overflow-x-auto rounded-lg border border-border">
+                  <table className="w-full border-collapse text-left text-sm">
+                    {children}
+                  </table>
+                </div>
+              ),
+              thead: ({ children }) => (
+                <thead className="bg-secondary text-foreground">
+                  {children}
+                </thead>
+              ),
+              th: ({ children }) => (
+                <th className="border-b border-border px-4 py-3 font-semibold">
+                  {children}
+                </th>
+              ),
+              td: ({ children }) => (
+                <td className="border-b border-border px-4 py-3 align-top text-muted-foreground">
+                  {children}
+                </td>
+              ),
+              strong: ({ children }) => (
+                <strong className="font-semibold text-foreground">
+                  {children}
+                </strong>
+              ),
+              blockquote: ({ children }) => (
+                <blockquote className="my-6 border-l-2 border-primary pl-4 text-muted-foreground">
+                  {children}
+                </blockquote>
+              ),
+              hr: () => <hr className="my-10 border-border" />,
+              code: ({ children }) => (
+                <code className="rounded bg-secondary px-1.5 py-0.5 text-sm text-foreground">
+                  {children}
+                </code>
+              ),
+            }}
+          >
+            {labContent}
+          </ReactMarkdown>
+        </article>
+      </main>
     </PageLayout>
   );
-};
-
-export default Lab;
+}
