@@ -267,12 +267,12 @@ Current publications in the series:
 
 Readers interested in dashboard engineering, human perception and operational visualisation may find the following references particularly useful.
 
-* Stephen Few — *Information Dashboard Design: Displaying Data for At-a-Glance Monitoring*
-* Colin Ware — *Information Visualization: Perception for Design*
-* Donald A. Norman — *The Design of Everyday Things*
-* Edward R. Tufte — *The Visual Display of Quantitative Information*
-* Grafana Labs — *Dashboard Design Best Practices*
-* Nielsen Norman Group — *Information Visualization* articles
+* Stephen Few - *Information Dashboard Design: Displaying Data for At-a-Glance Monitoring*
+* Colin Ware - *Information Visualization: Perception for Design*
+* Donald A. Norman - *The Design of Everyday Things*
+* Edward R. Tufte - *The Visual Display of Quantitative Information*
+* Grafana Labs - *Dashboard Design Best Practices*
+* Nielsen Norman Group - *Information Visualization* articles
 
 The following engineering resources published by ObservabiliTrends complement the concepts introduced throughout this series.
 

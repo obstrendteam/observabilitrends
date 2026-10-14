@@ -378,11 +378,11 @@ Current publications in the series:
 
 Readers interested in exploring dashboard design and operational visualisation in greater depth may find the following references particularly useful.
 
-* Stephen Few — *Information Dashboard Design: Displaying Data for At-a-Glance Monitoring*
-* Edward R. Tufte — *The Visual Display of Quantitative Information*
-* Google — *Site Reliability Engineering*
-* Google — *The Site Reliability Workbook*
-* Grafana Labs — *Dashboard design best practices*
+* Stephen Few - *Information Dashboard Design: Displaying Data for At-a-Glance Monitoring*
+* Edward R. Tufte - *The Visual Display of Quantitative Information*
+* Google - *Site Reliability Engineering*
+* Google - *The Site Reliability Workbook*
+* Grafana Labs - *Dashboard design best practices*
 
 For practical implementation guidance accompanying this article, the following engineering resources are available on ObservabiliTrends.
 

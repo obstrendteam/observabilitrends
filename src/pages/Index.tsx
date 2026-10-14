@@ -33,7 +33,7 @@ export default function Home() {
 
   return (
     <PageLayout
-      title="ObservabiliTrends — Observability, SRE & Platform Engineering"
+      title="ObservabiliTrends - Observability, SRE & Platform Engineering"
       description="Field reports, playbooks and deep analysis on observability, SRE, OpenTelemetry and platform engineering."
       canonical="/"
     >
@@ -194,7 +194,7 @@ export default function Home() {
             </h2>
 
             <p className="mt-4 text-muted-foreground leading-relaxed">
-              We write across the entire observability and reliability stack —
+              We write across the entire observability and reliability stack -
               from collector internals to org-wide SLO programs.
             </p>
           </div>
@@ -328,7 +328,7 @@ export default function Home() {
             </h3>
 
             <p className="mt-2 text-sm text-muted-foreground">
-              Battle-tested runbooks, dashboards and SLO templates — packaged
+              Battle-tested runbooks, dashboards and SLO templates - packaged
               and ready to deploy.
             </p>
 

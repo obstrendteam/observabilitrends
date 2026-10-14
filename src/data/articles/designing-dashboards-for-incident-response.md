@@ -92,15 +92,15 @@ The following structure translates the preceding principles into an implementati
 | 4. Investigation focus | Inspect components selected for further investigation | CPU by container; memory by container; network by container; restart and lifecycle activity |
 | 5. Supporting context | Add evidence required by the investigative scenario | Resource distribution; available service or container status; relevant infrastructure signals; change annotations where available |
 
-**Row 1 — Incident overview.** The initial row should summarise the selected observation window and the resource signals available for assessment. Aggregate values should be accompanied by clear units and an explicit scope. An overall health indicator should only be introduced when it is derived from a defined health signal; resource consumption alone is not sufficient to establish application health.
+**Row 1 - Incident overview.** The initial row should summarise the selected observation window and the resource signals available for assessment. Aggregate values should be accompanied by clear units and an explicit scope. An overall health indicator should only be introduced when it is derived from a defined health signal; resource consumption alone is not sufficient to establish application health.
 
-**Row 2 — Service comparison.** These panels should help identify differences between the selected services. Current-value comparisons can use ranked bars or another representation that preserves a clear relationship between value and magnitude. Service names, units and aggregation rules should remain consistent across the panels.
+**Row 2 - Service comparison.** These panels should help identify differences between the selected services. Current-value comparisons can use ranked bars or another representation that preserves a clear relationship between value and magnitude. Service names, units and aggregation rules should remain consistent across the panels.
 
-**Row 3 — System evolution.** These panels should expose changes across the same observation window. CPU, memory and network activity provide complementary evidence, but their different units and behaviours should remain visible. Compatible time ranges help the engineer compare when changes occurred without implying that the signals share the same causal mechanism.
+**Row 3 - System evolution.** These panels should expose changes across the same observation window. CPU, memory and network activity provide complementary evidence, but their different units and behaviours should remain visible. Compatible time ranges help the engineer compare when changes occurred without implying that the signals share the same causal mechanism.
 
-**Row 4 — Investigation focus.** Component-level panels provide detail once a service or container has been selected for investigation. These panels should use filtering or other selection mechanisms where available, so that the engineer can examine the relevant components without making the initial dashboard visually dense. Restart and lifecycle information should use the appropriate event or counter semantics rather than presenting cumulative counters as event timestamps.
+**Row 4 - Investigation focus.** Component-level panels provide detail once a service or container has been selected for investigation. These panels should use filtering or other selection mechanisms where available, so that the engineer can examine the relevant components without making the initial dashboard visually dense. Restart and lifecycle information should use the appropriate event or counter semantics rather than presenting cumulative counters as event timestamps.
 
-**Row 5 — Supporting context.** This row is reserved for signals that answer a defined question left open by the preceding views. The inclusion of additional infrastructure metrics, availability information or change annotations depends on the telemetry available and the investigation being supported. A panel should not be included solely because its metric can be collected.
+**Row 5 - Supporting context.** This row is reserved for signals that answer a defined question left open by the preceding views. The inclusion of additional infrastructure metrics, availability information or change annotations depends on the telemetry available and the investigation being supported. A panel should not be included solely because its metric can be collected.
 
 The structure is intended to evolve through implementation and evaluation. A proposed panel may be removed, replaced or moved when its actual contribution to the investigation becomes clear. The resulting dashboard should reflect the questions that can be answered reliably with its data sources.
 
@@ -142,8 +142,8 @@ This article is part of the **Dashboard Design Series**, an editorial collection
 1. [Why Dashboards Often Fail Before They Are Even Built](/articles/why-dashboards-often-fail-before-they-are-even-built)
 2. [Dashboard Design Principles](/articles/dashboard-design-principles)
 3. Designing Dashboards for Incident Response
-4. Dashboard Anti-Patterns — coming soon
-5. Dashboard Governance and Lifecycle Management — coming soon
+4. Dashboard Anti-Patterns - coming soon
+5. Dashboard Governance and Lifecycle Management - coming soon
 
 ## Further reading
 
