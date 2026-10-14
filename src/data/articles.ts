@@ -1,5 +1,6 @@
 import dashboardArticle from "@/data/articles/why-dashboards-fail-before-they-are-even-built.md?raw";
 import dashboardDesignPrinciplesArticle from "@/data/articles/dashboard-design-principles.md?raw";
+import incidentResponseArticle from "@/data/articles/designing-dashboards-for-incident-response.md?raw";
 
 export type Category =
   | "Dashboards"
@@ -63,14 +64,10 @@ export interface Article {
 export const ARTICLES: Article[] = [
   {
     slug: "why-dashboards-often-fail-before-they-are-even-built",
-
     title: "Why dashboards often fail before they are even built",
-
     excerpt:
       "Many dashboard problems originate before its implementation. Learn how purpose, audience and ownership help ensure a dashboard remains a valuable operational asset throughout its lifecycle.",
-
     category: "Dashboards",
-
     tags: [
       "dashboard",
       "grafana",
@@ -79,7 +76,6 @@ export const ARTICLES: Article[] = [
       "design",
       "sre",
     ],
-
     author: {
       name: "Daniel Busquets",
       initials: "DB",
@@ -87,32 +83,23 @@ export const ARTICLES: Article[] = [
       company: "ObservabiliTrends",
       linkedin: "https://linkedin.com/in/dbusquets",
     },
-
     series: {
       name: "Dashboard Design Series",
       part: 1,
       total: 5,
     },
-
     date: "2026-07-20",
-
     readingTime: 20,
-
     featured: true,
-
     content: dashboardArticle,
   },
 
   {
     slug: "dashboard-design-principles",
-
     title: "Dashboard Design Principles",
-
     excerpt:
       "A practical examination of the principles that make operational dashboards easier to interpret, navigate and maintain as systems evolve.",
-
     category: "Dashboards",
-
     tags: [
       "dashboard",
       "observability",
@@ -120,7 +107,6 @@ export const ARTICLES: Article[] = [
       "design",
       "sre",
     ],
-
     author: {
       name: "Daniel Busquets",
       initials: "DB",
@@ -128,20 +114,47 @@ export const ARTICLES: Article[] = [
       company: "ObservabiliTrends",
       linkedin: "https://linkedin.com/in/dbusquets",
     },
-
     series: {
       name: "Dashboard Design Series",
       part: 2,
       total: 5,
     },
-
     date: "2026-08-08",
-
     readingTime: 15,
-
     featured: false,
-
     content: dashboardDesignPrinciplesArticle,
+  },
+
+  {
+    slug: "designing-dashboards-for-incident-response",
+    title: "Designing Dashboards for Incident Response",
+    excerpt:
+      "Explore how operational dashboards can support incident detection, investigation and recovery by organizing the signals engineers need to make decisions under pressure.",
+    category: "Incident Management",
+    tags: [
+      "dashboard",
+      "incident-response",
+      "incident-management",
+      "observability",
+      "grafana",
+      "sre",
+    ],
+    author: {
+      name: "Daniel Busquets",
+      initials: "DB",
+      role: "Founder & Editor",
+      company: "ObservabiliTrends",
+      linkedin: "https://linkedin.com/in/dbusquets",
+    },
+    series: {
+      name: "Dashboard Design Series",
+      part: 3,
+      total: 5,
+    },
+    date: "2026-10-14",
+    readingTime: 15,
+    featured: false,
+    content: incidentResponseArticle,
   },
 ];
 
