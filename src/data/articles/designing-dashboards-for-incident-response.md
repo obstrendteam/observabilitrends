@@ -2,182 +2,425 @@
 
 ## Abstract
 
-Incident response places different demands on operational dashboards than routine monitoring. During an incident, the information presented must help responders establish the current state of the service, assess user impact, identify relevant changes and decide where investigation should continue.
+Operational dashboards are often used during incidents, but a dashboard designed primarily for routine monitoring may not provide the information engineers need when a system starts behaving unexpectedly.
 
-This article examines how dashboards can support that process. It focuses on information hierarchy, service-level signals, temporal context, change visibility and the transition from high-level assessment to detailed diagnosis. It also considers how dashboards should support coordination without becoming a substitute for incident management processes.
+During an incident, the objective changes. Engineers need to establish the current state of the system, determine whether users are affected, identify where the problem is occurring and gather enough evidence to decide what to investigate next.
+
+This article examines how dashboard design principles can be applied specifically to incident response. It focuses on information hierarchy, investigative flow, temporal context, correlation and the distinction between monitoring a system and investigating a problem.
+
+The objective is not to create a dashboard containing every available metric. It is to create an operational view that helps engineers move from detection to understanding with as little unnecessary cognitive effort as possible.
 
 ---
 
 # Introduction
 
-Incident response combines detection, assessment, mitigation and communication under time constraints. The information available to responders therefore needs to support a sequence of decisions rather than simply provide a comprehensive view of the system.
+The previous articles in this series established two important foundations.
 
-Google's SRE practices distinguish between monitoring that identifies a user-facing problem and monitoring that helps investigate its cause. Service-level indicators are useful for establishing that an objective is being violated, while additional telemetry is required to understand what may have contributed to that condition. A dashboard used during incident response should reflect this progression. 
+The first article argued that dashboard quality is largely determined before implementation begins. Objectives, audience, ownership and operational questions define the purpose a dashboard is expected to serve.
 
-[IMAGE 1 — Detection-to-diagnosis dashboard flow]
+The second article examined how information should then be organised and presented. Information hierarchy, cognitive effort, consistency and controlled complexity determine how efficiently engineers can interpret that information.
 
-The distinction is important because a dashboard designed for routine observation can contain information that is useful during normal operations but difficult to interpret during an active incident. Incident response benefits from a more deliberate structure in which the most important questions can be answered before lower-level investigation begins.
+Incident response brings these ideas together under particularly demanding conditions.
 
----
+An engineer investigating a production problem does not approach a dashboard as a collection of charts. They are trying to answer a sequence of questions:
 
-# Start with service impact
+* What is happening?
+* Is the system actually affected?
+* When did it start?
+* How widespread is it?
+* Which component appears to be involved?
+* What changed at approximately the same time?
+* Where should the investigation continue?
 
-The first task during an incident is to establish whether users or critical functionality are affected and to understand the scope of that impact.
+A dashboard that helps answer these questions can become a useful incident-response tool.
 
-This makes service-level information the natural starting point for an incident response dashboard. Availability, latency, error rates, request volume or SLO-related indicators can provide evidence about the condition of the service without requiring responders to inspect the implementation behind it.
-
-Google's SRE guidance recommends placing SLI metrics prominently on the service dashboard because these metrics provide the first indication of user-impacting conditions. They also provide a stable reference point when the underlying implementation changes.
-
-The dashboard should therefore make the current service state immediately identifiable. A responder should be able to determine whether the service is healthy, degraded or unavailable without first interpreting infrastructure metrics, individual component behaviour or detailed telemetry.
-
-This does not imply that infrastructure information is unimportant. It determines where that information belongs in the investigation sequence.
-
-> **Design principle**
->
-> The first level of an incident dashboard should establish service impact before presenting information about internal implementation.
+A dashboard that simply exposes a large collection of metrics may contain more information while providing less operational value.
 
 ---
 
-# Structure the dashboard around the investigation path
+## An incident dashboard has a different job
 
-Once service impact has been established, the next question is what information can help explain it.
+A dashboard used for routine monitoring and a dashboard used during an incident may expose many of the same metrics, but they do not necessarily have the same purpose.
 
-Incident investigation generally moves from symptoms towards possible causes. A dashboard can support this progression by organising information into levels of increasing diagnostic detail.
+Routine monitoring is often concerned with recognising gradual changes, checking service behaviour and maintaining awareness of system health.
 
-The first level establishes service health and user impact. The second provides context about the affected service, such as traffic distribution, dependency health or recent changes. The third exposes implementation-specific information that may help isolate the source of the problem.
+Incident response is more investigative.
 
-This structure allows the same dashboard to support several stages of an investigation without giving every metric equal visual priority. Google SRE describes a similar progression from SLO-based alerting metrics towards additional data used to diagnose the underlying problem.
+The engineer already has a reason to believe that something requires attention. The dashboard must therefore help transform an initial signal into an increasingly precise understanding of the situation.
 
-The hierarchy should also reflect the relationship between information. A dependency latency panel is more useful when it can be interpreted alongside the service latency it may influence. Deployment information becomes more useful when displayed close to the service indicators whose behaviour changed afterwards.
+This distinction affects the design.
 
-[IMAGE 2 — Example of a dashboard organised from service impact to diagnosis]
+During routine monitoring, a broad overview may be sufficient.
 
-The objective is not to encode a fixed investigation procedure into the interface. Different incidents require different paths. The dashboard should instead make the relationships between levels of information clear enough that responders can choose the next useful investigation step.
+During an incident, the dashboard should provide a clear path from:
 
----
+**current state → affected area → temporal context → supporting evidence → deeper investigation**
 
-# Make time part of the dashboard
-
-Incident response is fundamentally temporal. The relevant question is not only whether a metric is abnormal, but when the behaviour changed and what else changed around the same time.
-
-A current value without historical context can therefore be difficult to interpret. A latency of 800 milliseconds may represent a serious degradation for one service and normal behaviour for another. Comparing the current state with an appropriate historical baseline provides additional information about the magnitude and timing of the change.
-
-Time alignment becomes particularly valuable when investigating changes. Deployments, configuration changes, infrastructure events and dependency failures can be displayed against the same time axis as service-level indicators. This does not establish causality, but it allows responders to identify temporal relationships that warrant further investigation.
-
-[IMAGE 3 — Service health metrics with deployments, configuration changes and incident markers aligned on a common timeline]
-
-The choice of time range also matters. A dashboard that defaults to an excessively narrow window can hide the beginning of an incident, while an excessively broad window can make recent changes difficult to distinguish from normal historical variation.
-
-A useful incident dashboard should therefore make the selected time range explicit and allow it to be changed without disrupting the relationship between related panels.
+This does not mean that every incident requires a dedicated dashboard. It means that dashboards intended to support incident response should be designed around the investigative tasks their users are expected to perform.
 
 ---
 
-# Expose changes and dependencies
+## Design around the questions engineers need to answer
 
-A service rarely operates in isolation. Its behaviour can depend on other services, infrastructure components, external systems and configuration.
+The starting point for an incident-response dashboard should be the questions it needs to answer rather than the metrics that happen to be available.
 
-During an incident, responders need enough context to determine whether an observed symptom is local to the affected service or part of a broader condition. Dependency information can help establish that scope.
+A useful sequence is:
 
-For example, an increase in request latency may coincide with degradation in a downstream service. An increase in application errors may coincide with a database connection limit being reached. A sudden change in traffic may affect several services at the same time.
+### 1. Is the system affected?
 
-A dashboard cannot determine the cause from temporal correlation alone. It can, however, make relevant relationships visible and reduce the effort required to investigate them.
+The first objective is to establish whether the suspected problem corresponds to an observable change in system behaviour.
 
-The same principle applies to changes. Deployments, configuration changes, feature-flag updates and infrastructure modifications can provide important context when their timing overlaps with the incident.
+This is where primary indicators belong.
 
-[IMAGE 4 — Dependency and change context around an incident timeline]
+The dashboard should make the current state immediately visible without requiring the engineer to inspect several detailed charts.
 
-Change information should be presented as context rather than as an implicit explanation. A deployment marker appearing immediately before an increase in errors is evidence worth investigating; it is not, by itself, proof that the deployment caused the incident.
+### 2. When did the condition begin?
 
----
+Once an abnormal condition has been identified, its timing becomes important.
 
-# Design for comparison, not isolated values
+A useful dashboard should make it possible to determine whether the condition is:
 
-Incident response requires comparison against something: a previous period, an expected range, another service, another region or another component.
+* recent or persistent,
+* isolated to a short period,
+* gradually increasing,
+* recurring,
+* or coincident with another change.
 
-Displaying isolated metric values makes these comparisons harder to perform mentally. Trends, baselines and related series provide additional context without requiring responders to reconstruct it from separate views.
+Time therefore becomes part of the investigation rather than merely an axis on a graph.
 
-The appropriate comparison depends on the metric and the question being investigated. A request-rate graph may benefit from comparison with a previous period. An SLO indicator may be more useful when shown against its objective. A regional service may need to be compared with other regions to establish whether the problem is local or global.
+### 3. How widespread is the problem?
 
-The dashboard should therefore make meaningful comparisons visible where they support the investigation. This follows the broader principle described by Stephen Few: dashboard visualisation should make important information available for rapid perception rather than requiring unnecessary interpretation.
+The next question is whether the condition affects the entire system or only a subset of services, containers or components.
 
-Comparison should remain subordinate to the operational question. Adding baselines or reference series that cannot influence a decision increases visual density without necessarily increasing understanding.
+This distinction can significantly change the direction of an investigation.
 
----
+A problem affecting every component suggests a different class of investigation from a problem isolated to one service.
 
-# Support the human factors of incident response
+### 4. Where should the investigation continue?
 
-Incident response involves coordination as well as technical investigation. Google describes incident management in terms of coordinating, communicating and controlling the response, with explicit roles assigned to manage these responsibilities.
+The dashboard should help narrow the search.
 
-A dashboard can contribute to this process by providing a shared operational view. When responders, incident commanders and stakeholders refer to the same service indicators and time range, discussions can be grounded in observable system behaviour.
+Once a suspicious component or resource has been identified, engineers should be able to move towards the relevant supporting information without having to reconstruct the system mentally from unrelated panels.
 
-This does not mean that a dashboard should attempt to become an incident management interface. Communication channels, ownership, task tracking and decision records belong to the incident management process itself. The dashboard's role is to provide reliable operational evidence that those activities can reference.
-
-This distinction also affects dashboard content. Information that changes frequently during an incident should have a clear source and an understandable meaning. Ambiguous labels, undocumented calculations or panels whose data is unavailable during partial outages reduce confidence precisely when reliable information is most important.
-
-[IMAGE 5 — Shared incident view showing service state, timeline and operational context]
-
-A response dashboard should also remain usable when the system is degraded. If the dashboard depends on the same failing components that it is intended to investigate, responders may lose access to the information they need. This makes the availability and independence of monitoring infrastructure part of the dashboard's operational design.
+The dashboard therefore acts as an investigation guide rather than simply an information repository.
 
 ---
 
-# Separate assessment from deep diagnosis
+## From detection to diagnosis
 
-An incident dashboard does not need to contain every diagnostic signal available in the observability platform.
+An effective incident dashboard should support a progression from broad observations towards increasingly specific evidence.
 
-Detailed logs, traces, profiler data, infrastructure metrics and service-specific telemetry may be essential during investigation. Their value does not require them to occupy the primary incident view.
+A useful model is:
 
-A useful separation is between information required to establish the current state and information required to investigate that state. The first belongs in the response dashboard. The second can remain available through linked dashboards, drill-downs or the underlying observability tools.
+**Detect → Scope → Correlate → Investigate**
 
-This separation keeps the incident view focused while preserving access to detailed evidence. It also reduces the temptation to turn a single dashboard into a complete representation of the system.
+### Detect
 
-[IMAGE 6 — Response dashboard linked to specialised diagnostic views]
+The dashboard establishes that something is different from the expected state.
 
-The transition between these levels should be explicit. A responder who identifies abnormal database latency should be able to move towards the relevant database metrics without having to search through an unrelated collection of panels.
+Primary indicators should therefore receive the greatest visual prominence.
+
+### Scope
+
+The engineer determines how widely the condition is distributed.
+
+This may involve comparing services, containers, instances or other relevant dimensions.
+
+### Correlate
+
+The engineer examines whether other signals changed at approximately the same time.
+
+This is where time-series relationships become particularly valuable.
+
+### Investigate
+
+Once the likely affected area has been identified, supporting and diagnostic information can be examined in greater detail.
+
+This structure follows the summary-to-detail principle established in the previous article.
+
+The difference is that the sequence is now explicitly connected to an incident investigation.
 
 ---
 
-# Validate the dashboard against real incidents
+## Information hierarchy under pressure
 
-The effectiveness of an incident response dashboard cannot be established solely through visual inspection.
+Information hierarchy becomes particularly important during incidents because engineers have less spare attention available for navigating an interface.
 
-A dashboard may appear well structured during design review and still fail to provide the information required during an actual incident. The most useful validation therefore comes from examining how the dashboard performs against real operational scenarios.
+The top of the dashboard should therefore answer the questions with the highest operational priority.
 
-After an incident, the response process can be reviewed to identify where the dashboard helped and where it introduced additional investigation steps. Useful questions include:
+A practical hierarchy is:
 
-* Could the initial user impact be established quickly?
-* Was the scope of the problem clear?
-* Were relevant changes visible?
-* Could responders distinguish symptoms from diagnostic signals?
-* Did the dashboard provide enough context to choose the next investigation step?
-* Which information had to be obtained from another system?
-* Which panels were consulted but provided little useful evidence?
+### Level 1 — Situation awareness
 
-These questions turn the dashboard into an artefact that can be improved using operational evidence. Google recommends examining detection, mitigation, coordination and communication as part of incident learning; the dashboard can be evaluated within that same broader review.
+The engineer should be able to determine the overall state of the system immediately.
 
-The result should not necessarily be a larger dashboard. An investigation step that repeatedly requires information from elsewhere may justify adding a focused panel, changing the hierarchy or improving a link to another diagnostic view. Other findings may justify removing information that did not contribute to the response.
+Typical information includes:
+
+* current resource or service state,
+* primary indicators,
+* active abnormal conditions,
+* overall scope.
+
+### Level 2 — Investigation context
+
+Once a problem is established, the dashboard should provide the context required to understand it.
+
+Examples include:
+
+* service-level comparisons,
+* resource consumption,
+* traffic behaviour,
+* temporal changes,
+* affected components.
+
+### Level 3 — Diagnostic evidence
+
+Lower sections can expose information useful for deeper investigation.
+
+Examples include:
+
+* individual container behaviour,
+* detailed resource metrics,
+* supporting infrastructure telemetry,
+* component-specific signals.
+
+This hierarchy means that detailed telemetry remains available without competing with the information required for the initial assessment.
+
+It also follows a principle established in the previous article: **visual priority should reflect operational priority.**
+
+---
+
+## Current state versus evolution
+
+Incident investigation requires two complementary views of the same signal.
+
+The first is the **current state**.
+
+The second is **how that state changed over time**.
+
+A current-value panel can show that a resource is currently consuming a significant amount of CPU.
+
+A time-series panel can show whether that consumption increased suddenly, gradually or as part of an established pattern.
+
+Both perspectives are useful, but they answer different questions.
+
+For this reason, incident dashboards should avoid relying exclusively on either large current-value panels or long time-series charts.
+
+A useful combination is:
+
+**Current state → recent evolution → detailed history**
+
+This allows engineers to establish what is happening now and then determine how the system reached that state.
+
+---
+
+## Correlation without visual overload
+
+Incident investigation frequently involves comparing several signals.
+
+However, displaying every available metric on the same graph does not automatically improve correlation.
+
+Too many series can make relationships harder to recognise, particularly when several signals have similar magnitudes or overlapping behaviour.
+
+Correlation should therefore be intentional.
+
+A useful dashboard should group signals that are expected to answer a common investigative question.
+
+For example, a resource-investigation section might compare:
+
+* CPU consumption,
+* memory consumption,
+* network activity,
+* and the affected service or component.
+
+The objective is not to maximise the number of lines on a chart.
+
+It is to make relevant relationships easier to see.
+
+When two signals are not useful to compare during the same investigative step, they may be better presented in separate panels.
+
+---
+
+## Show enough context to explain changes
+
+An isolated value rarely explains an incident.
+
+Context is what makes a signal useful.
+
+A CPU value of 80% can be perfectly normal for one workload and highly unusual for another. A memory increase may represent expected traffic growth or a genuine resource problem.
+
+Incident dashboards should therefore provide enough context to distinguish between these situations.
+
+Useful contextual information can include:
+
+* previous behaviour,
+* comparable services,
+* recent trends,
+* distribution across components,
+* and the approximate start of the abnormal condition.
+
+The dashboard does not need to explain the incident automatically.
+
+Its role is to provide evidence that allows the engineer to form and test hypotheses.
+
+This is an important distinction.
+
+A dashboard should support investigation without pretending to replace engineering judgement.
+
+---
+
+## Design for investigation, not just monitoring
+
+A common mistake is to interpret an incident dashboard as a larger version of a monitoring dashboard.
+
+Adding more panels does not necessarily make a dashboard more useful during an incident.
+
+The design should instead reflect the way an investigation progresses.
+
+Each panel should have a reason for being present.
+
+A useful test is:
+
+> **What investigative question does this panel help answer?**
+
+If the answer is unclear, the panel should be reconsidered.
+
+The same principle applies to visualisations.
+
+A graph should exist because its representation makes a particular relationship easier to understand, not simply because the underlying metric is available.
+
+This is consistent with the principles established throughout this series: dashboards should contain the information required to support their purpose rather than the maximum amount of information available.
+
+---
+
+## A practical incident-response dashboard structure
+
+For the laboratory implementation developed alongside this article, we are using a progressive layout rather than attempting to build the complete dashboard at once.
+
+The proposed structure is:
+
+### Row 1 — Incident overview
+
+**Purpose:** establish the current situation immediately.
+
+Panels:
+
+1. **Overall system/resource state**
+2. **Total CPU consumption**
+3. **Total memory consumption**
+4. **Affected services / components**
+
+These panels should provide a compact summary rather than detailed diagnostics.
+
+---
+
+### Row 2 — Service comparison
+
+**Purpose:** determine whether the condition is widespread or concentrated.
+
+Panels:
+
+5. **CPU usage by service**
+6. **Memory usage by service**
+7. **Network activity by service**
+
+The objective is comparison rather than detailed investigation.
+
+The engineer should be able to identify which services appear unusual without inspecting individual containers first.
+
+---
+
+### Row 3 — System evolution
+
+**Purpose:** understand when the condition changed and how it evolved.
+
+Panels:
+
+8. **CPU evolution**
+9. **Memory evolution**
+10. **Network evolution**
+
+These panels should share a compatible time range so that changes can be compared temporally.
+
+---
+
+### Row 4 — Investigation focus
+
+**Purpose:** provide deeper evidence once a suspicious service or component has been identified.
+
+Panels:
+
+11. **CPU by individual component/container**
+12. **Memory by individual component/container**
+13. **Network by individual component/container**
+14. **Restart / lifecycle activity**
+
+This section deliberately appears below the higher-level information.
+
+It is useful during investigation, but it should not dominate the initial view.
+
+---
+
+### Row 5 — Supporting context
+
+**Purpose:** provide additional evidence without competing with the primary investigation path.
+
+Potential panels include:
+
+15. **Resource distribution**
+16. **Container or service availability**
+17. **Additional infrastructure signals**
+18. **Relevant annotations or deployment/change information**
+
+Not every dashboard needs all of these panels.
+
+They should only be introduced when the laboratory data demonstrates that they contribute to an actual investigative question.
+
+---
+
+## Building and validating the dashboard in the ObservabiliTrends Lab
+
+The dashboard described in this article is not intended to remain a theoretical example.
+
+ObservabiliTrends maintains a practical observability laboratory based on Docker, Prometheus, cAdvisor, Node Exporter, Grafana and the Dynatrace EasyTravel application.
+
+The laboratory provides a controlled environment in which dashboard concepts can be implemented, tested and evaluated against real telemetry.
+
+This allows the design principles discussed throughout the Dashboard Design Series to be examined using an actual monitoring environment rather than purely hypothetical examples.
+
+The incident-response dashboard will therefore be developed progressively in the laboratory.
+
+Each panel will be introduced only when its purpose is clear, its underlying telemetry is available and its contribution to the investigation can be evaluated.
+
+The resulting dashboard, queries and selected panel implementations will form part of the practical resources published by ObservabiliTrends alongside the article.
+
+This approach also provides an opportunity to evaluate the dashboard itself.
+
+If a panel does not help answer an operational question, it should not remain simply because it has already been implemented.
+
+The laboratory is therefore not only a source of screenshots and downloadable resources. It is also part of the design process.
 
 ---
 
 # Key takeaways
 
-A dashboard designed for incident response should help responders establish service impact, understand scope and move towards diagnosis with as little unnecessary interpretation as practical.
+Incident-response dashboards should help engineers move from an abnormal signal towards an increasingly precise understanding of the situation.
 
-The main principles are:
+The main ideas can be summarised as follows.
 
-* Put service-level impact before implementation details.
-* Structure information according to the progression from assessment to diagnosis.
-* Make time and relevant changes visible in the same context.
-* Provide meaningful comparisons instead of isolated values.
-* Use dependencies to help establish scope without implying causality.
-* Treat the dashboard as a shared source of operational evidence, not as the incident management process itself.
-* Keep detailed diagnostic information accessible without allowing it to dominate the primary response view.
-* Validate the dashboard against real incidents and post-incident evidence.
-
-A dashboard becomes part of incident response when it reduces the effort required to establish what is happening and decide where to investigate next. Its design should therefore follow the information needs of the response process rather than the capabilities of the observability platform.
+* Incident dashboards should support investigation rather than simply display more telemetry.
+* Dashboard design should follow the questions engineers need to answer during an incident.
+* Information should progress from situation awareness to investigation and then diagnosis.
+* Current state and temporal evolution provide complementary views of the same condition.
+* Correlation should be intentional rather than achieved by displaying large numbers of series together.
+* Supporting context helps engineers interpret abnormal values without removing the need for engineering judgement.
+* Every panel should have a clear relationship with an investigative question or operational decision.
+* Detailed diagnostic information should remain available without competing with the initial incident assessment.
+* Dashboards should be validated against real operational scenarios rather than judged only by visual appearance.
 
 ---
 
-## Dashboard Design Series
+# Dashboard Design Series
 
 This article is part of the **Dashboard Design Series**, an editorial collection exploring dashboard engineering from strategic planning through long-term operational management.
 
@@ -193,24 +436,33 @@ Current publications in the series:
 
 # Further reading
 
+Readers interested in dashboard engineering, human perception and operational visualisation may find the following references particularly useful.
+
 * Stephen Few — *Information Dashboard Design: Displaying Data for At-a-Glance Monitoring*
-* Google — *Site Reliability Engineering*
-* Google — *The Site Reliability Workbook*
-* Benjamin Bach et al. — *Dashboard Design Patterns*
+* Colin Ware — *Information Visualization: Perception for Design*
+* Donald A. Norman — *The Design of Everyday Things*
 * Edward R. Tufte — *The Visual Display of Quantitative Information*
+* Grafana Labs — *Dashboard Design Best Practices*
+* Nielsen Norman Group — *Information Visualization* articles
+
+Practical implementation resources published by ObservabiliTrends include the Dashboard Readiness Assessment, Dashboard Technical Specification and the ObservabiliTrends Lab.
 
 ---
 
 # Bibliography
 
-Bach, B., Freeman, E., Abdul-Rahman, A., Turkay, C., Khan, S., Fan, Y., & Chen, M. (2022). *Dashboard Design Patterns*. IEEE Transactions on Visualization and Computer Graphics.
+Few, S. (2006). *Information Dashboard Design: Displaying Data for At-a-Glance Monitoring*. Analytics Press.
 
-Few, S. (2013). *Information Dashboard Design: Displaying Data for At-a-Glance Monitoring*. Analytics Press.
+Few, S. (2009). *Now You See It: Simple Visualization Techniques for Quantitative Analysis*. Analytics Press.
 
-Google. *Site Reliability Engineering: Incident Management Guide*.
-
-Google. *The Site Reliability Workbook — Incident Response*.
-
-Google. *The Site Reliability Workbook — Monitoring*.
+Norman, D. A. (2013). *The Design of Everyday Things* (Revised and Expanded Edition). Basic Books.
 
 Tufte, E. R. (1983). *The Visual Display of Quantitative Information*. Graphics Press.
+
+Ware, C. (2020). *Information Visualization: Perception for Design* (4th ed.). Morgan Kaufmann.
+
+Grafana Labs. *Dashboard Design Best Practices*.
+
+Google. *Site Reliability Engineering*.
+
+Google. *The Site Reliability Workbook*.
