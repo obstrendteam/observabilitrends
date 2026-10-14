@@ -7,7 +7,7 @@ export default function Lab() {
   return (
     <PageLayout
       title="Observability Lab | ObservabiliTrends"
-      description="Explore the ObservabiliTrends Lab: a Docker-based environment for investigating infrastructure and container metrics, testing PromQL queries, and developing practical Grafana resources."
+      description="Explore the ObservabiliTrends Lab: a Docker-based environment for investigating infrastructure and container metrics, testing PromQL queries developing practical Grafana resources."
       canonical="/lab"
     >
       <main className="container-prose py-12 md:py-16">
@@ -22,7 +22,7 @@ export default function Lab() {
 
           <p className="text-lg leading-relaxed text-muted-foreground">
             A practical environment for exploring observability, validating
-            PromQL queries, and developing Grafana dashboards using a
+            queries and developing Grafana dashboards using a
             containerized application workload.
           </p>
         </header>

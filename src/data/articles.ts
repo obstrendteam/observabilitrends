@@ -13,7 +13,6 @@ export type Category =
   | "Distributed Tracing"
   | "Logging"
   | "Alerting"
-  | "AIOps"
   | "Platform Engineering"
   | "Cloud Monitoring";
 
@@ -28,7 +27,6 @@ export const CATEGORIES: Category[] = [
   "Distributed Tracing",
   "Logging",
   "Alerting",
-  "AIOps",
   "Platform Engineering",
   "Cloud Monitoring",
 ];

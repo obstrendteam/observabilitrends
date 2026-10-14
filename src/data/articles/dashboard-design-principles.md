@@ -99,7 +99,7 @@ The information presented on a dashboard should follow the order in which it is 
 
 For example, an operational dashboard may first establish whether the service is healthy and whether users are affected. It can then provide additional context to determine whether the condition is widespread or limited to a particular service, component or dependency. More detailed diagnostic information can follow once the relevant area has been identified.
 
-This creates a hierarchy from summary to detail: service-level indicators provide the initial context, supporting metrics add diagnostic information, and lower-level infrastructure or implementation-specific telemetry provides detail for deeper investigation.
+This creates a hierarchy from summary to detail: service-level indicators provide the initial context, supporting metrics add diagnostic information and lower-level infrastructure or implementation-specific telemetry provides detail for deeper investigation.
 
 The hierarchy should also reflect the intended use of the dashboard. Information that is expected to support the initial assessment deserves greater visual prominence than information used only during detailed investigation. This allows the dashboard to provide context progressively, without giving low-level diagnostic data the same visual priority as the signals used to establish system state.
 

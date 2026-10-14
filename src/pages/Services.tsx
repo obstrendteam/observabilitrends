@@ -22,7 +22,7 @@ const ENGAGEMENTS = [
     Icon: GitBranch,
     name: "Reliability & SRE Consulting",
     duration: "Ongoing",
-    summary: "Embedded advisory for platform and SRE leadership. Strategy, hiring, postmortem programs, and exec narrative.",
+    summary: "Embedded advisory for platform and SRE leadership. Strategy, hiring, postmortem programs and exec narrative.",
     points: ["SRE org design", "Postmortem program rollout", "Incident command training", "Executive reporting"],
   },
   {
@@ -36,7 +36,7 @@ const ENGAGEMENTS = [
 
 export default function Services() {
   return (
-    <PageLayout title="Services - ObservabiliTrends Advisory" description="Independent advisory for platform and SRE teams. Architectural reviews, monitoring assessments, SLO design, and cost optimization." canonical="/services">
+    <PageLayout title="Services - ObservabiliTrends Advisory" description="Independent advisory for platform and SRE teams. Architectural reviews, monitoring assessments, SLO design and cost optimization." canonical="/services">
       <section className="container-prose pt-20 pb-10">
         <p className="mono text-xs uppercase tracking-wider text-primary">/ advisory</p>
         <h1 className="mt-2 text-5xl md:text-6xl font-semibold tracking-tighter max-w-3xl leading-[1.05]">
@@ -81,7 +81,7 @@ export default function Services() {
               ["01", "Discovery call", "30 minutes. No charge. We figure out if there's a fit."],
               ["02", "Scoping", "Fixed-scope SoW with clear deliverables and a timeline."],
               ["03", "Engagement", "Embedded with your team. Weekly checkpoints, no surprises."],
-              ["04", "Handoff", "Written deliverables, recorded walkthroughs, and a 30-day follow-up."],
+              ["04", "Handoff", "Written deliverables, recorded walkthroughs and a 30-day follow-up."],
             ].map(([n, title, body]) => (
               <div key={n}>
                 <div className="mono text-xs text-primary">{n}</div>

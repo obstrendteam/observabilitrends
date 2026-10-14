@@ -55,8 +55,8 @@ export default function Community() {
       <section className="container-prose py-10 grid md:grid-cols-3 gap-6">
         {[
           { Icon: Users, title: "Vetted practitioners", body: "Membership requires a brief application. We optimize for signal, not headcount." },
-          { Icon: MessageSquare, title: "Real conversations", body: "Architecture reviews, postmortem swaps, hiring feedback, and the occasional rant." },
-          { Icon: Sparkles, title: "Early-access content", body: "First reads of articles, drafts of playbooks, and unreleased dashboards." },
+          { Icon: MessageSquare, title: "Real conversations", body: "Architecture reviews, postmortem swaps, hiring feedback and the occasional rant." },
+          { Icon: Sparkles, title: "Early-access content", body: "First reads of articles, drafts of playbooks and unreleased dashboards." },
         ].map(({ Icon, title, body }) => (
           <div key={title} className="surface-card p-6">
             <Icon className="h-6 w-6 text-primary" />
@@ -70,9 +70,9 @@ export default function Community() {
         <h2 className="text-3xl font-semibold tracking-tight">What's coming</h2>
         <ul className="mt-6 space-y-4 text-muted-foreground">
           <li className="flex gap-4"><span className="mono text-primary shrink-0">Q3 2026</span> Forum integration with topic-based channels and threaded discussions.</li>
-          <li className="flex gap-4"><span className="mono text-primary shrink-0">Q4 2026</span> Public profiles with reputation, contributions, and verified employer.</li>
+          <li className="flex gap-4"><span className="mono text-primary shrink-0">Q4 2026</span> Public profiles with reputation, contributions and verified employer.</li>
           <li className="flex gap-4"><span className="mono text-primary shrink-0">Q1 2027</span> Job board curated by community members - no agency reposts.</li>
-          <li className="flex gap-4"><span className="mono text-primary shrink-0">later</span> Mobile companion app, AMAs, and member-led workshops.</li>
+          <li className="flex gap-4"><span className="mono text-primary shrink-0">later</span> Mobile companion app, AMAs and member-led workshops.</li>
         </ul>
       </section>
 

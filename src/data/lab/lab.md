@@ -1,8 +1,8 @@
 # ObservabiliTrends Lab
 
-The ObservabiliTrends Lab is a local environment used to validate observability concepts, develop dashboard examples, test PromQL queries, and produce practical resources for the ObservabiliTrends articles.
+The ObservabiliTrends Lab is a local environment used to validate observability concepts, develop dashboard examples, test queries and produce practical resources for the ObservabiliTrends articles.
 
-It combines a containerized demo application with Prometheus-based metrics collection and Grafana visualization. The environment provides a controlled setting for exploring infrastructure, container, and application workload behaviour.
+It combines a containerized demo application with Prometheus-based metrics collection and Grafana visualization. The environment provides a controlled setting for exploring infrastructure, container and application workload behaviour.
 
 ## Architecture
 
@@ -17,19 +17,19 @@ The laboratory consists of six main components:
 - **Prometheus** scrapes and stores metrics and provides the PromQL query layer.
 - **Grafana** visualizes the collected metrics through dashboards and panels.
 
-The easyTravel environment includes multiple application services and supporting components, such as frontends, a backend, MongoDB, NGINX, and load generators. These components provide a workload against which infrastructure and container metrics can be observed.
+The easyTravel environment includes multiple application services and supporting components, such as frontends, a backend, MongoDB, NGINX and load generators. These components provide a workload against which infrastructure and container metrics can be observed.
 
 The demo application's Docker resources are available in the [Dynatrace easyTravel-Docker repository](https://github.com/Dynatrace/easyTravel-Docker).
 
 ## Metrics available
 
-The metrics available depend on the enabled exporters, the running containers, and the current workload.
+The metrics available depend on the enabled exporters, the running containers and the current workload.
 
 | Source | Metric domain | Examples |
 |---|---|---|
-| Node Exporter | Host resources | CPU, memory, filesystem, and network metrics |
-| cAdvisor | Container resources | CPU, memory, network activity, and container-related metrics |
-| Prometheus | Metrics collection and querying | Time-series storage, label-based filtering, aggregation, and PromQL queries |
+| Node Exporter | Host resources | CPU, memory, filesystem and network metrics |
+| cAdvisor | Container resources | CPU, memory, network activity and container-related metrics |
+| Prometheus | Metrics collection and querying | Time-series storage, label-based filtering, aggregation and PromQL queries |
 | easyTravel | Application workload | Application activity and resource consumption observable through the available infrastructure and container metrics |
 
 Prometheus provides a common query layer for the metrics exposed by the configured sources. This makes it possible to compare host-level and container-level behaviour over the same time range, provided the relevant metrics and labels are available.
@@ -46,7 +46,7 @@ The environment can be used to investigate questions such as:
 - How does application workload activity correlate with infrastructure metrics?
 - Which metrics and aggregations provide useful context for a particular dashboard panel?
 
-These are investigation questions, not predefined conclusions. Their answers depend on the workload, the observation window, the available metrics, and the queries used.
+These are investigation questions, not predefined conclusions. Their answers depend on the workload, the observation window, the available metrics and the queries used.
 
 ## How we use the lab
 
@@ -60,4 +60,4 @@ It supports the development and validation of:
 - Comparisons of metrics over selected time windows.
 - Reusable dashboard resources and practical examples for articles.
 
-Where an article uses observations from the lab, the environment provides a way to reproduce or inspect the relevant experiment. Results should be interpreted in the context of the configured services, workload, metrics, and time range rather than generalized automatically to other environments.
+Where an article uses observations from the lab, the environment provides a way to reproduce or inspect the relevant experiment. Results should be interpreted in the context of the configured services, workload, metrics and time range rather than generalized automatically to other environments.
