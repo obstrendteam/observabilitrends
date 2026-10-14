@@ -88,7 +88,7 @@ export const ARTICLES: Article[] = [
     },
     date: "2026-07-20",
     readingTime: 20,
-    featured: true,
+    featured: false,
     content: dashboardArticle,
   },
 
@@ -151,7 +151,7 @@ export const ARTICLES: Article[] = [
     },
     date: "2026-10-14",
     readingTime: 15,
-    featured: false,
+    featured: true,
     content: incidentResponseArticle,
   },
 ];
